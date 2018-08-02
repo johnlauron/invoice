@@ -41,6 +41,7 @@ Route::get('dragdrop/index', 'InvoiceinputsController@index')->name('dragdrop.in
 Route::get('dragdrop/invoiceslist', 'InvoiceinputsController@create')->name('dragdrop.invoiceslist');
 Route::post('dragdrop/createdraganddrop','InvoiceinputsController@store')->name('invoices.store_inputs');
 Route::get('dragdrop/createdraganddrop/{id}','InvoiceinputsController@createdrag')->name('dragdrop.createdrag');
+Route::delete('dragdrop/delete/{id}', 'InvoiceinputsController@destroy')->name('dragdrop.delete');
 
 //parse
 Route::get('parse/list','FormdatasController@list')->name('parse.list');

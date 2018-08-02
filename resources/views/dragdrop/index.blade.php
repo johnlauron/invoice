@@ -16,9 +16,7 @@
         <tr>
             <td>{{ $forms->form_name }}</td>
             <td>
-                <form action="" method="POST">
-                    <a class="btn btn-info" href="">Show</a>
-                    <a class="btn btn-primary" href="">Edit</a>
+                <form action="{{route('dragdrop.delete', $forms->id)}}" method="POST">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger">Delete</button>
