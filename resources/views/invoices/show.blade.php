@@ -13,8 +13,6 @@
             </div>
         </div>
     </div>
-
-
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
@@ -47,7 +45,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.0.550/pdf.js"></script>
     <script type="text/javascript">
     // URL of PDF document
-    var url = "https://app.formbuilder.com/images/<?php echo $invoice->company_name."/".$invoice->file_location?>";
+    var url = "http://app.dude.com/images/<?php echo $invoice->company_name."/".$invoice->file_location?>";
     // Asynchronous download PDF
     PDFJS.getDocument(url)
       .then(function(pdf) {
