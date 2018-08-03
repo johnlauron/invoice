@@ -1,5 +1,12 @@
 @extends('layouts.login')
-
+<style>
+table {
+   overflow-y: auto;
+   height:550px;
+   display:block;
+   layout: absolute;
+}
+</style>
 @section('title')
 	Dashboard
 @endsection
@@ -26,24 +33,14 @@
                                 <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                                     <thead>
                                         <tr>
-                                            <th>ID</th>
-                                            <th>Company Name</th>
-                                            <th>Email</th>
-                                            <th>Address</th>
-                                            <th>Contact</th>
-                                            <th>Action</th>
+                                            <th style="position: sticky; top: 0px; background: white;">ID</th>
+                                            <th style="position: sticky; top: 0px; background: white;">Company Name</th>
+                                            <th style="position: sticky; top: 0px; background: white;">Email</th>
+                                            <th style="position: sticky; top: 0px; background: white;">Address</th>
+                                            <th style="position: sticky; top: 0px; background: white;">Contact</th>
+                                            <th style="position: sticky; top: 0px; background: white;">Action</th>
                                         </tr>
                                     </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>Company Name</th>
-                                            <th>Email</th>
-                                            <th>Address</th>
-                                            <th>Contact</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </tfoot>
                                     <tbody>
                                         @foreach ($companies as $company)
                                             <tr>
@@ -56,9 +53,9 @@
                                                     <form action="{{ route('companies.destroy',$company->id) }}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="button" onclick="window.location='{{ route("companies.show",$company->id) }}';" class="btn bg-teal btn-block waves-effect">SHOW</button>
-                                                        <button type="button" onclick="window.location='{{ route("companies.edit",$company->id) }}';" class="btn bg-cyan btn-block  waves-effect">EDIT</button>
-                                                        <button type="submit" class="btn bg-red btn-block waves-effect">DELETE</button>    
+                                                        <button type="button" onclick="window.location='{{ route("companies.show",$company->id) }}';" class="btn bg-teal btn-block">SHOW</button>
+                                                        <button type="button" onclick="window.location='{{ route("companies.edit",$company->id) }}';" class="btn bg-cyan btn-block">EDIT</button>
+                                                        <button type="submit" class="btn bg-red btn-block">DELETE</button>    
                                                     </form>
                                                 </td>
                                             </tr>
