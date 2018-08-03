@@ -15,8 +15,8 @@ class CreateInvoiceInputTable extends Migration
     {
         Schema::create('invoice_input', function (Blueprint $table) {
             $table->increments('id');
-            // $table->unsignedInteger('invoice_id');
-            // $table->string('name', 100)->unique();
+            $table->unsignedInteger('invoice_id');
+            $table->string('category_name', 100);
             $table->integer('xloc');
             $table->integer('yloc');
             $table->integer('height');

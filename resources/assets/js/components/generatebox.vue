@@ -2,6 +2,11 @@
 	<div class="button-generate" >
 		<div class="button">
             <input type="text" name="form_name" class="form-control button" placeholder="Name of Form" required><br>
+			<input type="hidden" name="category_name[]" v-for="item in items" :value="item.category">
+			<input type="text" v-model="text" list="films" class="form-control button" placeholder="select/choose category">
+			<datalist id="films">
+				<option v-for="item in items" v-bind:category="item.category">{{item.category}}</option>
+			</datalist><br>
 			<input type="button" class="btn btn-success" v-on:click="click" style="margin-bottom: 7px;" value="Generate Box"></input><br>
             <button class="btn btn-primary" style="min-width: 101px;">Save</button>
 		</div>
@@ -19,15 +24,22 @@
         data: function(){
         	return{
         		Id: '',
+				text: '',
         		items: []
         	}
         },
         methods: {
         	click: function(){
-        		this.Id++,
-        		this.items.push({
-        			id: this.Id++
-        		})
+				if(!this.text){
+					alert("Select category first !");
+				}else{
+					this.Id++,
+					this.items.push({
+						id: this.Id++,
+						category: this.text,
+					})
+					this.text=''
+				}
         	}
         },
         components: {

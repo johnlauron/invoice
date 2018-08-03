@@ -59,13 +59,14 @@ class InvoiceinputsController extends Controller
                                 ->first();
                 if($formname->id){//validate if the doesnt have a null value
                     $formname_id = $formname->id;
-                    // $invoice_id = 1;
+                    $invoice_id = $request->invoice_id;
                     foreach ($request->height as $key => $value) {//multiple save
                         $data = array('height' => $request->height [$key],
                                         'width' => $request->width [$key],
                                         'xloc' => $request->xloc [$key],
                                         'yloc' => $request->yloc [$key],
-                                        // 'invoice_id' => $invoice_id,
+                                        'category_name' => $request->category_name [$key],
+                                        'invoice_id' => $invoice_id,
                                         'form_name_id' => $formname_id);
                         InvoiceInput::create($data);//saving the data
                     }

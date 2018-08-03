@@ -19,6 +19,7 @@ Dashboard
                     <div class="body wrap-image-content">
                         <generate-box id="app"></generate-box>
                         <script src="{{asset('js/app.js')}}"></script>
+                        <input type="hidden" name="invoice_id" value="{{$invoice->id}}">
                         <img src="{{ asset('images/'.$invoice->company_name.'/'.$invoice->file_location)}}" style="width: 100%;">
                     </div>
             </form>

@@ -2822,6 +2822,11 @@ section.content {
     padding: 5px 0 0 8px !important; }
 
 /* Card ======================================== */
+.category {
+  min-width: 80px;
+  float: left;}
+.parse-content {
+  padding: 70px;}
 ul.dropdown-menu.pull-right.show {
   left: -124px !important;}
 .card.preview {

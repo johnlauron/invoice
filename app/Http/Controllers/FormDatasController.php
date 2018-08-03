@@ -70,10 +70,10 @@ class FormDatasController extends Controller
         return view('parse/parse', compact('invoice','form'));
     }
     public function show_data($id){
-        $data = FormData::where('invoice_id', $id)->get();
+        $invoice_input = InvoiceInput::where('invoice_id', $id)->get();
+        $form_data = FormData::where('invoice_Id', $id)->get();
         $invoice = Invoice::where('id', $id)->first();
-        
-        return view('parse/show_data', compact('data','invoice'));
+        return view('parse/show_data', compact('form_data','invoice','invoice_input'));
     }
     public function search_form(){
         $search = request('search_form');

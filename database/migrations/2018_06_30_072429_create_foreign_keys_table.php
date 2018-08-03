@@ -21,16 +21,14 @@ class CreateForeignKeysTable extends Migration
                     ->onDelete('cascade')
                     ->onUpdate('cascade');
         });
-
-        // Schema::table('invoice_input', function($table)
-        // {
-        //     Schema::enableForeignKeyConstraints();
-        //     $table->foreign('invoice_id')
-        //             ->references('id')->on('invoices')
-        //             ->onDelete('cascade')
-        //             ->onUpdate('cascade');
-        // });
-
+        Schema::table('invoice_input', function($table)
+        {
+            Schema::enableForeignKeyConstraints();
+            $table->foreign('invoice_id')
+                    ->references('id')->on('invoices')
+                    ->onDelete('cascade')
+                    ->onUpdate('cascade');
+        });
         Schema::table('forms', function($table)
         {
             $table->foreign('invoice_id')

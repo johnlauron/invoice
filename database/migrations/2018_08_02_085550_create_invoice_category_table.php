@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFormDataTable extends Migration
+class CreateInvoiceCategoryTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class CreateFormDataTable extends Migration
      */
     public function up()
     {
-        Schema::create('form_data', function (Blueprint $table) {
+        Schema::create('invoice_category', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('invoice_id');
-            $table->unsignedInteger('formname_id')->nullable();
-            // $table->string('category_name', 100);
-            $table->text('value');
+            $table->integer('category_name');
             $table->timestamps();
         });
     }
@@ -30,6 +27,6 @@ class CreateFormDataTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('form_data');
+        Schema::dropIfExists('invoice_category');
     }
 }

@@ -7,15 +7,20 @@
             </div>
         </div>
     </div>
-    <table class="table table-bordered">
-        <tr>
-            <th>value</th>
-            <th width="280px">Action</th>
-        </tr>
-        @foreach($data as $datas)
-        <tr>
-            <td>{{ $datas->value }}</td>
-        </tr>
-        @endforeach
-    </table>
+    <div class="card">
+        <div class="parse-content">
+            <div class="container">
+                <div class="category">
+                    @foreach ($invoice_input as $input)
+                        <p><strong>{{$input->category_name}} :</strong></p>
+                    @endforeach
+                </div>
+                <div class="value">
+                    @foreach ($form_data as $data)
+                        <p>{{$data->value}}</p>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
