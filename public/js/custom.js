@@ -10,7 +10,7 @@ $(document).ready(function() {
                 success:function(data) {
                     $('#body-content').empty();
                     $.each(data, function(index, formObject) {
-                        $('#body-content').append('<input type="text" style="width:'+ formObject.width +'px; height:'+ formObject.height +'px; left:'+ formObject.xloc +'px; top:'+ formObject.yloc +'px; position:absolute;" disabled>').hide().fadeIn(200);
+                        $('#body-content').append('<input type="text" style="width:'+ formObject.width +'px; height:'+ formObject.height +'px; left:'+ formObject.xloc +'px; top:'+ formObject.yloc +'px; position:absolute;" disabled>').hide().fadeIn(100);
                         // $('#body-content').append('<input value="'+ key +'">');
                         $('input#form_name').val(formObject.form_name_id);
                     });

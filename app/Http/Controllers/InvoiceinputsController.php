@@ -28,13 +28,14 @@ class InvoiceinputsController extends Controller
     public function create()
     {
         $companies = Company::all()->first();
+        $company_name = $companies->company_name;
         $invoice = DB::table('invoices')
                             ->select('invoices.id','companies.company_name','invoices.file_location')
                             ->join('companies', 'invoices.company_id', '=', 'companies.id')
                             ->where('company_id', $companies->id)
                             ->get();
         $company = Company::all();
-        return view('dragdrop.invoiceslist',compact('invoice','company'));
+        return view('dragdrop.invoiceslist',compact('invoice','company','company_name'));
         // return view('dragdrop.createDragAndDrop',compact('invoice'));
     }
     public function createdrag($id){
@@ -60,6 +61,7 @@ class InvoiceinputsController extends Controller
                 if($formname->id){//validate if the doesnt have a null value
                     $formname_id = $formname->id;
                     $invoice_id = $request->invoice_id;
+                    $company = Company::where('company_name', $request->company_name)->first();
                     foreach ($request->height as $key => $value) {//multiple save
                         $data = array('height' => $request->height [$key],
                                         'width' => $request->width [$key],
@@ -67,7 +69,8 @@ class InvoiceinputsController extends Controller
                                         'yloc' => $request->yloc [$key],
                                         'category_name' => $request->category_name [$key],
                                         'invoice_id' => $invoice_id,
-                                        'form_name_id' => $formname_id);
+                                        'form_name_id' => $formname_id,
+                                        'company_id' => $company->id);
                         InvoiceInput::create($data);//saving the data
                     }
                 }
@@ -86,5 +89,19 @@ class InvoiceinputsController extends Controller
         if($formname->delete()){
             return redirect(route('dragdrop.index'))->with('success', 'deleted successfully');
         }
+    }
+    public function list_createform()
+    {
+        $company_id = request('select_list');
+        $companies = Company::find($company_id);
+        $company_name = $companies->company_name;
+      
+        $invoice = DB::table('invoices')
+                            ->select('invoices.id','companies.company_name','invoices.file_location')
+                            ->join('companies', 'invoices.company_id', '=', 'companies.id')
+                            ->where('company_id', $companies->id)
+                            ->get();
+        $company = Company::all();
+        return view('dragdrop.invoiceslist',compact('invoice','company','company_name'));
     }
 }

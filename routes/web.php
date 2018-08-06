@@ -24,6 +24,7 @@ Route::post('/changeskin/{id}', 'UsersController@changeSkin')->name('users.chang
 
 Route::resource('companies','CompaniesController');//->middleware('userVerification');
 
+//invoice
 Route::post('invoices', 'InvoicesController@index')->name('invoices.index');
 Route::get('invoices/no_form_inv', 'InvoicesController@form_without')->name('invoices.form_without');
 Route::get('invoices/no_form_inv/{id}', 'InvoicesController@show_without_form')->name('invoices.show_without_form');
@@ -41,6 +42,7 @@ Route::get('dragdrop/index', 'InvoiceinputsController@index')->name('dragdrop.in
 Route::get('dragdrop/invoiceslist', 'InvoiceinputsController@create')->name('dragdrop.invoiceslist');
 Route::post('dragdrop/createdraganddrop','InvoiceinputsController@store')->name('invoices.store_inputs');
 Route::get('dragdrop/createdraganddrop/{id}','InvoiceinputsController@createdrag')->name('dragdrop.createdrag');
+Route::post('dragdrop/list-dropdown/','InvoiceinputsController@list_createform')->name('dragdrop.list_createform');
 Route::delete('dragdrop/delete/{id}', 'InvoiceinputsController@destroy')->name('dragdrop.delete');
 
 //parse

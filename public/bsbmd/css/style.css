@@ -2822,6 +2822,9 @@ section.content {
     padding: 5px 0 0 8px !important; }
 
 /* Card ======================================== */
+.title-section {
+  width: 15%;
+  float: left;}
 .category {
   min-width: 80px;
   float: left;}
@@ -2849,7 +2852,7 @@ img.draglist:hover {
   border-bottom: solid 1px gainsboro;
   margin-bottom: 15px;}
 div#app {
-    padding-bottom: 20px;}
+    padding-bottom: 25px;}
 .drag {
     min-width: 1112px;}
 input.form-control.button {

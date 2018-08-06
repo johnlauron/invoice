@@ -44,6 +44,13 @@ class CreateForeignKeysTable extends Migration
                   ->onDelete('cascade')
                   ->onUpdate('cascade');
         });
+        Schema::table('invoice_input', function($table)
+        {
+            $table->foreign('company_id')
+                  ->references('id')->on('companies')
+                  ->onDelete('cascade')
+                  ->onUpdate('cascade');
+        });
     }
 
     /**

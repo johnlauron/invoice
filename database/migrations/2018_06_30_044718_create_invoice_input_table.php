@@ -22,6 +22,7 @@ class CreateInvoiceInputTable extends Migration
             $table->integer('height');
             $table->integer('width');
             $table->unsignedInteger('form_name_id');
+            $table->unsignedInteger('company_id');
             $table->timestamps();
         });
     }

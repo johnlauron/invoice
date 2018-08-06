@@ -9,13 +9,17 @@ Dashboard
 @section('content')
     <div class="container-fluid">
         <div class="card content-drag">
-            <div class="header">
-                <h2>
-                    Drag and Drop <small>Fill data</small>
-                </h2>
+        <form action="{{ route('invoices.store_inputs')}}" method="post"> 
+        {{ csrf_field() }} 
+            <div class="header dragdrop">
+                <div class="title-section">
+                    <h2>Drag and Drop <small>Fill data</small></h2>
+                </div>
+                <div class="drag-title">
+                    <input type="text" name="form_name" class="form-control button" placeholder="Name of Form" required>
+                    <input type="hidden" name="company_name" value="{{$invoice->company_name}}">
+                </div>
             </div>
-            <form action="{{ route('invoices.store_inputs')}}" method="post"> 
-                    {{ csrf_field() }} 
                     <div class="body wrap-image-content">
                         <generate-box id="app"></generate-box>
                         <script src="{{asset('js/app.js')}}"></script>

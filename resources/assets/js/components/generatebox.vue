@@ -1,11 +1,10 @@
 <template>
 	<div class="button-generate" >
 		<div class="button">
-            <input type="text" name="form_name" class="form-control button" placeholder="Name of Form" required><br>
 			<input type="hidden" name="category_name[]" v-for="item in items" :value="item.category">
-			<input type="text" v-model="text" list="films" class="form-control button" placeholder="select/choose category">
+			<input type="text" v-model="text" list="films" class="form-control button" placeholder="input/choose category">
 			<datalist id="films">
-				<option v-for="item in items" v-bind:category="item.category">{{item.category}}</option>
+				<option v-for="cats in cat">{{cats}}</option>
 			</datalist><br>
 			<input type="button" class="btn btn-success" v-on:click="click" style="margin-bottom: 7px;" value="Generate Box"></input><br>
             <button class="btn btn-primary" style="min-width: 101px;">Save</button>
@@ -25,7 +24,8 @@
         	return{
         		Id: '',
 				text: '',
-        		items: []
+        		items: [],
+				cat: []
         	}
         },
         methods: {
@@ -38,8 +38,20 @@
 						id: this.Id++,
 						category: this.text,
 					})
-					this.text=''
+					var one = this.text
+					if(this.cat.length === 0){
+						this.cat.push(this.text)
+					}
+					else{
+						if(this.cat.includes(this.text)){
+							console.log('sakpan')
+						}
+						else{
+							this.cat.push(this.text)
+						}
+					}
 				}
+				this.text=''
         	}
         },
         components: {

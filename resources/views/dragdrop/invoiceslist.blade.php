@@ -9,10 +9,10 @@
         <div class="col-lg-7">
             <div class="pull-left">
                 <div class="choose-company">
-                    <form action="" method="post">
+                    <form action="{{route('dragdrop.list_createform')}}" method="post">
                         {{ csrf_field() }}  
                         <div class="select-section" style="width: 227px;">
-                            <select class="form-control" name="select_n" style="width: 268px;">
+                            <select class="form-control" name="select_list" style="width: 268px;">
                                     <option value="">--- Chooose Form ---</option>
                                 @foreach($company as $companies)
                                     <option value="{{$companies->id}}">{{$companies->company_name}}</option>
@@ -29,6 +29,9 @@
     <div class="card drag-content">
         <div class="invoices-image">
             <div class="container d-content">
+                <div class="image-content-title">
+                    <h3>{{$company_name}}</h3>
+                </div>
                 <div class="row">
                     @foreach($invoice as $invoices)
                     <div class="col-md-3 col-sm-3 col-lg-3">

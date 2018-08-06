@@ -47352,37 +47352,47 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    mounted: function mounted() {
-        console.log('Component mounted.');
-    },
+	mounted: function mounted() {
+		console.log('Component mounted.');
+	},
 
-    data: function data() {
-        return {
-            Id: '',
-            text: '',
-            items: []
-        };
-    },
-    methods: {
-        click: function click() {
-            if (!this.text) {
-                alert("Select category first !");
-            } else {
-                this.Id++, this.items.push({
-                    id: this.Id++,
-                    category: this.text
-                });
-                this.text = '';
-            }
-        }
-    },
-    components: {
-        'vuedragresize': __WEBPACK_IMPORTED_MODULE_0__components_vue_draggable_resizable_vue___default.a
-    }
+	data: function data() {
+		return {
+			Id: '',
+			text: '',
+			items: [],
+			cat: []
+		};
+	},
+	methods: {
+		click: function click() {
+			if (!this.text) {
+				alert("Select category first !");
+			} else {
+				this.Id++, this.items.push({
+					id: this.Id++,
+					category: this.text
+				});
+				var one = this.text;
+				if (this.cat.length === 0) {
+					this.cat.push(this.text);
+				} else {
+					if (this.cat.includes(this.text)) {
+						console.log('sakpan');
+					} else {
+						this.cat.push(this.text);
+					}
+				}
+			}
+			this.text = '';
+		}
+	},
+	components: {
+		'vuedragresize': __WEBPACK_IMPORTED_MODULE_0__components_vue_draggable_resizable_vue___default.a
+	}
 });
 
 /***/ }),
@@ -48418,17 +48428,6 @@ var render = function() {
         "div",
         { staticClass: "button" },
         [
-          _c("input", {
-            staticClass: "form-control button",
-            attrs: {
-              type: "text",
-              name: "form_name",
-              placeholder: "Name of Form",
-              required: ""
-            }
-          }),
-          _c("br"),
-          _vm._v(" "),
           _vm._l(_vm.items, function(item) {
             return _c("input", {
               attrs: { type: "hidden", name: "category_name[]" },
@@ -48449,7 +48448,7 @@ var render = function() {
             attrs: {
               type: "text",
               list: "films",
-              placeholder: "select/choose category"
+              placeholder: "input/choose category"
             },
             domProps: { value: _vm.text },
             on: {
@@ -48465,10 +48464,8 @@ var render = function() {
           _c(
             "datalist",
             { attrs: { id: "films" } },
-            _vm._l(_vm.items, function(item) {
-              return _c("option", { attrs: { category: item.category } }, [
-                _vm._v(_vm._s(item.category))
-              ])
+            _vm._l(_vm.cat, function(cats) {
+              return _c("option", [_vm._v(_vm._s(cats))])
             })
           ),
           _c("br"),
