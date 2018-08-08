@@ -53,6 +53,7 @@ class InvoicesController extends Controller
      */
     public function store(Request $request)
     {
+        
         $this->validate(request(),[
             'file' => 'required | mimes:jpeg,jpg,png,pdf',
             'company_id' => 'required',
@@ -89,7 +90,7 @@ class InvoicesController extends Controller
                 DB::rollback();
                 throw $e;
             }
-            $form = request('form_name_id');
+            $form = request('assign_form');
             DB::commit();
             if($form == null){
                 return redirect(route('invoices.no_form_inv'))->with('success', 'Created successfully');
@@ -293,7 +294,7 @@ class InvoicesController extends Controller
         return response()->json($forms);
     }
     public function update_assign(Request $request, $id){
-        $this->validate(request(),[
+        $this->validate(request(),[ 
             'form_name' => 'required'
         ]);
         if(request('form_name')){
@@ -306,6 +307,10 @@ class InvoicesController extends Controller
                 dd('error');
             }
         }
+    }
+    public function company_ajax($id){
+        $formnames = Formname::where('company_id', $id)->get();
+        return response()->json($formnames);
     }
 }
 

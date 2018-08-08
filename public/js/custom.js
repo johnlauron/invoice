@@ -1,13 +1,39 @@
 $(document).ready(function() {
-    $('select[name="assign_form"]').on('change', function() {
-        var formId = $(this).val();
-        console.log(formId);
-        if(formId) {
-            $.ajax({
-                url: '/invoices/ajax/'+formId,
+    $('.form').append('<select class="form-control" id="assign_form" name="assign_form"><option value="">--- Choose Form ---</option></select>');
+    $('select[name="company_id"]').on('change', function() {
+        var company_id = $(this).val();
+        console.log(company_id);
+        if(company_id){
+            console.log('nice');
+             $.ajax({
+                url: '/invoices/company_ajax/'+company_id,
                 type: "GET",
                 dataType: "json",
                 success:function(data) {
+                    console.log(data);
+                    $('select[name="assign_form"]').empty();
+                    $('select[name="assign_form"]').append('<option value="">--- Choose Form ---</option>');
+                    $.each(data, function(index, nameObject) {
+                        $('select[name="assign_form"]').append('<option value="'+ nameObject.id +'">'+ nameObject.form_name +'</option>');
+                    });
+                }
+            });
+        }
+        else{
+            $('select[name="assign_form"]').empty();
+        }
+    });
+    $('select[name="assign_form"]').on('change', function() {
+        var form_id = $(this).val();
+        console.log(form_id);
+        if(form_id){
+            console.log('nice');
+             $.ajax({
+                url: '/invoices/ajax/'+form_id,
+                type: "GET",
+                dataType: "json",
+                success:function(data) {
+                    console.log(data);
                     $('#body-content').empty();
                     $.each(data, function(index, formObject) {
                         $('#body-content').append('<input type="text" style="width:'+ formObject.width +'px; height:'+ formObject.height +'px; left:'+ formObject.xloc +'px; top:'+ formObject.yloc +'px; position:absolute;" disabled>').hide().fadeIn(100);
@@ -17,11 +43,12 @@ $(document).ready(function() {
                 }
             });
         }
-        else{
-            $('#body-content').empty();
+         else{
+            console.log('error');
         }
-    });
+    });    
 });
+
 function readURL(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();

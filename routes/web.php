@@ -32,6 +32,7 @@ Route::post('invoices/no_form_inv/', 'InvoicesController@form_without_select')->
 Route::get('invoices/assign_form/{id}', 'InvoicesController@assign_form')->name('invoices.assign_form');
 Route::post('invoices/assign_update/{id}', 'InvoicesController@update_assign')->name('invoices.update_assign');
 Route::get('invoices/ajax/{id}', 'InvoicesController@ajax')->name('invoices.ajax');
+Route::get('invoices/company_ajax/{id}', 'InvoicesController@company_ajax')->name('invoices.company_ajax');
 Route::post('/invoices/dropdown', 'InvoicesController@dropdown');
 Route::resource('invoices','InvoicesController');
 Route::resource('users','UsersController');

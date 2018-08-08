@@ -23,7 +23,8 @@
 								<div class="col-xs-8 col-sm-8 col-md-8">
 									<div class="form-group">
 										<strong>Company:</strong>
-										<select class="form-control" name="company_id">
+										<select class="form-control" name="company_id" id="company_id">
+											<option value="">--- Choose Company ---</option>
 											@foreach ($companies as $company)
 												<option value="{{$company->id}}">{{$company->company_name}}</option>
 											@endforeach
@@ -33,12 +34,9 @@
 								<div class="col-xs-8 col-sm-8 col-md-8">
 									<div class="form-group">
 										<strong>Form :</strong>
-										<select class="form-control" id="assign_form" name="assign_form">
-												<option value="">--- Chooose Form ---</option>
-											@foreach($formname as $form)
-												<option value="{{$form->id}}">{{$form->form_name}}</option>
-											@endforeach
-										</select>
+										<div class="form">
+											
+										</div>
 									</div>
 								</div>
 								<div class="col-xs-8 col-sm-8 col-md-8">

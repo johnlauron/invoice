@@ -16,6 +16,7 @@ class CreateFormnamesTable extends Migration
         Schema::create('formnames', function (Blueprint $table) {
             $table->increments('id');
             $table->string('form_name')->unique();
+            $table->unsignedInteger('company_id');
             $table->timestamps();
         });
     }

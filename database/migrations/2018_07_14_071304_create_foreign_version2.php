@@ -35,6 +35,13 @@ class CreateForeignVersion2 extends Migration
                   ->onDelete('set null')
                   ->onUpdate('cascade');
         });
+        Schema::table('formnames', function($table)
+        {
+            $table->foreign('company_id')
+                  ->references('id')->on('companies')
+                  ->onDelete('cascade')
+                  ->onUpdate('cascade');
+        });
     }
 
     /**

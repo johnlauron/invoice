@@ -34,8 +34,6 @@ class FormDatasController extends Controller
     }
     public function store(Request $request)
     {
-        // $data = $request->all();
-        // dd($data);
         DB::beginTransaction();
         try{
             foreach($request->value as $key => $value){
@@ -70,9 +68,12 @@ class FormDatasController extends Controller
         return view('parse/parse', compact('invoice','form'));
     }
     public function show_data($id){
-        $invoice_input = InvoiceInput::where('invoice_id', $id)->get();
-        $form_data = FormData::where('invoice_Id', $id)->get();
         $invoice = Invoice::where('id', $id)->first();
+        $invoice_input = InvoiceInput::where('form_name_id', $invoice->form_name_id)
+                                        // ->where('invoice_id', $id)
+                                        ->where('company_id', $invoice->company_id)->get();
+        $form_data = FormData::where('invoice_id', $id)
+                                ->where('formname_id', $invoice->form_name_id)->get();
         return view('parse/show_data', compact('form_data','invoice','invoice_input'));
     }
     public function search_form(){

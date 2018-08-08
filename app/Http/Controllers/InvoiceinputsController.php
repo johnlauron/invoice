@@ -50,18 +50,18 @@ class InvoiceinputsController extends Controller
     {  
         DB::beginTransaction();
         try{
-            $form_name = $request->form_name;
             $form = new Formname;
-            $form->form_name = $form_name;
+            $form->form_name = $request->form_name;
+            $company = Company::where('company_name', $request->company_name)->first();
+            $form->company_id = $company->id;
             if($form->save()){//validate if the data was save
-                $formname = DB::table('formnames')
+                $formname = DB::table('formnames')//get the data that was save earlier
                                 ->select('id')
-                                ->where('form_name', $form_name)
+                                ->where('form_name', $request->form_name)
                                 ->first();
                 if($formname->id){//validate if the doesnt have a null value
                     $formname_id = $formname->id;
                     $invoice_id = $request->invoice_id;
-                    $company = Company::where('company_name', $request->company_name)->first();
                     foreach ($request->height as $key => $value) {//multiple save
                         $data = array('height' => $request->height [$key],
                                         'width' => $request->width [$key],
