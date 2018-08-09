@@ -30,11 +30,11 @@ class InvoiceinputsController extends Controller
         $companies = Company::all()->first();
         $company_name = $companies->company_name;
         $invoice = DB::table('invoices')
-                            ->select('invoices.id','companies.company_name','invoices.file_location')
+                            ->select('invoices.id','companies.company_name','invoices.file_location','invoices.invoice_name')
                             ->join('companies', 'invoices.company_id', '=', 'companies.id')
                             ->where('company_id', $companies->id)
                             ->get();
-        $company = Company::all();
+        $company = Company::orderBy('company_name', 'asc')->get();
         return view('dragdrop.invoiceslist',compact('invoice','company','company_name'));
         // return view('dragdrop.createDragAndDrop',compact('invoice'));
     }
@@ -44,7 +44,8 @@ class InvoiceinputsController extends Controller
                             ->join('companies', 'invoices.company_id', '=', 'companies.id')
                             ->where('invoices.id', $id)
                             ->first();
-        return view('dragdrop.createdraganddrop',compact('invoice'));
+        $extension = \File::extension($invoice->file_location);
+        return view('dragdrop.createdraganddrop',compact('invoice','extension'));
     }
     public function store(Request $request)
     {  
@@ -95,9 +96,8 @@ class InvoiceinputsController extends Controller
         $company_id = request('select_list');
         $companies = Company::find($company_id);
         $company_name = $companies->company_name;
-      
         $invoice = DB::table('invoices')
-                            ->select('invoices.id','companies.company_name','invoices.file_location')
+                            ->select('invoices.id','companies.company_name','invoices.file_location','invoices.invoice_name')
                             ->join('companies', 'invoices.company_id', '=', 'companies.id')
                             ->where('company_id', $companies->id)
                             ->get();

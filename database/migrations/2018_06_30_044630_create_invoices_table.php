@@ -17,7 +17,7 @@ class CreateInvoicesTable extends Migration
             Schema::create('invoices', function (Blueprint $table) {
                 $table->increments('id');
                 $table->unsignedInteger('company_id');
-                $table->string('invoice_name','191');
+                $table->string('invoice_name','191')->unique();
                 $table->string('file_location','191');
                 $table->unique(['company_id','invoice_name','file_location']);
                 $table->unsignedInteger('form_name_id')->nullable();

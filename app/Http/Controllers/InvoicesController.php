@@ -21,7 +21,7 @@ class InvoicesController extends Controller
 
     public function index()
     {
-        $company = Company::all();
+        $company = Company::orderBy('company_name', 'asc')->get();
         $invoices = DB::table('invoices')
                         ->select('invoices.id','companies.company_name','formnames.form_name','invoices.file_location','invoices.invoice_name')
                         ->join('formnames', 'invoices.form_name_id', '=', 'formnames.id')
@@ -40,7 +40,7 @@ class InvoicesController extends Controller
      */
     public function create()
     {
-        $companies = Company::all();
+        $companies = Company::orderBy('company_name', 'asc')->get();
         $formname = Formname::all();
         return view('invoices.create', compact('companies','formname'));
     }
@@ -57,7 +57,7 @@ class InvoicesController extends Controller
         $this->validate(request(),[
             'file' => 'required | mimes:jpeg,jpg,png,pdf',
             'company_id' => 'required',
-            'invoice_name' => 'required',
+            'invoice_name' => 'required | unique:invoices,invoice_name',
         ]);
         $img = request('file');
         $img_name = $img->getClientOriginalName();
@@ -137,14 +137,14 @@ class InvoicesController extends Controller
     }
     public function assign_form($id)
     {
-        $form = Formname::all();
         $invoice = DB::table('invoices')
-                            ->select('invoices.id','companies.company_name','invoices.file_location','invoices.invoice_name','invoices.form_name_id')
+                            ->select('invoices.id','companies.id AS companies_id','companies.company_name','invoices.file_location','invoices.invoice_name','invoices.form_name_id')
                             ->join('companies', 'invoices.company_id', '=', 'companies.id')
                             ->whereNull('invoices.form_name_id')
                             ->where('invoices.id', $id)
                             ->orderBy('invoices.created_at', 'Desc')
                             ->first();
+        $form = Formname::where('company_id', $invoice->companies_id)->get();
         $extension = \File::extension($invoice->file_location);
         return view('invoices.assign_form',compact('invoice','display','extension','form'));
     }
@@ -178,7 +178,7 @@ class InvoicesController extends Controller
          $this->validate(request(),[
             'file' => 'required | mimes:jpeg,jpg,png,pdf',
             'company_id' => 'required',
-            'invoice_name' => 'required',
+            'invoice_name' => 'required | unique:invoices,invoice_name',
         ]);
 
         $img = request('file');
@@ -254,7 +254,7 @@ class InvoicesController extends Controller
                             ->where('invoices.company_id', 1)
                             ->orderBy('invoices.created_at', 'Desc')
                             ->paginate(5);
-        $company = Company::all();
+        $company = Company::orderBy('company_name', 'asc')->get();
         $comp_name = Company::find(1);
          return view('invoices.no_form_inv',compact('invoices','company','comp_name'))
                         ->with('i', (request()->input('page', 1) - 1) * 5);
@@ -262,7 +262,7 @@ class InvoicesController extends Controller
     public function form_without_select()
     {
         $comp_req = request('select_n');
-        $company = Company::all();
+        $company = Company::orderBy('company_name', 'asc')->get();
         $invoices = DB::table('invoices')
                             ->select('invoices.id','companies.company_name','invoices.file_location','invoices.invoice_name')
                             ->join('companies', 'invoices.company_id', '=', 'companies.id')

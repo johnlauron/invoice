@@ -73,4 +73,7 @@
 		</div>
 	</div>
 	<script src="{{ asset('js/custom.js') }}"></script>
+	<script>
+		var flagsUrl = '{{ asset('images/pdf_icon.jpg') }}';
+	</script>
 @endsection

@@ -46,20 +46,23 @@ $(document).ready(function() {
          else{
             console.log('error');
         }
-    });    
+    });
 });
 
 function readURL(input) {
-    if (input.files && input.files[0]) {
+    var url = input.value;
+    var ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
+    if (input.files && input.files[0]&& (ext == "gif" || ext == "png" || ext == "jpeg" || ext == "jpg")) {
         var reader = new FileReader();
 
         reader.onload = function (e) {
-            $('#blah')
-                .attr('src', e.target.result).hide().fadeIn(200);
-                // .width(150)
-                // .height(200);
-        };
+            $('#blah').attr('src', e.target.result).hide().fadeIn(200);
+        }
+
         reader.readAsDataURL(input.files[0]);
+    }else{
+        console.log(flagsUrl);
+         $('#blah').attr('src', flagsUrl);
     }
 }
 

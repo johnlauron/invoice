@@ -15,7 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/no_form_inv', 'InvoicesController@form_without')->name('invoices.no_form_inv');
 Route::get('/dashboard', 'UsersController@dashboard')->name('users.dashboard');
 Route::get('/editprofile/{id}', 'UsersController@editProfile')->name('users.editprofile');
 Route::post('/changepassword/{id}', 'UsersController@changePassword')->name('users.changepassword');
@@ -25,6 +24,7 @@ Route::post('/changeskin/{id}', 'UsersController@changeSkin')->name('users.chang
 Route::resource('companies','CompaniesController');//->middleware('userVerification');
 
 //invoice
+Route::get('/no_form_inv', 'InvoicesController@form_without')->name('invoices.no_form_inv');
 Route::post('invoices', 'InvoicesController@index')->name('invoices.index');
 Route::get('invoices/no_form_inv', 'InvoicesController@form_without')->name('invoices.form_without');
 Route::get('invoices/no_form_inv/{id}', 'InvoicesController@show_without_form')->name('invoices.show_without_form');

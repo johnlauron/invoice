@@ -65,7 +65,8 @@ class FormDatasController extends Controller
                         ->first();
         $form = InvoiceInput::all()
                             ->where('form_name_id', $invoice->form_name_id);
-        return view('parse/parse', compact('invoice','form'));
+        $extension = \File::extension($invoice->file_location);
+        return view('parse/parse', compact('invoice','form','extension'));
     }
     public function show_data($id){
         $invoice = Invoice::where('id', $id)->first();

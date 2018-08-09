@@ -13,7 +13,7 @@
                         {{ csrf_field() }}
                         <div class="select-section" style="width: 227px;">
                             <select class="form-control" name="select" style="width: 268px;">
-                                    <option value="">--- Chooose Form ---</option>
+                                    <option value="">--- Choose Company ---</option>
                                 @foreach($company as $companies)
                                     <option value="{{$companies->id}}">{{$companies->company_name}}</option>
                                 @endforeach

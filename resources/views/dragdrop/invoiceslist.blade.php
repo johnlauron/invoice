@@ -35,7 +35,15 @@
                 <div class="row">
                     @foreach($invoice as $invoices)
                     <div class="col-md-3 col-sm-3 col-lg-3">
-                        <a href="{{route('dragdrop.createdrag', $invoices->id)}}"><img class="draglist" src="{{asset('images/'.$invoices->company_name.'/'.$invoices->file_location)}}"></a>
+                        <a href="{{route('dragdrop.createdrag', $invoices->id)}}">
+                            @if (pathinfo($invoices->file_location, PATHINFO_EXTENSION) == 'pdf')
+                                <p style="color:#000;"><strong>{{$invoices->invoice_name}}</strong></p>
+                                <img class="draglist" src="{{asset('images/pdf_icon.jpg')}}">
+                            @else
+                                <p style="color:#000;"><strong>{{$invoices->invoice_name}}</strong></p>
+                                 <img class="draglist" src="{{asset('images/'.$invoices->company_name.'/'.$invoices->file_location)}}">
+                            @endif 
+                        </a>
                     </div>
                     @endforeach
                 </div>
