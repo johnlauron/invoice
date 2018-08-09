@@ -16,21 +16,24 @@ class FormDatasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function list()
     {
         $form = Formname::all();
-        $formname = Formname::all()->first();
+        $company = Company::orderBy('company_name', 'asc')->get();
+        $formname = Formname::select('companies.company_name','formnames.id','formnames.company_id')
+                            ->join('companies', 'formnames.company_id', '=', 'companies.id')->first();
         $invoices = DB::table('invoices')
-                        ->select(
-                            'invoices.id',
-                            'invoices.invoice_name',
-                            'companies.company_name',
-                            'invoices.file_location'
-                        )
+                        ->select('invoices.id','invoices.invoice_name','companies.company_name','invoices.file_location','formnames.form_name')
                         ->join('companies', 'invoices.company_id', '=', 'companies.id')
-                        ->where('form_name_id', $formname->id)
+                        ->join('formnames', 'invoices.form_name_id', '=', 'formnames.id')       
+                        ->where('invoices.form_name_id', $formname->id)
+                        ->where('invoices.company_id', $formname->company_id)
                         ->get();
-        return view('parse/list', compact('form','formname','invoices'));
+        return view('parse/list', compact('form','formname','invoices','company'));
     }
     public function store(Request $request)
     {
@@ -79,18 +82,21 @@ class FormDatasController extends Controller
     }
     public function search_form(){
         $search = request('search_form');
-        $form = Formname::all();
-        $formname = Formname::find($search);
+        $search_company = request('search_company');
+        $company = Company::orderBy('company_name', 'asc')->get();
+        $form = Formname::orderBy('form_name', 'asc')->get();
+        $formname = Company::where('id', $search_company)->first();
         $invoices = DB::table('invoices')
-                        ->select(
-                            'invoices.id',
-                            'invoices.invoice_name',
-                            'companies.company_name',
-                            'invoices.file_location'
-                        )
+                        ->select('invoices.id','invoices.invoice_name','companies.company_name','invoices.file_location','formnames.form_name')
                         ->join('companies', 'invoices.company_id', '=', 'companies.id')
-                        ->where('form_name_id', $search)
+                        ->join('formnames', 'invoices.form_name_id', '=', 'formnames.id')
+                        ->where('invoices.form_name_id', $search)
+                        ->where('invoices.company_id', $search_company)
                         ->get();
-        return view('parse/list', compact('form','formname','invoices'));
+        return view('parse/list', compact('form','formname','invoices','company'));
+    }
+    public function select_ajax($id){
+        $forms = Formname::where('company_id', $id)->get();
+        return response()->json($forms);
     }
 }

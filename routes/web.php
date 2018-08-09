@@ -50,6 +50,7 @@ Route::delete('dragdrop/delete/{id}', 'InvoiceinputsController@destroy')->name('
 Route::get('parse/list','FormdatasController@list')->name('parse.list');
 Route::get('parse/show_data/{id}','FormdatasController@show_data')->name('parse.show_data');
 Route::get('parse/parse/{id}','FormdatasController@show')->name('parse.show');
+Route::get('parse/ajax_dropdown/{id}','FormdatasController@select_ajax')->name('parse.select_ajax');
 Route::post('parse/parse/', 'FormdatasController@store')->name('parse.store');
 Route::post('parse/search', 'FormdatasController@search_form')->name('parse.search_form');
 Route::resource('about','AboutController');

@@ -22,35 +22,24 @@ class InvoicesController extends Controller
     public function index()
     {
         $company = Company::orderBy('company_name', 'asc')->get();
+        $comp = Company::all()->first();
         $invoices = DB::table('invoices')
                         ->select('invoices.id','companies.company_name','formnames.form_name','invoices.file_location','invoices.invoice_name')
                         ->join('formnames', 'invoices.form_name_id', '=', 'formnames.id')
                         ->join('companies', 'invoices.company_id', '=', 'companies.id')
-                        ->where('invoices.company_id', 1)
+                        ->where('invoices.company_id', $comp->id)
                         ->orderBy('invoices.created_at', 'Desc')
                         ->paginate(5);
-        $comp_name = Company::find(1);
+        $comp_name = Company::find($comp->id);
         return view('invoices.index',compact('invoices','company','comp_name'))
                         ->with('i', (request()->input('page', 1) - 1) * 5);
     }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $companies = Company::orderBy('company_name', 'asc')->get();
         $formname = Formname::all();
         return view('invoices.create', compact('companies','formname'));
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         
@@ -101,12 +90,6 @@ class InvoicesController extends Controller
             }
         }
     }
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)//for show button in 'invoice'
     {
         $invoice = DB::table('invoices')
@@ -149,12 +132,6 @@ class InvoicesController extends Controller
         return view('invoices.assign_form',compact('invoice','display','extension','form'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $companies = Company::all();
@@ -165,14 +142,6 @@ class InvoicesController extends Controller
         // dd($companies,$formname,$invoices);
         return view('invoices.edit',compact('companies','formname','invoices'));
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
          $this->validate(request(),[
@@ -224,12 +193,6 @@ class InvoicesController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $invoices = Invoice::findorFail($id);
@@ -241,21 +204,21 @@ class InvoicesController extends Controller
         else{
             $invoices->delete();
         }
-
         return redirect()->route('invoices.no_form_inv')
                         ->with('success','Invoice entry deleted successfully');
     }
     public function form_without()
     {
+        $comp = Company::all()->first();
         $invoices = DB::table('invoices')
                             ->select('invoices.id','companies.company_name','invoices.file_location','invoices.invoice_name')
                             ->join('companies', 'invoices.company_id', '=', 'companies.id')
                             ->whereNull('invoices.form_name_id')
-                            ->where('invoices.company_id', 1)
+                            ->where('invoices.company_id', $comp->id)
                             ->orderBy('invoices.created_at', 'Desc')
                             ->paginate(5);
         $company = Company::orderBy('company_name', 'asc')->get();
-        $comp_name = Company::find(1);
+        $comp_name = Company::find($comp->id);
          return view('invoices.no_form_inv',compact('invoices','company','comp_name'))
                         ->with('i', (request()->input('page', 1) - 1) * 5);
     }
@@ -302,9 +265,6 @@ class InvoicesController extends Controller
             $inv->form_name_id = request('form_name');
             if($inv->save()){
                 return redirect(route('invoices.index'))->with('success','Assigned successfully');
-            }
-            else{
-                dd('error');
             }
         }
     }

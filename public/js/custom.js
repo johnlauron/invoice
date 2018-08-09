@@ -47,8 +47,28 @@ $(document).ready(function() {
             console.log('error');
         }
     });
+    $('.select-section').append('<select class="form-control" id="search_form" name="search_form" required><option value="">--- Choose Form ---</option></select>');
+    $('select[name="search_company"]').on('change', function() {
+        var comp_id = $(this).val();
+        console.log(comp_id);
+        if(comp_id){
+            console.log('nice');
+             $.ajax({
+                url: '/parse/ajax_dropdown/'+comp_id,
+                type: "GET",
+                dataType: "json",
+                success:function(data) {
+                    console.log(data);
+                    $('select[name="search_form"]').empty();
+                    $('select[name="search_form"]').append('<option value="">--- Choose Form ---</option>');
+                    $.each(data, function(index, formObject) {
+                        $('select[name="search_form"]').append('<option value="'+ formObject.id +'">'+ formObject.form_name +'</option>');
+                    });
+                }
+            });
+        }
+    });
 });
-
 function readURL(input) {
     var url = input.value;
     var ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
