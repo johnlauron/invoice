@@ -21,7 +21,7 @@
                             <div class="row">
                                 <form>
                                     <div class="col-md-2">
-                                        <div class="select-section" style="width: 227px;">
+                                        <div class="select-section-assign" style="width: 227px;">
                                             <select class="form-control" id="assign_form" name="assign_form" style="width: 268px;" required>
                                                     <option value="">--- Choose Form ---</option>
                                                 @foreach($form as $forms)

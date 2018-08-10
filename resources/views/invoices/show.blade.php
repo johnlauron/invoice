@@ -45,7 +45,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.0.550/pdf.js"></script>
     <script type="text/javascript">
     // URL of PDF document
-    var url = "http://app.dude.com/images/<?php echo $invoice->company_name."/".$invoice->file_location?>";
+    var url = "http://<?php echo $url."/images/".$invoice->company_name."/".$invoice->file_location?>";
     </script>
     <script src="{{asset('js/pdf-view.js')}}"></script>
 @endsection

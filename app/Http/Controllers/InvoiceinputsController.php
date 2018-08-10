@@ -43,13 +43,14 @@ class InvoiceinputsController extends Controller
         // return view('dragdrop.createDragAndDrop',compact('invoice'));
     }
     public function createdrag($id){
+        $url = request()->getHttpHost();
         $invoice = DB::table('invoices')
                             ->select('invoices.id','companies.company_name','invoices.file_location')
                             ->join('companies', 'invoices.company_id', '=', 'companies.id')
                             ->where('invoices.id', $id)
                             ->first();
         $extension = \File::extension($invoice->file_location);
-        return view('dragdrop.createdraganddrop',compact('invoice','extension'));
+        return view('dragdrop.createdraganddrop',compact('invoice','extension','url'));
     }
     public function store(Request $request)
     {  

@@ -92,6 +92,7 @@ class InvoicesController extends Controller
     }
     public function show($id)//for show button in 'invoice'
     {
+        $url = request()->getHttpHost();
         $invoice = DB::table('invoices')
                             ->select('invoices.id','companies.company_name','formnames.form_name','invoices.file_location','invoices.invoice_name')
                             ->join('formnames', 'invoices.form_name_id', '=', 'formnames.id')
@@ -100,7 +101,7 @@ class InvoicesController extends Controller
                             ->orderBy('invoices.created_at', 'Desc')
                             ->first();
         $extension = \File::extension($invoice->file_location);
-        return view('invoices.show',compact('invoice','extension'));
+        return view('invoices.show',compact('invoice','extension','url'));
     }
     public function show_without_form($id)// for show button in 'invoice w/o form'
     {

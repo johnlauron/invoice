@@ -62,6 +62,7 @@ class FormDatasController extends Controller
      */
     public function show($id)
     {
+        $url = request()->getHttpHost();
         $invoice = Invoice::select('invoices.id','invoices.file_location','companies.company_name','invoices.form_name_id')
                         ->join('companies', 'invoices.company_id', '=', 'companies.id')
                         ->where('invoices.id', $id)
@@ -69,16 +70,17 @@ class FormDatasController extends Controller
         $form = InvoiceInput::all()
                             ->where('form_name_id', $invoice->form_name_id);
         $extension = \File::extension($invoice->file_location);
-        return view('parse/parse', compact('invoice','form','extension'));
+        return view('parse/parse', compact('invoice','form','extension','url'));
     }
     public function show_data($id){
+        $url = request()->getHttpHost();
         $invoice = Invoice::where('id', $id)->first();
         $invoice_input = InvoiceInput::where('form_name_id', $invoice->form_name_id)
                                         // ->where('invoice_id', $id)
                                         ->where('company_id', $invoice->company_id)->get();
         $form_data = FormData::where('invoice_id', $id)
                                 ->where('formname_id', $invoice->form_name_id)->get();
-        return view('parse/show_data', compact('form_data','invoice','invoice_input'));
+        return view('parse/show_data', compact('form_data','invoice','invoice_input','url'));
     }
     public function search_form(){
         $search = request('search_form');
