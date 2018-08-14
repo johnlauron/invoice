@@ -29,7 +29,7 @@ class FormDatasController extends Controller
         $invoices = DB::table('invoices')
                         ->select('invoices.id','invoices.invoice_name','companies.company_name','invoices.file_location','formnames.form_name')
                         ->join('companies', 'invoices.company_id', '=', 'companies.id')
-                        ->join('formnames', 'invoices.form_name_id', '=', 'formnames.id')       
+                        ->join('formnames', 'invoices.form_name_id', '=', 'formnames.id')    
                         ->where('invoices.form_name_id', $formname->id)
                         ->where('invoices.company_id', $formname->company_id)
                         ->get();
@@ -69,8 +69,12 @@ class FormDatasController extends Controller
                         ->first();
         $form = InvoiceInput::all()
                             ->where('form_name_id', $invoice->form_name_id);
+        $data = FormData::all()
+                            ->where('formname_id', $invoice->form_name_id)
+                            ->where('invoice_id', $id);
+        // dd($data);
         $extension = \File::extension($invoice->file_location);
-        return view('parse/parse', compact('invoice','form','extension','url'));
+        return view('parse/parse', compact('invoice','form','extension','url','data'));
     }
     public function show_data($id){
         $url = request()->getHttpHost();

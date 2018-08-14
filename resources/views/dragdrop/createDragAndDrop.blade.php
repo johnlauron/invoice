@@ -33,6 +33,7 @@ Dashboard
             </form>
         </div>
     </div>
+    <script src="{{asset('js/animation.js')}}"></script>
     <script src="{{asset('js/pdf.js')}}"></script>
     <script src="{{asset('js/pdf.worker.js')}}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.0.550/pdf.js"></script>

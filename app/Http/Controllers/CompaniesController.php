@@ -92,7 +92,7 @@ class CompaniesController extends Controller
     {
         $company = Company::find($id);
         request()->validate([
-            'company_name' => 'required | unique:companies,company_name',
+            'company_name' => 'required | unique:companies,company_name,'.$id.',id',
             'contact_number' => 'required',
             'email' => 'required| email',
             'address' => 'required'

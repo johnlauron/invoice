@@ -21,6 +21,7 @@
                 <div class="form-group">
                     <strong>Company Name:</strong>
                     <select class="form-control" name="company_id">
+                        <option value="{{$invoices->company_id}}">{{$invoices->company_name}}</option>
                         @foreach ($companies as $company)
                             <option value="{{$company->id}}">{{$company->company_name}}</option>
                         @endforeach
@@ -33,17 +34,21 @@
                     <input type="text" name="invoice_name" value="{{ $invoices->invoice_name }}" class="form-control">
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Form :</strong>
-                    <select class="form-control" name="form_name_id">
-                            <option value="">--- Chooose Form ---</option>
-                        @foreach($formname as $form)
-                            <option value="{{$form->id}}">{{$form->form_name}}</option>
-                        @endforeach
-                    </select>
+            @if($invoices->form_name_id == 0)
+
+            @else
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="form-group">
+                        <strong>Form :</strong>
+                        <select class="form-control" name="form_name_id">
+                                <option value="">--- Chooose Form ---</option>
+                            @foreach($formname as $form)
+                                <option value="{{$form->id}}">{{$form->form_name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
-            </div>
+            @endif
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <label for="fileupload">Upload an Invoice</label>
@@ -56,9 +61,6 @@
               <button type="submit" class="btn btn-primary">Update</button>
             </div>
         </div>
-
-
     </form>
-
-
+    <script src="{{asset('js/animation.js')}}"></script>
 @endsection

@@ -20,11 +20,19 @@ Dashboard
                 <div class="body wrap-image-content">
                     <input type="hidden" name="invoice_id" value="{{$invoice->id}}">
                     <input type="hidden" name="formname_id" value="{{$invoice->form_name_id}}">
-                    @foreach($form as $forms)
-                        <input type="text" name="value[]"
-                            class="form-control box" 
-                            style="position:absolute;top:{{ $forms->yloc }}px;left:{{$forms->xloc}}px;width:{{$forms->width}}px;height:{{$forms->height}}px" required>
-                    @endforeach
+                    @if(count($data) == 0)
+                        @foreach($form as $forms)
+                            <input type="text" name="value[]"
+                                class="form-control box" 
+                                style="position:absolute;top:{{ $forms->yloc }}px;left:{{$forms->xloc}}px;width:{{$forms->width}}px;height:{{$forms->height}}px" required>
+                        @endforeach
+                    @else
+                        @foreach($form as $forms)
+                            <input type="text" name="value[]"
+                                class="form-control box" 
+                                style="position:absolute;top:{{ $forms->yloc }}px;left:{{$forms->xloc}}px;width:{{$forms->width}}px;height:{{$forms->height}}px" disabled>
+                        @endforeach
+                    @endif
                     <div class="info" style="min-height: 141px">
                         <button class="btn btn-primary">Save</button>                       
                     </div>

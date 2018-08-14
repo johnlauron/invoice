@@ -38,6 +38,24 @@
                             <span>Home</span>
                         </a>
                     </li>
+                     <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">group</i>
+                            <span>Users</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="{{ route('users.create') }}">
+                                    <span>Add User</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('users.index') }}">
+                                    <span>Show Users</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                     <li>
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">business</i>
@@ -75,24 +93,6 @@
                             <li>
                                 <a href="{{route('invoices.form_without')}}">
                                     <span>Invoices w/o Form</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0);" class="menu-toggle">
-                            <i class="material-icons">group</i>
-                            <span>Users</span>
-                        </a>
-                        <ul class="ml-menu">
-                            <li>
-                                <a href="{{ route('users.create') }}">
-                                    <span>Add User</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ route('users.index') }}">
-                                    <span>Show Users</span>
                                 </a>
                             </li>
                         </ul>

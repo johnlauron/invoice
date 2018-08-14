@@ -2402,7 +2402,7 @@ a {
   animation: none !important; }
 
 section.content {
-  margin: 100px 15px 0 315px;
+  margin: 100px 15px 0 260px;
   -moz-transition: 0.5s;
   -o-transition: 0.5s;
   -webkit-transition: 0.5s;
@@ -2822,6 +2822,8 @@ section.content {
     padding: 5px 0 0 8px !important; }
 
 /* Card ======================================== */
+.card.content-drag {
+    min-width: 1097px;}
 .selection,
 .selection-2 {
     width: 22%;
@@ -5195,10 +5197,10 @@ input.form-control.button {
   bottom: 35px;
   font-size: 12px; }
 
-.form-control[disabled],
+/*.form-control[disabled],
 .form-control[readonly],
 fieldset[disabled] .form-control {
-  background-color: transparent; }
+  background-color: transparent; }*/
 
 /* Color Picker ================================ */
 .colorpicker {
@@ -7542,7 +7544,7 @@ fieldset[disabled] .form-control {
   transition: all 0.5s;
   font-family: "Roboto", sans-serif;
   background: #fdfdfd;
-  width: 300px;
+  width: 250px;
   overflow: hidden;
   display: inline-block;
   height: calc(100vh - 70px);

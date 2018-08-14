@@ -7,6 +7,7 @@ use App\Company;
 use App\Formname;
 use App\InvoiceInput;
 use File;
+use Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
@@ -42,7 +43,6 @@ class InvoicesController extends Controller
     }
     public function store(Request $request)
     {
-        
         $this->validate(request(),[
             'file' => 'required | mimes:jpeg,jpg,png,pdf',
             'company_id' => 'required',
@@ -52,47 +52,49 @@ class InvoicesController extends Controller
         $img_name = $img->getClientOriginalName();
         $company = Company::find(request('company_id'));
         $company_path = 'images/'. $company->company_name;
-        if(file_exists($company_path. '/' .$img_name)){
-            // dd('error');
-             $error = 'image already exist';
-             return redirect(route('invoices.create', compact('error')));
-        }
-        else{
-            DB::beginTransaction();
-            try{
-                $inv = new Invoice;
-                $path = $company_path;
-                $inv->company_id = request('company_id');
-                $inv->invoice_name = request('invoice_name');
-                $inv->form_name_id = request('assign_form');
-                $inv->file_location = $img_name;
-                if(!$img->move($path,$img_name)){                    
-                    $error += "File storage failed";                
+        DB::beginTransaction();
+        try{
+            $inv = new Invoice;
+            $path = $company_path;
+            $inv->company_id = request('company_id');
+            $inv->invoice_name = request('invoice_name');
+            $inv->form_name_id = request('assign_form');
+            $inv->file_location = $img_name;
+            if(file_exists($company_path. '/' .$img_name)){
+                Session::flash('error', 'file already exist');
+                return redirect(route('invoices.create', compact('error')));
+            }
+            else{
+                if($img->move($company_path,$img_name)){
+                    if(!$inv->save()){
+                        Session::flash('error', 'Theres a problem on saving data');
+                        if(File::delete($company_path. '/' .$img_name)){
+                            Session::flash('error', 'Theres a problem on rollback the file');
+                        }
+                    }                                
                 }
                 else{
-                    if(!$inv->save()){
-                        $error = 'Theres a problem on saving, Record Creation Failed';
-                    }
+                    Session::flash('error', 'Theres a problem on saving file');   
                 }
             }
-            catch(Exception $e){
-                DB::rollback();
-                throw $e;
-            }
-            $form = request('assign_form');
-            DB::commit();
-            if($form == null){
-                return redirect(route('invoices.no_form_inv'))->with('success', 'Created successfully');
-            }
-            else
-            {
-                return redirect(route('invoices.index'))->with('success', 'Created successfully');
-            }
+        }
+        catch(Exception $e){
+            DB::rollback();
+            throw $e;
+        }
+        $form = request('assign_form');
+        DB::commit();
+        if($form == null){
+            return redirect(route('invoices.no_form_inv'))->with('success', 'Created successfully');
+        }
+        else
+        {
+            return redirect(route('invoices.index'))->with('success', 'Created successfully');
         }
     }
     public function show($id)//for show button in 'invoice'
     {
-        $url = request()->getHttpHost();
+        $url = request()->getHttpHost();//get the url
         $invoice = DB::table('invoices')
                             ->select('invoices.id','companies.company_name','formnames.form_name','invoices.file_location','invoices.invoice_name')
                             ->join('formnames', 'invoices.form_name_id', '=', 'formnames.id')
@@ -105,6 +107,7 @@ class InvoicesController extends Controller
     }
     public function show_without_form($id)// for show button in 'invoice w/o form'
     {
+        $url = request()->getHttpHost();//get the url
         $invoice = DB::table('invoices')
                             ->select('invoices.id','companies.company_name','invoices.file_location','invoices.invoice_name','invoices.form_name_id')
                             ->join('companies', 'invoices.company_id', '=', 'companies.id')
@@ -117,7 +120,7 @@ class InvoicesController extends Controller
             $invoice->form_name = "";
         }
         $extension = \File::extension($invoice->file_location);
-        return view('invoices.show',compact('invoice','display','extension'));
+        return view('invoices.show',compact('invoice','display','extension','url'));
     }
     public function assign_form($id)
     {
@@ -135,12 +138,13 @@ class InvoicesController extends Controller
 
     public function edit($id)
     {
-        $companies = Company::all();
+        $companies = Company::orderBy('company_name', 'asc')->get();
         $formname = Formname::all();
-        $invoices = DB::table('invoices')
-                    ->where('id',$id)
+         $invoices = Invoice::select('companies.company_name','invoices.invoice_name','invoices.file_location','companies.id AS company_id','invoices.id')
+                    ->join('companies', 'invoices.company_id', '=', 'companies.id')
+                    ->where('invoices.id',$id)
                     ->first();
-        // dd($companies,$formname,$invoices);
+        // dd($invoices);
         return view('invoices.edit',compact('companies','formname','invoices'));
     }
     public function update(Request $request, $id)
@@ -148,50 +152,55 @@ class InvoicesController extends Controller
          $this->validate(request(),[
             'file' => 'required | mimes:jpeg,jpg,png,pdf',
             'company_id' => 'required',
-            'invoice_name' => 'required | unique:invoices,invoice_name',
+            'invoice_name' => 'required | unique:invoices,invoice_name,'.$id.',id'
         ]);
-
         $img = request('file');
         $img_name = $img->getClientOriginalName();
         $company = Company::find(request('company_id'));
-        $company_path = $company->company_name;
-        if(file_exists($company_path. '/' .$img_name)){
-            dd('error');
-             $error = 'image already exist';
-             return redirect(route('invoices.create', compact('error')));
-        }
-        else{
-            DB::beginTransaction();
-            try{
-                $inv = Invoice::find($id);
-                $path = $company_path;
-                $inv->company_id = request('company_id');
-                $inv->invoice_name = request('invoice_name');
-                $inv->form_name_id = request('form_name_id');
-                $inv->file_location = $img_name;
-                if(!$img->move($path,$img_name)){                    
-                    $error += "File storage failed";                
+        $company_path = 'images/'. $company->company_name;
+        DB::beginTransaction();
+        try{
+            $inv = Invoice::find($id);
+            $oldfile = $inv->file_location;//if company updated
+            $oldcomp = Company::find($inv->company_id);
+            $oldcompid = $oldcomp->id;
+            $oldpath = 'images/'. $oldcomp->company_name;//end
+            $newcomp = request('company_id');
+            $inv->company_id = request('company_id');
+            $inv->invoice_name = request('invoice_name');
+            $inv->form_name_id = request('form_name_id');
+            $inv->file_location = $img_name;
+            if(file_exists($company_path. '/' .$img_name)){
+                Session::flash('error', 'file already exist');
+            }
+            else{
+                if($img->move($company_path,$img_name)){
+                    if(!$inv->save()){
+                        if(File::delete($company_path. '/' .$img_name)){
+                            Session::flash('error', 'Theres a problem on rollback the file');
+                        }
+                        Session::flash('error', 'Theres a problem on saving data');
+                    }
+                    else{
+                        if($oldcompid == $newcomp){
+                            File::delete($company_path. '/' .$oldfile);
+                        }
+                        else{
+                            File::delete($oldpath. '/' .$oldfile);
+                        }
+                    }                                
                 }
                 else{
-                    if(!$inv->save()){
-                        $error = 'Theres a problem on saving, Record Creation Failed';
-                    }
+                    Session::flash('error', 'Theres a problem on saving file');   
                 }
             }
-            catch(Exception $e){
-                DB::rollback();
-                throw $e;
-            }
-            $form = request('form_name_id');
-            DB::commit();
-            if($form == null){
-                return redirect(route('dragdrop.createdraganddrop'))->with('success', 'Updated successfully');
-            }
-            else
-            {
-                return redirect(route('invoices.index'))->with('success', 'Updated successfully');
-            }
         }
+        catch(Exception $e){
+            DB::rollback();
+            throw $e;
+        }
+        DB::commit();
+        return redirect(route('invoices.form_without'))->with('success', 'Updated successfully');
     }
 
     public function destroy($id)

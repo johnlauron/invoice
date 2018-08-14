@@ -49,4 +49,5 @@
         </tr>
         @endforeach
     </table>
+    <script src="{{asset('js/animation.js')}}"></script>
 @endsection
