@@ -54,6 +54,9 @@ class InvoiceinputsController extends Controller
     }
     public function store(Request $request)
     {  
+        $this->validate(request(),[
+            'invoice_name' => 'form_name | unique:formnames,form_name',
+        ]);
         DB::beginTransaction();
         try{
             $form = new Formname;

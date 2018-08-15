@@ -3,6 +3,7 @@
 
 
 @section('content')
+<div class="card drag-content">
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
@@ -40,6 +41,7 @@
         </div>
 
     </div>
+</div>
     <script src="{{asset('js/pdf.js')}}"></script>
     <script src="{{asset('js/pdf.worker.js')}}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.0.550/pdf.js"></script>
