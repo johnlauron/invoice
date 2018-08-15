@@ -48,8 +48,6 @@
                 <button type="submit" class="btn bg-teal btn-lg waves-effect">UPDATE</button>
             </div>
         </div>
-
-
     </form>
     <script src="{{asset('js/animation.js')}}"></script>
 

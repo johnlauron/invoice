@@ -250,7 +250,7 @@ class InvoicesController extends Controller
     public function dropdown()//select button from invoice
     {
         $select = request('select');
-        $company = Company::all();
+        $company = Company::orderBy('company_name', 'asc')->get();
         $invoices = DB::table('invoices')
                         ->select('invoices.id','companies.company_name','formnames.form_name','invoices.file_location','invoices.invoice_name')
                         ->join('formnames', 'invoices.form_name_id', '=', 'formnames.id')

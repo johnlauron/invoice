@@ -1,5 +1,12 @@
 @extends('layouts.login')
-
+<style>
+table {
+   overflow-y: auto;
+   height:550px;
+   display:block;
+   layout: absolute;
+}
+</style>
 @section('title')
 	Dashboard
 @endsection
@@ -26,11 +33,11 @@
                                 <table class="table table-bordered table-striped table-hover dataTable js-exportable">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Email</th>
-                                            <th>Company</th>
-                                            <th>Role</th>
-                                            <th>Actions</th>
+                                            <th style="position: sticky; top: 0px; background: white; width: 327px;">Name</th>
+                                            <th style="position: sticky; top: 0px; background: white; width: 327px;">Email</th>
+                                            <th style="position: sticky; top: 0px; background: white; width: 327px;">Company</th>
+                                            <th style="position: sticky; top: 0px; background: white; width: 327px;">Role</th>
+                                            <th style="position: sticky; top: 0px; background: white; width: 327px;">Actions</th>
                                         </tr>
                                     </thead>
                                     <tfoot>

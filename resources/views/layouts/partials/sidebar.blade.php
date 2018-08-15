@@ -139,6 +139,9 @@
                 </div>
                 <div class="version">
                     <b>Pre-Alpha Version: </b> 0.0.5
+                    <a href="{{ route('about.index')}}">
+                        <p>References</p>
+                    </a>
                 </div>
             </div>
             <!-- #Footer -->

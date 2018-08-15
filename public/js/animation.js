@@ -1,1 +1,1 @@
-$('.alert').fadeIn().delay(10000).fadeOut();
+$('.alert').fadeIn().delay(3000).fadeOut();

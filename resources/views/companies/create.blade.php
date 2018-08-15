@@ -13,7 +13,7 @@
     </div>
 
 
-    <form action="{{ route('companies.store') }}" method="POST">
+    <form action="{{ route('companies.store') }}" method="POST" autocomplete="off">
         @csrf
          <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12">
@@ -46,8 +46,6 @@
                 <button type="submit" class="btn bg-teal btn-lg waves-effect">SAVE</button>
             </div>
         </div>
-
-
     </form>
     <script src="{{asset('js/animation.js')}}"></script>
 

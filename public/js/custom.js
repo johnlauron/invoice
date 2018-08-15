@@ -85,5 +85,5 @@ function readURL(input) {
          $('#blah').attr('src', flagsUrl);
     }
 }
-$('.alert').fadeIn().delay(10000).fadeOut();
+$('.alert').fadeIn().delay(3000).fadeOut();
 

@@ -2822,6 +2822,13 @@ section.content {
     padding: 5px 0 0 8px !important; }
 
 /* Card ======================================== */
+.user-form {
+    padding: 70px;}
+.container.selection-sec {
+  width: 1045px;
+  padding-top: 16px;}
+.search-section {
+    width: 300px;}
 .card.content-drag {
     min-width: 1097px;}
 .selection,
@@ -2829,7 +2836,8 @@ section.content {
     width: 22%;
     float: left;}
 .selection-2 {
-    margin-left: 8px;}
+  margin-left: 8px;
+  margin-right: 10px;}
 .title-section {
   width: 15%;
   float: left;}
@@ -2848,13 +2856,15 @@ ul.dropdown-menu.pull-right.show {
 .container.d-content {
   width: 100%;}
 .card.drag-content {
-    padding: 15px;}
+    padding: 15px;
+    z-index: 0;}
 img.draglist {
     border: 1px solid #ddd;
     border-radius: 4px;
     padding: 5px;
     min-height: 228px;
-    width: 100%;}
+    width: 100%;
+    height: 228px;}
 img.draglist:hover {
     box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);}
 .row.drag-sec{
@@ -3040,7 +3050,9 @@ input.form-control.button {
       margin: 0;
       font-size: 18px;
       font-weight: normal;
-      color: #111; }
+      color: #111;
+      width: 211px;
+      float: left; }
       .card .header h2 small {
         display: block;
         font-size: 12px;
@@ -5116,7 +5128,7 @@ input.form-control.button {
   margin-bottom: 25px; }
   .form-group .form-control {
     width: 100%;
-    border: none;
+    border: solid 1px gainsboro;
     box-shadow: none;
     -webkit-border-radius: 0;
     -moz-border-radius: 0;

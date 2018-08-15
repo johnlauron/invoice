@@ -69,6 +69,7 @@ table {
             </div>
         </div>
     </div>
+    <script src="{{asset('js/animation.js')}}"></script>
 @endsection
 
 @section('extra-script')

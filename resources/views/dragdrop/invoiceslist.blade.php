@@ -10,16 +10,20 @@
             <div class="pull-left">
                 <div class="choose-company">
                     <form action="{{route('dragdrop.list_createform')}}" method="post">
-                        {{ csrf_field() }}  
-                        <div class="select-section" style="width: 227px;">
-                            <select class="form-control" name="select_list" style="width: 268px;">
-                                    <option value="">--- Chooose Form ---</option>
-                                @foreach($company as $companies)
-                                    <option value="{{$companies->id}}">{{$companies->company_name}}</option>
-                                @endforeach
-                            </select>
-                            <br>
-                            <button type="submit" class="btn btn-primary">Go</button>
+                        {{ csrf_field() }}
+                        <div class="search-section">
+                            <div class="select-section" style="width: 227px;float: left;margin-right: 7px;">
+                                <select class="form-control" name="select_list" style="width: 268px;">
+                                        <option value="">--- Chooose Form ---</option>
+                                    @foreach($company as $companies)
+                                        <option value="{{$companies->id}}">{{$companies->company_name}}</option>
+                                    @endforeach
+                                </select>
+                                <br>
+                            </div>
+                            <div class="button-search">
+                                <button type="submit" class="btn btn-primary">Go</button>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -32,6 +36,11 @@
                 <div class="image-content-title">
                     <h3>{{$company_name}}</h3>
                 </div>
+                @if(count($invoice) == 0)
+                    <div class="alert bg-red alert-dismissible" role="alert">
+                        <strong>No Record Found</strong>
+                    </div>
+                @else
                 <div class="row">
                     @foreach($invoice as $invoices)
                     <div class="col-md-3 col-sm-3 col-lg-3">
@@ -47,6 +56,7 @@
                     </div>
                     @endforeach
                 </div>
+                @endif
             </div>
         </div>
     </div>

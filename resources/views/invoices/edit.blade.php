@@ -13,7 +13,7 @@
         </div>
     </div>
 
-    <form action="{{ route('invoices.update', $invoices->id) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('invoices.update', $invoices->id) }}" method="POST" enctype="multipart/form-data" autocomplete="off">
         @csrf
         @method('PUT')
          <div class="row">

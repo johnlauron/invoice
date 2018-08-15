@@ -44,7 +44,7 @@
                                             </div>
                                             <div id="collapseOne_1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne_1">
                                                 <div class="panel-body well">
-                                                    <form action="{{ route('users.changepassword', Auth::user()->id) }}" method="POST">
+                                                    <form action="{{ route('users.changepassword', Auth::user()->id) }}" method="POST" autocomplete="off">
                                                         @csrf
                                                         <div class="col-xs-6 col-sm-6 col-md-6">
                                                             <div class="form-group">
