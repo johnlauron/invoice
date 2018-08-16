@@ -16,6 +16,8 @@ Dashboard
                     <h2>
                         Parse<small>Inserting data</small>
                     </h2>
+                     <div class="padding-title">
+                    </div>
                 </div>
                 <div class="body wrap-image-content">
                     <input type="hidden" name="invoice_id" value="{{$invoice->id}}">

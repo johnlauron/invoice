@@ -32,11 +32,17 @@ class InvoiceinputsController extends Controller
     public function create()
     {
         $companies = Company::all()->first();
-        $company_name = $companies->company_name;
+        if(empty($companies)){
+            $company_n = null;
+            $company_id = null;}
+        else{
+            $company_n = $companies->company_name;
+            $company_id = $companies->id;}
+        $company_name = $company_n;
         $invoice = DB::table('invoices')
                             ->select('invoices.id','companies.company_name','invoices.file_location','invoices.invoice_name')
                             ->join('companies', 'invoices.company_id', '=', 'companies.id')
-                            ->where('company_id', $companies->id)
+                            ->where('company_id', $company_id)
                             ->get();
         $company = Company::orderBy('company_name', 'asc')->get();
         return view('dragdrop.invoiceslist',compact('invoice','company','company_name'));

@@ -4,11 +4,13 @@
 
 @section('content')
 <div class="container-fluid">
-        <div class="card">
-                <div class="header">
-                    <h2>
-                        Form Assign<small>assigning form</small>
-                    </h2>
+        <div class="card content-drag">
+               <div class="header dragdrop">
+                    <div class="title-section">
+                        <h2>Form Assign <small>Choose Form to assign</small></h2>
+                    </div>
+                    <div class="padding-title">
+                    </div>
                 </div>
                 <div class="body wrap-image-content">
                     <div class="info" style="min-height: 141px">

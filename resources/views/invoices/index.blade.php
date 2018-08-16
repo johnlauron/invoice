@@ -26,11 +26,7 @@ table {
                     <div class="card">
                         <div class="header">
                             <h2>
-                                @if(empty($comp_name))
-                                    
-                                @else
-                                    {{$comp_name->company_name}}
-                                @endif
+                                List of Invoice's
                             </h2>
                             <div class="choose-company">
                                 <form action="/invoices/dropdown" method="post" style="display: inline-block;margin-top: -6px;">
@@ -51,6 +47,13 @@ table {
                                 </form>
                             </div>
                         </div>
+                        <div class="company-title">
+                                @if(empty($comp_name))
+                                    
+                                @else
+                                    <center><strong><h3>{{$comp_name->company_name}}</h3></strong></center>
+                                @endif
+                            </div>
                         <div class="body">
                              @if(count($invoices) == 0)
                             <br>

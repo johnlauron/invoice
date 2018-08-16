@@ -26,7 +26,7 @@ table {
                     <div class="card">
                         <div class="header">
                             <h2>
-                                {{$comp_name->company_name}}
+                                List of Invoice's without Form
                             </h2>
                             <div class="choose-company">
                                 <form action="{{route('invoices.form_without_select')}}" method="post" style="display: inline-block;margin-top: -6px;">
@@ -46,6 +46,13 @@ table {
                                     </div>
                                 </form>
                             </div>
+                        </div>
+                        <div class="company-title">
+                                @if(empty($comp_name))
+                                    
+                                @else
+                                    <center><strong><h3>{{$comp_name->company_name}}</h3></strong></center>
+                                @endif
                         </div>
                         <div class="body">
                              @if(count($invoices) == 0)
