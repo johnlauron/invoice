@@ -24,14 +24,20 @@ class InvoicesController extends Controller
     {
         $company = Company::orderBy('company_name', 'asc')->get();
         $comp = Company::all()->first();
+        if(empty($comp)){
+            $comp_id = 0;}
+        else{
+            $comp_id = $comp->id;
+        }
         $invoices = DB::table('invoices')
                         ->select('invoices.id','companies.company_name','formnames.form_name','invoices.file_location','invoices.invoice_name')
                         ->join('formnames', 'invoices.form_name_id', '=', 'formnames.id')
                         ->join('companies', 'invoices.company_id', '=', 'companies.id')
-                        ->where('invoices.company_id', $comp->id)
+                        ->where('invoices.company_id', $comp_id)
                         ->orderBy('invoices.created_at', 'Desc')
                         ->paginate(5);
-        $comp_name = Company::find($comp->id);
+        $comp_name = Company::find($comp_id);
+
         return view('invoices.index',compact('invoices','company','comp_name'))
                         ->with('i', (request()->input('page', 1) - 1) * 5);
     }

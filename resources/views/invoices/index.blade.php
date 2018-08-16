@@ -26,7 +26,11 @@ table {
                     <div class="card">
                         <div class="header">
                             <h2>
-                                {{$comp_name->company_name}}
+                                @if(empty($comp_name))
+                                    
+                                @else
+                                    {{$comp_name->company_name}}
+                                @endif
                             </h2>
                             <div class="choose-company">
                                 <form action="/invoices/dropdown" method="post" style="display: inline-block;margin-top: -6px;">
