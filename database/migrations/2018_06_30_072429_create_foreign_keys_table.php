@@ -51,6 +51,13 @@ class CreateForeignKeysTable extends Migration
                   ->onDelete('cascade')
                   ->onUpdate('cascade');
         });
+        // Schema::table('users', function($table)
+        // {
+        //     $table->foreign('company_id')
+        //           ->references('id')->on('companies')
+        //           ->onDelete('set null')
+        //           ->onUpdate('cascade');
+        // });
     }
 
     /**

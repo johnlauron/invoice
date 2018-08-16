@@ -34,11 +34,11 @@ table {
                                     <thead>
                                         <tr>
                                             <th style="position: sticky; top: 0px; background: white;">ID</th>
-                                            <th style="position: sticky; top: 0px; background: white;">Company Name</th>
-                                            <th style="position: sticky; top: 0px; background: white;">Email</th>
-                                            <th style="position: sticky; top: 0px; background: white;">Address</th>
-                                            <th style="position: sticky; top: 0px; background: white;">Contact</th>
-                                            <th style="position: sticky; top: 0px; background: white;">Action</th>
+                                            <th style="position: sticky; top: 0px; background: white;width: 177px;">Company Name</th>
+                                            <th style="position: sticky; top: 0px; background: white;width: 162px;">Email</th>
+                                            <th style="position: sticky; top: 0px; background: white;width: 225px;">Address</th>
+                                            <th style="position: sticky; top: 0px; background: white;width: 102px;">Contact</th>
+                                            <th style="position: sticky; top: 0px; background: white;width: 75px;">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>

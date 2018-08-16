@@ -17,7 +17,7 @@ class UsersController extends Controller
 
     function __construct()
     {
-        $this->middleware(  'auth');
+        $this->middleware('auth');
     }
 
 
@@ -28,7 +28,12 @@ class UsersController extends Controller
             $id = $user->id;
             $company_id = CompanyUser::where('user_id', $id)->first()->company_id;
             $companys = Company::find($company_id);
-            $user->company_id = $companys->company_name;
+            if(empty($companys)){
+                $user->company_id = null;
+            }
+            else{
+                $user->company_id = $companys->company_name;
+            }
            
             if($user->approved == true){
                 $user->approved = 'approved';
@@ -64,7 +69,7 @@ class UsersController extends Controller
             User::create([
                 'name' => $request->name,
                 'email' => $request->email,
-                'password' => $request->password,
+                'password' => Hash::make($request->password),
                 'role' => $request->role,
                 'approved' => true
             ]);
@@ -108,8 +113,9 @@ class UsersController extends Controller
     {
         $USER_ROLES = ['Super Admin', 'Super User', 'Admin', 'User'];
         $user = User::find($id);
-        $company_id = CompanyUser::where('user_id', $user->id)->first()->id;
-        $companies = Company::all();
+        $company = CompanyUser::select('company_id')->where('user_id', $user->id)->first();
+        $company_id = $company->company_id;
+        $companies = Company::orderBy('company_name', 'asc')->get();
         return view('users.edit', compact('companies', 'user', 'company_id', 'USER_ROLES'));
     }
 

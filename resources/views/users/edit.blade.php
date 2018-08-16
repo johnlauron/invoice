@@ -30,15 +30,11 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Company:</strong>
-					          <select class="form-control show-tick" data-live-search="true" name="company_id">
-					              @foreach ($companies as $company)
-                            @if($company->id == $company_id)
-                                <option selected value="{{$company->id}}">{{$company->company_name}}</option>
-                            @else
-                                <option value="{{$company->id}}">{{$company->company_name}}</option>
-                            @endif
-                        @endforeach
-		  		          </select>
+					    <select class="form-control show-tick" name="company_id">
+					        @foreach ($companies as $company)
+                                <option value="{{$company->id}}" @if($company->id==$company_id) selected='selected' @endif>{{$company->company_name}}</option>
+                            @endforeach
+		  		        </select>
 				</div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">

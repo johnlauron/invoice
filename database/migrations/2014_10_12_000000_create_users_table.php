@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('email','191')->unique();
             $table->string('password','191');
             $table->string('role','100');
+            // $table->unsignedInteger('company_id')->nullable();
             $table->boolean('approved')->default(false);
             $table->rememberToken();
             $table->timestamps();

@@ -140,7 +140,7 @@ class InvoicesController extends Controller
     {
         $companies = Company::orderBy('company_name', 'asc')->get();
         $formname = Formname::all();
-         $invoices = Invoice::select('companies.company_name','invoices.invoice_name','invoices.file_location','companies.id AS company_id','invoices.id')
+        $invoices = Invoice::select('companies.company_name','invoices.invoice_name','invoices.file_location','companies.id AS company_id','invoices.id')
                     ->join('companies', 'invoices.company_id', '=', 'companies.id')
                     ->where('invoices.id',$id)
                     ->first();

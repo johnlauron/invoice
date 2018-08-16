@@ -22,9 +22,9 @@
                     <div class="form-group">
                         <strong>Company Name:</strong>
                         <select class="form-control" name="company_id">
-                            <option value="{{$invoices->company_id}}">{{$invoices->company_name}}</option>
+                            <!-- <option value="{{$invoices->company_id}}">{{$invoices->company_name}}</option> -->
                             @foreach ($companies as $company)
-                                <option value="{{$company->id}}">{{$company->company_name}}</option>
+                                <option value="{{$company->id}}" @if($company->id==$invoices->company_id) selected='selected' @endif>{{$company->company_name}}</option>
                             @endforeach
                         </select>
                     </div>
