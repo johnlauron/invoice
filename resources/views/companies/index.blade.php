@@ -18,6 +18,7 @@ table {
 @endsection
 
 @section('content')
+    <script src="{{asset('js/animation.js')}}"></script>
 	<div class="container-fluid">
         <div class="block-header">
             <div class="row clearfix">
@@ -50,13 +51,9 @@ table {
                                                 <td>{{ $company->address }}</td>
                                                 <td>{{ $company->contact_number }}</td>
                                                 <td>
-                                                    <form action="{{ route('companies.destroy',$company->id) }}" method="POST">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="button" onclick="window.location='{{ route("companies.show",$company->id) }}';" class="btn bg-teal btn-block">SHOW</button>
-                                                        <button type="button" onclick="window.location='{{ route("companies.edit",$company->id) }}';" class="btn bg-cyan btn-block">EDIT</button>
-                                                        <button type="submit" class="btn bg-red btn-block">DELETE</button>    
-                                                    </form>
+                                                    <button type="button" onclick="window.location='{{ route("companies.show",$company->id) }}';" class="btn bg-teal btn-block">SHOW</button>
+                                                    <button type="button" onclick="window.location='{{ route("companies.edit",$company->id) }}';" class="btn bg-cyan btn-block">EDIT</button>
+                                                    <a class="btn bg-red btn-block waves-effect remove-record" data-toggle="modal" data-target="#custom-width-modal" data-url="{{ route('companies.destroy',$company->id) }}" data-id="{{$company->id}}">Delete</a>    
                                                 </td>
                                             </tr>
                                         @endforeach                                    
@@ -69,7 +66,7 @@ table {
             </div>
         </div>
     </div>
-    <script src="{{asset('js/animation.js')}}"></script>
+    @include('layouts.partials.modal')
 @endsection
 
 @section('extra-script')

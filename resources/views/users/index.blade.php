@@ -18,6 +18,7 @@ table {
 @endsection
 
 @section('content')
+    <script src="{{asset('js/animation.js')}}"></script>
 	<div class="container-fluid">
         <div class="block-header">
             <div class="row clearfix">
@@ -57,14 +58,8 @@ table {
                                                 <td>{{ $user->company_id }}</td>
                                                 <td>{{ $user->role }}</td>
                                                 <td>
-                                                    <form action="{{ route('users.destroy',$user->id) }}" method="POST">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <!--<button type="button" onclick="window.location='{{ route("users.show",$user->id) }}';" class="btn bg-teal btn-block waves-effect">SHOW</button>-->
-                                                        <button type="button" onclick="window.location='{{ route("users.edit",$user->id) }}';" class="btn bg-cyan btn-block  waves-effect">EDIT</button>
-                                                        <button type="submit" class="btn bg-red btn-block waves-effect">DELETE</button>
-
-                                                    </form>
+                                                    <button type="button" onclick="window.location='{{ route("users.edit",$user->id) }}';" class="btn bg-cyan btn-block  waves-effect">EDIT</button>
+                                                    <a class="btn bg-red btn-block waves-effect remove-record" data-toggle="modal" data-target="#custom-width-modal" data-url="{{ route('users.destroy',$user->id) }}" data-id="{{$user->id}}">Delete</a>
                                                 </td>
                                             </tr>
                                         @endforeach                                    
@@ -77,8 +72,8 @@ table {
             </div>
         </div>
     </div>
+    @include('layouts.partials.modal')
 @endsection
-
 @section('extra-script')
         {{Html::script('bsbmd/plugins/jquery-countto/jquery.countTo.js')}}
         {{Html::script('bsbmd/plugins/raphael/raphael.min.js')}}

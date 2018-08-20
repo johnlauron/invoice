@@ -10,16 +10,25 @@
                         <h2>Form Assign <small>Choose Form to assign</small></h2>
                     </div>
                     <div class="padding-title">
+                        <div class="pull-right">
+                            <button type="button" href="javascript:history.back()" class="btn bg-teal btn-block waves-effect">BACK</button>
+                        </div>
                     </div>
                 </div>
                 <div class="body wrap-image-content">
                     <div class="info" style="min-height: 141px">
-                        <form action="{{route('invoices.update_assign', $invoice->id)}}" method="post">
-                            {{ csrf_field() }}
-                            <input type="hidden" name="form_name" id="form_name">
-                            <button class="btn btn-primary">Save</button>
-                        </form>
-                        <br><br>
+                        @if(count($form) == 0)
+                        <br>
+                            <div class="alert bg-red alert-dismissible" role="alert">
+                                <strong>No Form Design Found</strong>
+                            </div>
+                        @else
+                            <form action="{{route('invoices.update_assign', $invoice->id)}}" method="post">
+                                {{ csrf_field() }}
+                                <input type="hidden" name="form_name" id="form_name">
+                                <button class="btn btn-primary">Save</button>
+                            </form>
+                            <br><br>
                             <div class="row">
                                 <form>
                                     <div class="col-md-2">
@@ -33,7 +42,8 @@
                                         </div>
                                     </div>
                                 </form>
-                        </div>                    
+                            </div>
+                        @endif                  
                     </div>
                     @if($extension == 'pdf')
                         <canvas id="the-canvas" style="border:1px solid black"></canvas>

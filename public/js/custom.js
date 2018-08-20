@@ -68,6 +68,9 @@ $(document).ready(function() {
             });
         }
     });
+    $('.remove-record').click(function() {
+        console.log('nice');
+    });
 });
 function readURL(input) {
     var url = input.value;
@@ -85,5 +88,4 @@ function readURL(input) {
          $('#blah').attr('src', flagsUrl);
     }
 }
-$('.alert').fadeIn().delay(3000).fadeOut();
 

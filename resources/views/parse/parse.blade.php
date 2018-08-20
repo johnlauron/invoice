@@ -17,6 +17,9 @@ Dashboard
                         Parse<small>Inserting data</small>
                     </h2>
                      <div class="padding-title">
+                         <div class="pull-right">
+                            <a class="btn btn-primary" href="javascript:history.back()"> Back</a>
+                        </div>
                     </div>
                 </div>
                 <div class="body wrap-image-content">

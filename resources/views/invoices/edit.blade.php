@@ -9,7 +9,7 @@
                 <h2>Edit Invoice Info</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('invoices.no_form_inv') }}"> Back</a>
+                <a class="btn btn-primary" href="javascript:history.back()"> Back</a>
             </div>
         </div>
     </div>

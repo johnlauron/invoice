@@ -15,6 +15,9 @@ Dashboard
                 <div class="title-section">
                     <h2>Drag and Drop <small>Fill data</small></h2>
                 </div>
+                 <div class="pull-right">
+                    <a class="btn btn-primary" href="javascript:history.back()"> Back</a>
+                </div>
                 <div class="drag-title">
                     <input type="text" name="form_name" class="form-control button" placeholder="Name of Form" required>
                     <input type="hidden" name="company_name" value="{{$invoice->company_name}}">

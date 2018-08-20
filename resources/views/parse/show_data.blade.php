@@ -5,6 +5,9 @@
             <div class="pull-left">
                 <h2>{{$invoice->invoice_name}}</h2>
             </div>
+             <div class="pull-right">
+                <a class="btn btn-primary" href="javascript:history.back()"> Back</a>
+            </div>
         </div>
     </div>
     <div class="card">

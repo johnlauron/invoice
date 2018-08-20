@@ -78,13 +78,9 @@ table {
                                                 <td>{{ $invoice->form_name}}</td>
                                                 <td>{{ $invoice->file_location }}</td>
                                                 <td>
-                                                    <form action="{{ route('invoices.destroy', $invoice->id) }}" method="POST">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="button" onclick="window.location='{{ route("invoices.show", $invoice->id) }}';" class="btn bg-teal btn-block">SHOW</button>
-                                                        <button type="button" onclick="window.location='{{ route("invoices.edit", $invoice->id) }}';" class="btn bg-cyan btn-block">EDIT</button>
-                                                        <button type="submit" class="btn bg-red btn-block">DELETE</button>    
-                                                    </form>
+                                                    <button type="button" onclick="window.location='{{ route("invoices.show", $invoice->id) }}';" class="btn bg-teal btn-block">SHOW</button>
+                                                    <button type="button" onclick="window.location='{{ route("invoices.edit", $invoice->id) }}';" class="btn bg-cyan btn-block">EDIT</button>
+                                                    <a class="btn bg-red btn-block waves-effect remove-record" data-toggle="modal" data-target="#custom-width-modal" data-url="{{ route('invoices.destroy', $invoice->id) }}" data-id="{{$invoice->id}}">Delete</a>  
                                                 </td>
                                             </tr>
                                         @endforeach                                    
@@ -98,6 +94,7 @@ table {
             </div>
         </div>
     </div>
+    @include('layouts.partials.modal')
 @endsection
 
 @section('extra-script')

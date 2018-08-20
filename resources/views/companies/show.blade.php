@@ -10,7 +10,7 @@
                     <h2> Company info</h2>
                 </div>
                 <div class="pull-right">
-                    <button type="button" onclick="window.location='{{ route("companies.index") }}';" class="btn bg-teal btn-lg waves-effect">BACK</button>
+                    <button type="button" href="javascript:history.back()" class="btn bg-teal btn-lg waves-effect">BACK</button>
                 </div>
             </div>
         </div>

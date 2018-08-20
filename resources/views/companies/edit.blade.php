@@ -8,7 +8,7 @@
                 <h2>Edit Company Info</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('companies.index') }}"> Back</a>
+                <a class="btn btn-primary" href="javascript:history.back()"> Back</a>
             </div>
         </div>
     </div>

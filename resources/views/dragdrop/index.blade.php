@@ -30,7 +30,7 @@ table {
                             </h2>
                         </div>
                         <div class="body">
-                             @if(count($form) == 0))
+                             @if(count($form) == 0)
                             <br>
                                 <div class="alert bg-red alert-dismissible" role="alert">
                                     <strong>No Record Found</strong>
@@ -49,11 +49,7 @@ table {
                                             <tr>
                                                 <td>{{ $forms->form_name }}</td>
                                                 <td>
-                                                    <form action="{{route('dragdrop.delete', $forms->id)}}" method="POST">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn bg-red btn-block">DELETE</button>    
-                                                    </form>
+                                                    <a class="btn bg-red btn-block waves-effect remove-record" data-toggle="modal" data-target="#custom-width-modal" data-url="{{route('dragdrop.delete', $forms->id)}}" data-id="{{$forms->id}}">Delete</a>   
                                                 </td>
                                             </tr>
                                         @endforeach                                    
@@ -67,6 +63,7 @@ table {
             </div>
         </div>
     </div>
+    @include('layouts.partials.modal')
 @endsection
 
 @section('extra-script')

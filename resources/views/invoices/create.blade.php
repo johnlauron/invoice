@@ -12,7 +12,7 @@
 							<br>
 						</div>
 						<div class="pull-right">
-							<button type="button" onclick="window.location='{{ route("users.dashboard") }}';" class="btn bg-teal btn-block waves-effect">BACK</button>
+							<button type="button" href="javascript:history.back()" class="btn bg-teal btn-block waves-effect">BACK</button>
 						</div>
 					</div>
 					<br>

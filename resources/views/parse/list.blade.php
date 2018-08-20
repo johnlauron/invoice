@@ -26,7 +26,10 @@ table {
                     <div class="card">
                         <div class="header">
                             <h2>
-                                {{$formname->company_name}}
+                                @if(empty($formname))
+                                @else
+                                    {{$formname->company_name}}
+                                @endif
                             </h2>
                             <br>
                             <div class="choose-company">
