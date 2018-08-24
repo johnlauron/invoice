@@ -26,10 +26,7 @@ table {
                     <div class="card">
                         <div class="header">
                             <h2>
-                                @if(empty($formname))
-                                @else
-                                    {{$formname->company_name}}
-                                @endif
+                                Data Entry
                             </h2>
                             <br>
                             <div class="choose-company">
@@ -59,6 +56,12 @@ table {
                             </div>
                         </div>
                         <script src="{{ asset('js/custom.js') }}"></script>
+                         <div class="company-title">
+                            @if(empty($formname))
+                            @else
+                                 <center><strong><h3>{{$formname->company_name}}</h3></strong></center>
+                            @endif
+                        </div>
                         <div class="body">
                              @if(count($invoices) == 0)
                             <br>

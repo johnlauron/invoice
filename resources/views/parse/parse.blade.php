@@ -44,7 +44,7 @@ Dashboard
                      @if($extension == 'pdf')
                         <canvas id="the-canvas" style="border:1px solid black"></canvas>
                     @else
-                        <img src="{{asset('images/'.$invoice->company_name.'/'.$invoice->file_location)}}" width="100%" height="100%">
+                        <img src="{{asset('images/'.$invoice->company_name.'/'.$invoice->file_location)}}" width="100%" height="100%" style="display: block !important;">
                     @endif
                 </div>
             </form>

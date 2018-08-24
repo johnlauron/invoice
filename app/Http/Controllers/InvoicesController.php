@@ -181,19 +181,19 @@ class InvoicesController extends Controller
             }
             else{
                 if($img->move($company_path,$img_name)){
-                    if(!$inv->save()){
-                        if(File::delete($company_path. '/' .$img_name)){
-                            Session::flash('error', 'Theres a problem on rollback the file');
-                        }
-                        Session::flash('error', 'Theres a problem on saving data');
-                    }
-                    else{
+                    if($inv->save()){
                         if($oldcompid == $newcomp){
                             File::delete($company_path. '/' .$oldfile);
                         }
                         else{
                             File::delete($oldpath. '/' .$oldfile);
                         }
+                    }
+                    else{
+                        if(File::delete($company_path. '/' .$img_name)){
+                            Session::flash('error', 'Theres a problem on rollback the file');
+                        }
+                        Session::flash('error', 'Theres a problem on saving data');
                     }                                
                 }
                 else{

@@ -38,24 +38,6 @@
                             <span>Home</span>
                         </a>
                     </li>
-                     <li>
-                        <a href="javascript:void(0);" class="menu-toggle">
-                            <i class="material-icons">group</i>
-                            <span>Users</span>
-                        </a>
-                        <ul class="ml-menu">
-                            <li>
-                                <a href="{{ route('users.create') }}">
-                                    <span>Add User</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ route('users.index') }}">
-                                    <span>Show Users</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
                     <li>
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">business</i>
@@ -70,6 +52,24 @@
                             <li>
                                 <a href="{{ route('companies.index') }}">
                                     <span>Show Companies</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                     <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">group</i>
+                            <span>Users</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="{{ route('users.create') }}">
+                                    <span>Add User</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('users.index') }}">
+                                    <span>Show Users</span>
                                 </a>
                             </li>
                         </ul>
@@ -118,12 +118,12 @@
                     <li>
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">assignment_ind</i>
-                            <span>Form data</span>
+                            <span>Data Entry</span>
                         </a>
                         <ul class="ml-menu">
                             <li>
                                 <a href="{{ route('parse.list') }}">
-                                    <span>List of data</span>
+                                    <span>List of Data Entries</span>
                                 </a>
                             </li>
                         </ul>

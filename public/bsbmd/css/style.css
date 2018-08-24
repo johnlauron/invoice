@@ -2877,7 +2877,7 @@ img.draglist:hover {
   border-bottom: solid 1px gainsboro;
   margin-bottom: 15px;}
 div#app {
-    padding-bottom: 25px;}
+  padding-bottom: 20px;}
 .drag {
     min-width: 1112px;}
 input.form-control.button {
@@ -2887,7 +2887,7 @@ input.form-control.button {
   -webkit-transition: .35s ease-in-out;
   transition: .35s ease-in-out;}
 .wrap-image-content input.form-control.box:focus {
-    margin-top: -26px;
+  margin-top: -35px;
   -webkit-transition: .35s ease-in-out;
   transition: .35s ease-in-out;}
 .card-drag{
@@ -3073,10 +3073,11 @@ input.form-control.button {
   .body.wrap-image-content {
     min-width: 1040px;
     min-height: auto;}
-    .wrap-image-content img {
+  .wrap-image-content img {
     min-width: 1073px;
     width: 100%;
-    min-height: 1073px;}
+    min-height: 1073px;
+    display: none;}
   .card .body {
     font-size: 14px;
     color: #555;

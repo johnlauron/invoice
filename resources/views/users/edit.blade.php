@@ -7,7 +7,7 @@
                 <h2>Edit User</h2>
             </div>
             <div class="pull-right">
-                <button type="button" href="javascript:history.back()" class="btn bg-teal btn-lg waves-effect">BACK</button>
+               <a class="btn btn-primary" href="javascript:history.back()"> Back</a>
             </div>
         </div>
     </div>

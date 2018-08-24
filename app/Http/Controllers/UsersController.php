@@ -144,22 +144,17 @@ class UsersController extends Controller
                 'approved' => true
             ]);
 
-            $comp_user = User::where('name' , $old_name_record->name)->first();
+            $comp_user = User::where('id' , $user_id)->first();
             CompanyUser::where('id', $comp_user->id)->first()->update([
                 'user_id' => $user_id,
                 'company_id' => $request->company_id
             ]);
-        } catch(\Exception $e)
+        } catch(Exception $e)
         {
-            dd($e);
             DB::rollback();
-            $status = "error";
-            $message = "Problem occurred. User update failed!";
+            throw $e;
         }
-
- 
         DB::commit();
-
         return redirect()->route('users.index')
                         ->with($status,$message);
     }

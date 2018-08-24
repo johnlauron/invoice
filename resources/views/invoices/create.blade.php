@@ -12,7 +12,7 @@
 							<br>
 						</div>
 						<div class="pull-right">
-							<button type="button" href="javascript:history.back()" class="btn bg-teal btn-block waves-effect">BACK</button>
+							<a class="btn btn-primary" href="javascript:history.back()"> Back</a>
 						</div>
 					</div>
 					<br>

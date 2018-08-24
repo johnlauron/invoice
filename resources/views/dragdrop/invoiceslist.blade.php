@@ -14,7 +14,7 @@
                         <div class="search-section">
                             <div class="select-section" style="width: 227px;float: left;margin-right: 7px;">
                                 <select class="form-control" name="select_list" style="width: 268px;">
-                                        <option value="">--- Chooose Form ---</option>
+                                        <option value="">--- Choose Company ---</option>
                                     @foreach($company as $companies)
                                         <option value="{{$companies->id}}">{{$companies->company_name}}</option>
                                     @endforeach
