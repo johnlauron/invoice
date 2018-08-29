@@ -81,7 +81,7 @@
             <strong>&copy; 2018 <a href="http://revelo.tech" style ="color:#333;">Revelo Solutions, Inc.</a></strong>
         </div>
         <div class="version">
-            <b>Pre-Alpha Version: </b> 0.0.5
+            <b>Pre-Alpha Version: </b> 0.0.6
         </div>
     </div>
     <!-- #Footer -->

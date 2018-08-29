@@ -23,22 +23,13 @@ class InvoicesController extends Controller
     public function index()
     {
         $company = Company::orderBy('company_name', 'asc')->get();
-        $comp = Company::all()->first();
-        if(empty($comp)){
-            $comp_id = 0;}
-        else{
-            $comp_id = $comp->id;
-        }
         $invoices = DB::table('invoices')
                         ->select('invoices.id','companies.company_name','formnames.form_name','invoices.file_location','invoices.invoice_name')
                         ->join('formnames', 'invoices.form_name_id', '=', 'formnames.id')
                         ->join('companies', 'invoices.company_id', '=', 'companies.id')
-                        ->where('invoices.company_id', $comp_id)
                         ->orderBy('invoices.created_at', 'Desc')
                         ->paginate(5);
-        $comp_name = Company::find($comp_id);
-
-        return view('invoices.index',compact('invoices','company','comp_name'))
+        return view('invoices.index',compact('invoices','company'))
                         ->with('i', (request()->input('page', 1) - 1) * 5);
     }
     public function create()
@@ -67,20 +58,19 @@ class InvoicesController extends Controller
             $inv->form_name_id = request('assign_form');
             $inv->file_location = $img_name;
             if(file_exists($company_path. '/' .$img_name)){
-                Session::flash('error', 'file already exist');
-                return redirect(route('invoices.create', compact('error')));
+                return back()->with('error', 'File Already Exist');
             }
             else{
                 if($img->move($company_path,$img_name)){
                     if(!$inv->save()){
-                        Session::flash('error', 'Theres a problem on saving data');
+                        return back()->with('error', 'Theres a problem on saving data');
                         if(File::delete($company_path. '/' .$img_name)){
-                            Session::flash('error', 'Theres a problem on rollback the file');
+                            return back()->with('error', 'Theres a problem on rollback the file');
                         }
                     }                                
                 }
                 else{
-                    Session::flash('error', 'Theres a problem on saving file');   
+                    return back()->with('error', 'Theres a problem on saving file');
                 }
             }
         }
@@ -156,17 +146,20 @@ class InvoicesController extends Controller
     public function update(Request $request, $id)
     {
          $this->validate(request(),[
-            'file' => 'required | mimes:jpeg,jpg,png,pdf',
+            'file' => 'mimes:jpeg,jpg,png,pdf',
             'company_id' => 'required',
             'invoice_name' => 'required | unique:invoices,invoice_name,'.$id.',id'
         ]);
-        $img = request('file');
-        $img_name = $img->getClientOriginalName();
+        if(!empty(request('file'))){
+            $img = request('file');
+            $img_name = $img->getClientOriginalName();
+        }
         $company = Company::find(request('company_id'));
         $company_path = 'images/'. $company->company_name;
         DB::beginTransaction();
         try{
             $inv = Invoice::find($id);
+            $form = $inv->form_name_id;
             $oldfile = $inv->file_location;//if company updated
             $oldcomp = Company::find($inv->company_id);
             $oldcompid = $oldcomp->id;
@@ -174,31 +167,31 @@ class InvoicesController extends Controller
             $newcomp = request('company_id');
             $inv->company_id = request('company_id');
             $inv->invoice_name = request('invoice_name');
-            $inv->form_name_id = request('form_name_id');
-            $inv->file_location = $img_name;
-            if(file_exists($company_path. '/' .$img_name)){
-                Session::flash('error', 'file already exist');
-            }
-            else{
-                if($img->move($company_path,$img_name)){
-                    if($inv->save()){
-                        if($oldcompid == $newcomp){
-                            File::delete($company_path. '/' .$oldfile);
-                        }
-                        else{
-                            File::delete($oldpath. '/' .$oldfile);
-                        }
-                    }
-                    else{
-                        if(File::delete($company_path. '/' .$img_name)){
-                            Session::flash('error', 'Theres a problem on rollback the file');
-                        }
-                        Session::flash('error', 'Theres a problem on saving data');
-                    }                                
+            if(!empty($img_name)){
+                $inv->file_location = $img_name;
+                if(file_exists($company_path. '/' .$img_name)){
+                    return back()->with('error', 'File Already Exist');
                 }
                 else{
-                    Session::flash('error', 'Theres a problem on saving file');   
+                    if($img->move($company_path,$img_name)){//move file
+                        if($inv->save()){
+                            if($oldcompid != $newcomp){
+                                File::delete($oldpath. '/' .$oldfile);//delete the current file path
+                            }
+                        }
+                        else{
+                            if(File::delete($company_path. '/' .$img_name)){
+                                return back()->with('error', 'Theres a problem on rollback the file');
+                            }
+                            return back()->with('error', 'Theres a problem on saving data');
+                        }                                
+                    }
+                    else{
+                        return back()->with('error', 'Theres a problem on saving file'); 
+                    }
                 }
+            }else{
+                $inv->save();
             }
         }
         catch(Exception $e){
@@ -206,7 +199,13 @@ class InvoicesController extends Controller
             throw $e;
         }
         DB::commit();
-        return redirect(route('invoices.form_without'))->with('success', 'Updated successfully');
+        if(empty($form)){
+            return redirect(route('invoices.no_form_inv'))->with('success', 'Updated successfully');
+        }
+        else
+        {
+            return redirect(route('invoices.index'))->with('success', 'Updated successfully');
+        }
     }
 
     public function destroy($id)
@@ -225,21 +224,14 @@ class InvoicesController extends Controller
     }
     public function form_without()
     {
-        $comp = Company::all()->first();
-        if(empty($comp)){
-            $comp_id = 0;}
-        else{
-            $comp_id = $comp->id;}
+        $company = Company::orderBy('company_name', 'asc')->get();
         $invoices = DB::table('invoices')
                             ->select('invoices.id','companies.company_name','invoices.file_location','invoices.invoice_name')
                             ->join('companies', 'invoices.company_id', '=', 'companies.id')
                             ->whereNull('invoices.form_name_id')
-                            ->where('invoices.company_id', $comp_id)
                             ->orderBy('invoices.created_at', 'Desc')
                             ->paginate(5);
-        $company = Company::orderBy('company_name', 'asc')->get();
-        $comp_name = Company::find($comp_id);
-         return view('invoices.no_form_inv',compact('invoices','company','comp_name'))
+        return view('invoices.no_form_inv',compact('invoices','company','comp_name'))
                         ->with('i', (request()->input('page', 1) - 1) * 5);
     }
     public function form_without_select()

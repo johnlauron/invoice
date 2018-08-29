@@ -24,20 +24,10 @@ class FormDatasController extends Controller
     {
         $form = Formname::all();
         $company = Company::orderBy('company_name', 'asc')->get();
-        $formname = Formname::select('companies.company_name','formnames.id','formnames.company_id')
-                            ->join('companies', 'formnames.company_id', '=', 'companies.id')->first();
-        if(empty($formname)){
-            $form_id = 0;
-            $form_company_id = 0;}
-        else{
-            $form_id = $formname->id;
-            $form_company_id = $formname->company_id;}
         $invoices = DB::table('invoices')
                         ->select('invoices.id','invoices.invoice_name','companies.company_name','invoices.file_location','formnames.form_name')
                         ->join('companies', 'invoices.company_id', '=', 'companies.id')
                         ->join('formnames', 'invoices.form_name_id', '=', 'formnames.id')    
-                        ->where('invoices.form_name_id', $form_id)
-                        ->where('invoices.company_id', $form_company_id)
                         ->get();
         return view('parse/list', compact('form','formname','invoices','company'));
     }

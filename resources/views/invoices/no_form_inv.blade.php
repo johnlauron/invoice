@@ -93,6 +93,7 @@ table {
             </div>
         </div>
     </div>
+    @include('layouts.partials.modal')
 @endsection
 
 @section('extra-script')

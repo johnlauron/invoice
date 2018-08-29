@@ -138,7 +138,7 @@
                     &copy; 2018 <a href="javascript:void(0);">Revelo Solutions, Inc.</a>
                 </div>
                 <div class="version">
-                    <b>Pre-Alpha Version: </b> 0.0.5
+                    <b>Pre-Alpha Version: </b> 0.0.6
                     <a href="{{ route('about.index')}}">
                         <p>References</p>
                     </a>
