@@ -139,7 +139,7 @@ class UsersController extends Controller
             User::where('id', $user_id)->first()->update([
                 'name' => $request->name,
                 'email' => $request->email,
-                'password' => $request->password,
+                'password' => Hash::make($request->password),
                 'role' => $request->role,
                 'approved' => true
             ]);
@@ -179,7 +179,13 @@ class UsersController extends Controller
         $user = User::find($id);
         $company_id = CompanyUser::where('user_id', $user->id)->first()->company_id;
         $companys = Company::find($company_id);
-        $user->company = $companys->company_name;
+        if(empty($companys->company_name)){
+            $company_name = null;
+        }
+        else{
+            $company_name = $companys->company_name;
+        }
+        $user->companys = $company_name;
         return view('users/editprofile', compact('user'));
     }
 

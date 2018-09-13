@@ -2822,6 +2822,45 @@ section.content {
     padding: 5px 0 0 8px !important; }
 
 /* Card ======================================== */
+div#images-contents {
+  position: relative;}
+.info {
+  min-height: 55px;}
+.info-dropdown {
+  float: left;}
+.info-submit {
+  width: 6%;
+  float: left;}
+.fa-times-circle {
+  color: #ff1212 !important;}
+.draggable input {
+  z-index: 1;
+  position: relative;}
+.image-contents {
+  position: relative;}
+.submit-button {
+  text-align: center;
+  margin-top: 10px;}
+.button-content {
+  padding: 10px 20px;
+  border: solid 1px #ccc;}
+.row-body {
+  margin-top: 10px;}
+.container-section {
+  width: 100%;
+  padding: 10px 40px;}
+ul.dropdown-menu.pull-right {
+    left: -124px !important;}
+.addinput{
+  margin-top:55px;}
+.fa, .fas {
+  font-size: 18px;}
+a.add_button,
+a.remove_button {
+  display: inline;
+  position: absolute;
+  right: -20px;
+  margin-top: -23px;}
 .padding-title{
   height: 34px;}
 .invoice-form {
@@ -2882,14 +2921,18 @@ div#app {
     min-width: 1112px;}
 input.form-control.button {
     width: 168px !important;}
-.wrap-image-content input.form-control.box{
+ .wrap-image-content input.form-control.box{
   border: 1px solid #ababab !important;
   -webkit-transition: .35s ease-in-out;
   transition: .35s ease-in-out;}
-.wrap-image-content input.form-control.box:focus {
+.wrap-image-content input.form-control.box:focus-within {
   margin-top: -35px;
   -webkit-transition: .35s ease-in-out;
   transition: .35s ease-in-out;}
+input.form-control.box.addinput:focus {
+    margin-top: 15px;
+    transition: .35s ease-in-out;
+}
 .card-drag{
     background: #fff;
     min-height: 50px;

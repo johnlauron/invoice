@@ -83,8 +83,8 @@ table {
                                         @foreach ($invoices as $invoice)
                                             <tr>
                                                 <td>{{ $invoice->form_name }}</td>
-                                                <td>{{ $invoice->invoice_name }}</td>
-                                                <td>{{ $invoice->file_location }}</td>
+                                                <td>{{ $invoice->doc_name }}</td>
+                                                <td>{{ $invoice->file_name }}</td>
                                                 <td>
                                                         <button type="button" onclick="window.location='{{ route("parse.show_data", $invoice->id) }}';" class="btn bg-teal btn-block">view</button>
                                                         <button type="button" onclick="window.location='{{ route("parse.show", $invoice->id) }}';" class="btn bg-cyan btn-block">Action</button>

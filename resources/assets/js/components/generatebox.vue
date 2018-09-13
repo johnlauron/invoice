@@ -9,8 +9,9 @@
 			<input type="button" class="btn btn-success" v-on:click="click" style="margin-bottom: 7px;" value="Generate Box"></input><br>
             <button class="btn btn-primary" style="min-width: 101px;">Save</button>
 		</div>
+		<!-- box-->
 		<div v-for="item in items" :key="item.Id" style="list-style-type: none;">
-	        <vuedragresize :w="150" :h="30" :x="146" :y="153"></vuedragresize>
+	        <vuedragresize :w="150" :h="30" :x="146" :y="153" placeholder="aws"></vuedragresize>
 	    </div>
 	</div>
 </template>

@@ -32,10 +32,11 @@
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
                         <strong>Invoice Name:</strong>
-                        <input type="text" name="invoice_name" value="{{ $invoices->invoice_name }}" class="form-control">
+                        <input type="text" name="invoice_name" value="{{ $invoices->doc_name }}" class="form-control">
+                        <input type="hidden" name="doc_id" value="{{ $invoices->document_id }}" class="form-control">
                     </div>
                 </div>
-                @if($invoices->form_name_id == 0)
+                @if(empty($invoices->form_name_id))
 
                 @else
                     <div class="col-xs-12 col-sm-12 col-md-12">
@@ -44,7 +45,7 @@
                             <select class="form-control" name="form_name_id">
                                     <option value="">--- Chooose Form ---</option>
                                 @foreach($formname as $form)
-                                    <option value="{{$form->id}}">{{$form->form_name}}</option>
+                                    <option value="{{$form->id}}" @if($form->id==$form_id) selected='selected' @endif>{{$form->form_name}}</option>
                                 @endforeach
                             </select>
                         </div>

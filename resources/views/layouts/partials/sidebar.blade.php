@@ -132,6 +132,7 @@
                 </ul>
             </div>
             <!-- #Menu -->
+            
             <!-- Footer -->
             <div class="legal">
                 <div class="copyright">

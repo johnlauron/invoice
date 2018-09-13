@@ -37,9 +37,6 @@
         <div class="button-place">
             <button type="button" onclick="window.location='{{ route("login") }}';" class="btn bg-purple btn-lg waves-effect">LOGIN</button>
         </div>
-        <div class="button-place">
-            <a href="{{ route('about.index') }}" ><h3>Reference's</h3></a>
-        </div>
     </div>
     <!-- Footer -->
     <div class="footer" style ="color:#333;">

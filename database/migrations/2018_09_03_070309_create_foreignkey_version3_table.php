@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFormsTable extends Migration
+class CreateForeignkeyVersion3Table extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateFormsTable extends Migration
      */
     public function up()
     {
-        Schema::create('forms', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('file_id');
-            $table->string('invoice_name', 100)->unique();
-            $table->timestamps();
+        Schema::enableForeignKeyConstraints();
+        Schema::table('files', function (Blueprint $table) {
+            $table->foreign('doc_id')
+            ->references('id')->on('documents')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
         });
     }
 
@@ -28,6 +29,6 @@ class CreateFormsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('form');
+        Schema::dropIfExists('foreign_keys');
     }
 }

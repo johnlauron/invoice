@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use App\InvoiceInput;
 use App\Formname;
-use App\Invoice;
+use App\Filename;
 use App\Company;
 use DB;
 use Illuminate\Http\Request;
@@ -39,9 +39,8 @@ class InvoiceinputsController extends Controller
             $company_n = $companies->company_name;
             $company_id = $companies->id;}
         $company_name = $company_n;
-        $invoice = DB::table('invoices')
-                            ->select('invoices.id','companies.company_name','invoices.file_location','invoices.invoice_name')
-                            ->join('companies', 'invoices.company_id', '=', 'companies.id')
+        $invoice = Filename::select('files.id','files.file_location','documents.doc_name','files.company_id')
+                            ->join('documents', 'files.doc_id', '=', 'documents.id')
                             ->where('company_id', $company_id)
                             ->get();
         $company = Company::orderBy('company_name', 'asc')->get();
@@ -50,16 +49,17 @@ class InvoiceinputsController extends Controller
     }
     public function createdrag($id){
         $url = request()->getHttpHost();
-        $invoice = DB::table('invoices')
-                            ->select('invoices.id','companies.company_name','invoices.file_location')
-                            ->join('companies', 'invoices.company_id', '=', 'companies.id')
-                            ->where('invoices.id', $id)
+        $invoice = DB::table('files')
+                            ->select('files.id','companies.company_name','files.file_location')
+                            ->join('companies', 'files.company_id', '=', 'companies.id')
+                            ->where('files.id', $id)
                             ->first();
         $extension = \File::extension($invoice->file_location);
         return view('dragdrop.createdraganddrop',compact('invoice','extension','url'));
     }
     public function store(Request $request)
     {  
+        // dd($request->all());
         $this->validate(request(),[
             'invoice_name' => 'form_name | unique:formnames,form_name',
         ]);
@@ -80,10 +80,11 @@ class InvoiceinputsController extends Controller
                     foreach ($request->height as $key => $value) {//multiple save
                         $data = array('height' => $request->height [$key],
                                         'width' => $request->width [$key],
-                                        'xloc' => $request->xloc [$key],
-                                        'yloc' => $request->yloc [$key],
-                                        'category_name' => $request->category_name [$key],
-                                        'invoice_id' => $invoice_id,
+                                        'xloc' => $request->left [$key],
+                                        'yloc' => $request->top [$key],
+                                        'category_name' => $request->field [$key],
+                                        'section' => $request->section [$key],
+                                        'file_id' => $invoice_id,
                                         'form_name_id' => $formname_id,
                                         'company_id' => $company->id);
                         InvoiceInput::create($data);//saving the data
@@ -110,9 +111,10 @@ class InvoiceinputsController extends Controller
         $company_id = request('select_list');
         $companies = Company::find($company_id);
         $company_name = $companies->company_name;
-        $invoice = DB::table('invoices')
-                            ->select('invoices.id','companies.company_name','invoices.file_location','invoices.invoice_name')
-                            ->join('companies', 'invoices.company_id', '=', 'companies.id')
+        $invoice = DB::table('files')
+                            ->select('files.id','companies.company_name','files.file_location','documents.doc_name','files.file_name')
+                            ->join('companies', 'files.company_id', '=', 'companies.id')
+                            ->join('documents', 'files.doc_id', '=', 'documents.id')
                             ->where('company_id', $companies->id)
                             ->get();
         $company = Company::all();

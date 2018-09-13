@@ -18,7 +18,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Invoice name : </strong>
-                {{ $invoice->invoice_name }}
+                {{ $invoice->doc_name }}
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
@@ -27,6 +27,15 @@
                 {{ $invoice->company_name }}
             </div>
         </div>
+        @if(empty($invoice->form_name))
+        @else
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Form Design : </strong>
+                {{ $invoice->form_name }}
+            </div>
+        </div>
+        @endif
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>File</strong>
@@ -35,7 +44,7 @@
                 @if($extension == 'pdf')
                     <canvas id="the-canvas" style="border:1px solid black"></canvas>
                 @else
-                    <img src="{{asset('images/'.$invoice->company_name.'/'.$invoice->file_location)}}" width="100%" height="100%">
+                    <img src="{{asset($invoice->file_location)}}" width="100%" height="100%">
                 @endif
             </div>
         </div>
@@ -47,7 +56,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.0.550/pdf.js"></script>
     <script type="text/javascript">
     // URL of PDF document
-    var url = "http://<?php echo $url."/images/".$invoice->company_name."/".$invoice->file_location?>";
+    var url = "http://<?php echo $url."/".$invoice->file_location?>";
     </script>
     <script src="{{asset('js/pdf-view.js')}}"></script>
 @endsection

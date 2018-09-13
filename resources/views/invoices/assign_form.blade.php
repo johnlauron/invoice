@@ -16,7 +16,7 @@
                     </div>
                 </div>
                 <div class="body wrap-image-content">
-                    <div class="info" style="min-height: 141px">
+                    <div class="info">
                         @if(count($form) == 0)
                         <br>
                             <div class="alert bg-red alert-dismissible" role="alert">
@@ -26,12 +26,11 @@
                             <form action="{{route('invoices.update_assign', $invoice->id)}}" method="post">
                                 {{ csrf_field() }}
                                 <input type="hidden" name="form_name" id="form_name">
-                                <button class="btn btn-primary">Save</button>
-                            </form>
-                            <br><br>
-                            <div class="row">
-                                <form>
-                                    <div class="col-md-2">
+                                <div class="info">
+                                    <div class="info-submit">
+                                        <button class="btn btn-primary">Save</button>
+                                    </div>
+                                    <div class="info-dropdown">
                                         <div class="select-section-assign" style="width: 227px;">
                                             <select class="form-control" id="assign_form" name="assign_form" style="width: 268px;" required>
                                                     <option value="">--- Choose Form ---</option>
@@ -41,8 +40,10 @@
                                             </select>
                                         </div>
                                     </div>
-                                </form>
-                            </div>
+                                </div>  
+                                
+                            </form>
+                            
                         @endif                  
                     </div>
                     @if($extension == 'pdf')
@@ -50,8 +51,11 @@
                          <div id="body-content">
                         </div>
                     @else
-                        <img src="{{asset('images/'.$invoice->company_name.'/'.$invoice->file_location)}}" width="100%" style="display: block !important;">
-                        <div id="body-content">
+                        <div id="images-contents">
+                            
+                        </div>
+                        <div class="images">
+                            <img src="{{asset($invoice->file_location)}}" width="100%" style="display: block !important;">
                         </div>
                     @endif
                 </div>
@@ -63,7 +67,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.0.550/pdf.js"></script>
     <script type="text/javascript">
     // URL of PDF document
-    var url = "http://app.dude.com/images/<?php echo $invoice->company_name."/".$invoice->file_location?>";
+    var url = "http://<?php echo $url."/".$invoice->file_location?>";
     // Asynchronous download PDF
     </script>
     <script src="{{asset('js/pdf-view.js')}}"></script>

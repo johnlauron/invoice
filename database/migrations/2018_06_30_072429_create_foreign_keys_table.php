@@ -14,7 +14,7 @@ class CreateForeignKeysTable extends Migration
     public function up()
     {
         Schema::enableForeignKeyConstraints();
-        Schema::table('invoices', function($table)
+        Schema::table('files', function($table)
         {
             $table->foreign('company_id')
                     ->references('id')->on('companies')
@@ -24,23 +24,23 @@ class CreateForeignKeysTable extends Migration
         Schema::table('invoice_input', function($table)
         {
             Schema::enableForeignKeyConstraints();
-            $table->foreign('invoice_id')
-                    ->references('id')->on('invoices')
+            $table->foreign('file_id')
+                    ->references('id')->on('files')
                     ->onDelete('cascade')
                     ->onUpdate('cascade');
         });
         Schema::table('forms', function($table)
         {
-            $table->foreign('invoice_id')
-                    ->references('id')->on('invoices')
+            $table->foreign('file_id')
+                    ->references('id')->on('files')
                     ->onDelete('cascade')
                     ->onUpdate('cascade');
         });
 
         Schema::table('form_data', function($table)
         {
-            $table->foreign('invoice_id')
-                  ->references('id')->on('invoices')
+            $table->foreign('file_id')
+                  ->references('id')->on('files')
                   ->onDelete('cascade')
                   ->onUpdate('cascade');
         });

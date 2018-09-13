@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    //invoice create
     $('.form').append('<select class="form-control" id="assign_form" name="assign_form"><option value="">--- Choose Form ---</option></select>');
     $('select[name="company_id"]').on('change', function() {
         var company_id = $(this).val();
@@ -34,9 +35,9 @@ $(document).ready(function() {
                 dataType: "json",
                 success:function(data) {
                     console.log(data);
-                    $('#body-content').empty();
+                    $('#images-contents').empty();
                     $.each(data, function(index, formObject) {
-                        $('#body-content').append('<input type="text" style="width:'+ formObject.width +'px; height:'+ formObject.height +'px; left:'+ formObject.xloc +'px; top:'+ formObject.yloc +'px; position:absolute;" disabled>').hide().fadeIn(100);
+                        $('#images-contents').append('<input type="text" style="width:'+ formObject.width +'px; height:'+ formObject.height +'px; left:'+ formObject.xloc +'px; top:'+ formObject.yloc +'px; position:absolute;" disabled>').hide().fadeIn(100);
                         // $('#body-content').append('<input value="'+ key +'">');
                         $('input#form_name').val(formObject.form_name_id);
                     });
@@ -47,6 +48,7 @@ $(document).ready(function() {
             console.log('error');
         }
     });
+    //end invoice create
     $('.select-section').append('<select class="form-control" id="search_form" name="search_form" required><option value="">--- Choose Form ---</option></select>');
     $('select[name="search_company"]').on('change', function() {
         var comp_id = $(this).val();

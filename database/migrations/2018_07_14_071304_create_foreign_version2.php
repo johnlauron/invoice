@@ -14,7 +14,7 @@ class CreateForeignVersion2 extends Migration
     public function up()
     {
         Schema::enableForeignKeyConstraints();
-        Schema::table('invoices', function($table)
+        Schema::table('files', function($table)
         {
             $table->foreign('form_name_id')
                     ->references('id')->on('formnames')

@@ -19,7 +19,7 @@
 					<div class="card-body">
 						<div class="container">
 							<div class="invoice-form">
-								<form action="{{ route('invoices.store') }}" method="post" enctype="multipart/form-data" autocomplete="off">
+								<form action="{{ route('invoices.store') }}" method="post" enctype="multipart/form-data" autocomplete="off" multiple />
 									{{ csrf_field() }}									
 									<div class="col-xs-8 col-sm-8 col-md-8">
 										<div class="form-group">
@@ -49,7 +49,7 @@
 									<div class="col-xs-8 col-sm-8 col-md-8">
 										<div class="form-group">
 											<label for="fileupload">Upload an Invoice</label>
-											<input type="file" class="form-control-file" id="fileupload" name="file" onchange="readURL(this);">
+											<input type="file" class="form-control-file" id="fileupload" name="file[]" onchange="readURL(this);" multiple />
 											<br>
 											<button type="button" onclick="window.location='{{ route("users.dashboard") }}';" class="btn bg-teal btn-lg waves-effect">CANCEL</button>
 											<button type="submit" class="btn bg-teal btn-lg waves-effect">SAVE</button>
@@ -66,9 +66,15 @@
 					<div class="spacing" style="min-height:221px;">
 					</div>
 					<div class="body wrap-image-content">
-						<img id="blah" src="#" alt="invoice image">
+							<div id="images-contents">
+                   
+							</div>
+							<div class="images">
+									<img id="blah" src="#" alt="invoice image">
+							</div>
+						{{--  <img id="blah" src="#" alt="invoice image">
 						<div id="body-content">
-						</div>
+						</div>  --}}
 					</div>
 				</div>
 			</div>

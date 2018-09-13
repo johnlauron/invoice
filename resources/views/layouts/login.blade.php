@@ -9,14 +9,19 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>DUDE</title>
-
+  
     <!-- Bootstrap Core Css -->
     @section('css')
     
         <!-- Google Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
         <script src=" {{ asset('js/app.js') }} "></script>
+        {{--  <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel = "stylesheet">  --}}
+        {{--  <script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>  --}}
+        
         {{ Html::style('bsbmd/plugins/bootstrap/css/bootstrap.css') }}
         {{ Html::style('bsbmd/plugins/node-waves/waves.css') }}
         {{ Html::style('bsbmd/plugins/animate-css/animate.css') }}
@@ -42,6 +47,8 @@
 
     @section('script')
         {{Html::script('bsbmd/plugins/jquery/jquery.min.js')}}
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         {{Html::script('bsbmd/plugins/bootstrap/js/bootstrap.js')}}
         {{Html::script('bsbmd/plugins/bootstrap-select/js/bootstrap-select.js')}}
         {{Html::script('bsbmd/plugins/jquery-slimscroll/jquery.slimscroll.js')}}

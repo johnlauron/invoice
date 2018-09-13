@@ -21,7 +21,7 @@
                         <div class = "body">
                             <p>Name: {{ $user->name }}</p>
                             <p>Email: {{ $user->email }}</p>
-                            <p>Company: {{ $user->company }}</p>
+                            <p>Company: {{ $user->companys }}</p>
                             <p>Role: {{ $user->role }}</p>
                         </div>
                     </div>

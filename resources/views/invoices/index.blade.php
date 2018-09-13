@@ -74,9 +74,9 @@ table {
                                     <tbody>
                                         @foreach ($invoices as $invoice)
                                             <tr>
-                                                <td>{{ $invoice->invoice_name }}</td>
+                                                <td>{{ $invoice->doc_name }}</td>
                                                 <td>{{ $invoice->form_name}}</td>
-                                                <td>{{ $invoice->file_location }}</td>
+                                                <td>{{ $invoice->file_name }}</td>
                                                 <td>
                                                     <button type="button" onclick="window.location='{{ route("invoices.show", $invoice->id) }}';" class="btn bg-teal btn-block">SHOW</button>
                                                     <button type="button" onclick="window.location='{{ route("invoices.edit", $invoice->id) }}';" class="btn bg-cyan btn-block">EDIT</button>

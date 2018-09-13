@@ -14,16 +14,18 @@
         <div class="parse-content">
             <div class="container">
                 <div class="category">
+                  
                     @foreach ($invoice_input as $input)
-                        <p><strong>{{$input->category_name}} :</strong></p>
+                       <p><strong>{{$input->category_name}} :</strong></p>
                     @endforeach
                 </div>
-                <div class="value">
+                <div class="value">    
                     @foreach ($form_data as $data)
-                        <p>{{$data->value}}</p>
+                       <p>{{$data->value}}</p>
                     @endforeach
                 </div>
-            </div>
+            </div>    
+            </table>
         </div>
     </div>
 @endsection

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateInvoicesTable extends Migration
+class CreateFilesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,14 @@ class CreateInvoicesTable extends Migration
      */
     public function up()
     {
-        if(!Schema::hasTable('invoices')){
-            Schema::create('invoices', function (Blueprint $table) {
+        if(!Schema::hasTable('files')){
+            Schema::create('files', function (Blueprint $table) {
                 $table->increments('id');
                 $table->unsignedInteger('company_id');
-                $table->string('invoice_name','191')->unique();
-                $table->string('file_location','191');
-                $table->unique(['company_id','invoice_name','file_location']);
+                $table->unsignedInteger('doc_id');
+                $table->string('file_name')->unique();
+                $table->string('file_location')->unique();
+                $table->unique(['company_id','file_location']);
                 $table->unsignedInteger('form_name_id')->nullable();
                 $table->timestamps();
             });
@@ -33,6 +34,6 @@ class CreateInvoicesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('invoices');
+        Schema::dropIfExists('files');
     }
 }
