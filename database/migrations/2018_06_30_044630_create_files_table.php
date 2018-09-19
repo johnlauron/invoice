@@ -22,6 +22,7 @@ class CreateFilesTable extends Migration
                 $table->string('file_location')->unique();
                 $table->unique(['company_id','file_location']);
                 $table->unsignedInteger('form_name_id')->nullable();
+                $table->text('parse')->nullable();
                 $table->timestamps();
             });
         }

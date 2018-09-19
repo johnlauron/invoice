@@ -42,19 +42,35 @@ $(document).ready(function(){
               var section = 'header-section';
               var $el = $('<div id="draggable '+x+'" class="draggable" style="cursor: move;position:absolute;top:0;left=0;z-index:2;"><span class="form-control" style="width:'+ width +'px;height:'+ height +'px" name="start">'+field+'</span><a href="#" class="clickedon"><i class="fa fa-check-circle" id="change" style="position: absolute;left: 155px;top:0;color: #1ff3ce;font-size: 15px;"></i></a>');
               window.$el = $el;
+              var varwidth;
+              var varheight;
               $('.image-contents').append($el);
                 //version1
-                $el.draggable({
-                  stop: function(){
-                      // var finalOffset = $(this).offset();
-                      // var finalxPos = finalOffset.left;
-                      var finalxPos = $(this).position().left;
-                      var finalyPos = $(this).position().top;
-                      var htmls = '<div class="hidden-inputs '+id+'"><input type="hidden" name="left[]" class="form-control" value="'+finalxPos+'"><input type="hidden" name="top[]" class="form-control" value="'+finalyPos+'"><input type="hidden" name="section[]" class="form-control" value="'+section+'"><input type="hidden" name="width[]" class="form-control" value="'+width +'"><input type="hidden" name="height[]" class="form-control" value="'+height +'"><input type="hidden" name="field[]" class="form-control" value="'+field +'"></div>';
-                      // $(".header-section").html(htmls);
-                      window.myvar = htmls;
-                  } 
-                });
+                // $('span').resizable({
+                //   resize: function(e, ui) {
+                //     // console.log( ui.size.width + 'x' + ui.size.height);
+                //     var varwidth = ui.size.width;
+                //     var varheight = ui.size.height;
+                //     var varhtml   = '<input type="hidden" name="width[]" class="form-control" value="'+varwidth +'"><input type="hidden" name="height[]" class="form-control" value="'+varheight +'">';
+                //     window.varhtmls = varhtml;
+                //     // return new variable(varhtml);
+                //     // window.varheight = varheight;
+                //   }
+                // });
+              $el.draggable({
+                stop: function(){
+                    // var finalOffset = $(this).offset();
+                    // var finalxPos = finalOffset.left;
+                    var finalxPos = $(this).position().left;
+                    var finalyPos = $(this).position().top;
+                    var htmls = '<div class="hidden-inputs '+id+'"><input type="hidden" name="left[]" class="form-control" value="'+finalxPos+'"><input type="hidden" name="top[]" class="form-control" value="'+finalyPos+'"><input type="hidden" name="section[]" class="form-control" value="'+section+'"><input type="hidden" name="width[]" class="form-control" value="'+width +'"><input type="hidden" name="height[]" class="form-control" value="'+height +'"><input type="hidden" name="field[]" class="form-control" value="'+field +'"></div>';
+                    // $(".header-section").html(htmls);
+                    window.myvar = htmls;
+                } 
+              });
+              
+              // var retval = variable();
+              // console.log(retval.varhtml);
           }
             //end version1
         $('#custom-width-modal').modal('toggle');

@@ -10,7 +10,7 @@ Dashboard
 @section('content')
     <div class="container-fluid">
         <div class="card">
-            <form action="{{route('parse.store')}}" method="post"> 
+            <form action="{{route('parse.store')}}" method="post" id="parseform"> 
                 {{ csrf_field() }} 
                 <div class="header">
                     <h2>
@@ -24,20 +24,32 @@ Dashboard
                 </div>
                 <div class="body wrap-image-content">
                     <div class="info">
-                        <button class="btn btn-primary">Save</button>                       
+                        <button type="submit" class="btn btn-primary">Save</button>                       
+                        <script src="{{asset('js/parse.js')}}"></script>
+                        <button type="button" class="btn btn-success" id="submit_parse" value="Parse">Parse</button>
+                        
                     </div>
-                    <input type="hidden" name="invoice_id" value="{{$invoice->id}}">
-                    <input type="hidden" name="formname_id" value="{{$invoice->form_name_id}}">
+                    <div class="parsing">
+                        <textarea name="parsing" id="parsing"  style="width: 754px; height: 80px; margin: 0px;" readonly /></textarea>
+                    </div>
+                    <div class="header-location">
+                         <input type="hidden" name="Document" value="{{$invoice->doc_name}}">
+                         <input type="hidden" name="File" value="{{$invoice->file_name}}">
+                    </div>
+                    {{--  <input type="hidden" name="invoice_id" value="{{$invoice->id}}">
+                    <input type="hidden" name="formname_id" value="{{$invoice->form_name_id}}">  --}}
                     @if(count($data) == 0)
                          @if($extension == 'pdf')
                             <div id="images-contents">
                                 @foreach($form as $forms){{--  header section  --}}
-                                    <input type="text" name="{{$forms->category_name}}[]" class="form-control box" placeholder="{{$forms->category_name}}" style="position:absolute;top:{{ $forms->yloc }}px;left:{{$forms->xloc}}px;width:{{$forms->width}}px;height:{{$forms->height}}px">
+                                    <div class="header-location"> 
+                                        <input type="text" name="{{$forms->category_name}}" class="form-control box" placeholder="{{$forms->category_name}}" style="position:absolute;top:{{ $forms->yloc }}px;left:{{$forms->xloc}}px;width:{{$forms->width}}px;height:{{$forms->height}}px">
+                                    <div>
                                 @endforeach
                                 <div class="input-section">
                                     @foreach($formline as $formlines){{--  linedetails section  --}}
                                         <div class="inputs" style="position:absolute;top:{{ $formlines->yloc }}px;left:{{$formlines->xloc}}px;">
-                                            <input type="text" name="{{$formlines->category_name}}[]" class="form-control box" placeholder="{{$formlines->category_name}}" style="width:{{$formlines->width}}px;height:{{$formlines->height}}px">
+                                            <input type="text" name="{{$formlines->category_name}}" class="form-control box" placeholder="{{$formlines->category_name}}" style="width:{{$formlines->width}}px;height:{{$formlines->height}}px">
                                             <div class="add_but">
                                                 <a href="javascript:void(0);" class="add_button" title="Add field"><i class="fas fa-plus-circle"></i></a>
                                             </div>
@@ -52,12 +64,14 @@ Dashboard
                         @else
                             <div id="images-contents">
                                 @foreach($form as $forms){{--  header section  --}}
-                                    <input type="text" name="{{$forms->category_name}}[]" class="form-control box" placeholder="{{$forms->category_name}}" style="position:absolute;top:{{ $forms->yloc }}px;left:{{$forms->xloc}}px;width:{{$forms->width}}px;height:{{$forms->height}}px">
+                                    <div class="header-location"> 
+                                        <input type="text" name="{{$forms->category_name}}" class="form-control box" placeholder="{{$forms->category_name}}" style="position:absolute;top:{{ $forms->yloc }}px;left:{{$forms->xloc}}px;width:{{$forms->width}}px;height:{{$forms->height}}px">
+                                    </div>
                                 @endforeach
                                 <div class="input-section">
                                     @foreach($formline as $formlines){{--  linedetails section  --}}
                                         <div class="inputs" style="position:absolute;top:{{ $formlines->yloc }}px;left:{{$formlines->xloc}}px;">
-                                            <input type="text" name="{{$formlines->category_name}}[]" class="form-control box" placeholder="{{$formlines->category_name}}" style="width:{{$formlines->width}}px;height:{{$formlines->height}}px">
+                                            <textarea name="{{$formlines->category_name}}" class="form-control box" placeholder="{{$formlines->category_name}}" style="width:{{$formlines->width}}px;height:{{$formlines->height}}px"></textarea>
                                             <div class="add_but">
                                                 <a href="javascript:void(0);" class="add_button" title="Add field"><i class="fas fa-plus-circle"></i></a>
                                             </div>
@@ -78,8 +92,6 @@ Dashboard
                                 style="position:absolute;top:{{ $forms->yloc }}px;left:{{$forms->xloc}}px;width:{{$forms->width}}px;height:{{$forms->height}}px" disabled>
                         @endforeach
                     @endif
-                    
-                   
                 </div>
             </form>
         </div>

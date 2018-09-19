@@ -34,8 +34,7 @@ class FormDatasController extends Controller
     }
     public function store(Request $request)
     {
-        dd($request->all());
-        // $request->all();    
+        dd($request->all()); 
         // DB::beginTransaction();
         // try{
         //     foreach($request->value as $key => $value){
@@ -62,8 +61,9 @@ class FormDatasController extends Controller
     public function show($id)
     {
         $url = request()->getHttpHost();
-        $invoice = Filename::select('files.id','files.file_location','companies.company_name','files.form_name_id')
+        $invoice = Filename::select('files.id','documents.doc_name','files.file_name','files.file_location','companies.company_name','files.form_name_id')
                         ->join('companies', 'files.company_id', '=', 'companies.id')
+                        ->join('documents', 'files.doc_id', '=', 'documents.id')
                         ->where('files.id', $id)
                         ->first();
         $form = InvoiceInput::all()

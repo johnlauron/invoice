@@ -2825,7 +2825,9 @@ section.content {
 div#images-contents {
   position: relative;}
 .info {
-  min-height: 55px;}
+  min-height: 55px;
+  width: 13%;
+  float: left;}
 .info-dropdown {
   float: left;}
 .info-submit {
@@ -2921,11 +2923,14 @@ div#app {
     min-width: 1112px;}
 input.form-control.button {
     width: 168px !important;}
+  /* textarea.form-control.box, */
  .wrap-image-content input.form-control.box{
   border: 1px solid #ababab !important;
   -webkit-transition: .35s ease-in-out;
   transition: .35s ease-in-out;}
-.wrap-image-content input.form-control.box:focus-within {
+
+  textarea.form-control.box:focus-within,
+  .wrap-image-content input.form-control.box:focus-within {
   margin-top: -35px;
   -webkit-transition: .35s ease-in-out;
   transition: .35s ease-in-out;}
