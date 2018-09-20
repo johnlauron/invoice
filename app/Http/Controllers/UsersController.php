@@ -190,6 +190,7 @@ class UsersController extends Controller
     }
 
 
+
     public function changePassword(Request $request, $id)
     {
         $status = "success";

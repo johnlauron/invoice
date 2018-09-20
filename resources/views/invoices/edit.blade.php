@@ -54,7 +54,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
                         <label for="fileupload">Upload an Invoice</label>
-                            <input type="file" class="form-control-file" id="fileupload" name="file">
+                            <input type="file" class="form-control-file" id="fileupload" name="file" placeholder="agas">
                             <br>
                     </div>
                 </div>

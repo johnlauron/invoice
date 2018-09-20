@@ -15,7 +15,10 @@
         <div class="parse-content">
             <div class="container">
                 <div class="category">
-                       <p>{{$parses->parse}}</p>
+                    @foreach ($parsing as $pars)
+                       <p>{{ $pars->parse }}</p>
+                    @endforeach
+
                 </div>
             </div>    
             </table>

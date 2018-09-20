@@ -53,5 +53,7 @@ Route::get('parse/parse/{id}','FormdatasController@show')->name('parse.show');
 Route::get('parse/ajax_dropdown/{id}','FormdatasController@select_ajax')->name('parse.select_ajax');
 Route::post('parse/parse/', 'FormdatasController@store')->name('parse.store');
 Route::post('parse/search', 'FormdatasController@search_form')->name('parse.search_form');
+Route::get('parse/result','FormdatasController@result')->name('parse.result');
+Route::get('parse/details/{id}','FormdatasController@details')->name('parse.details');
 Route::resource('about','AboutController');
 Auth::routes();

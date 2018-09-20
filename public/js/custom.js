@@ -91,3 +91,19 @@ function readURL(input) {
     }
 }
 
+(function() {
+      $('#createJson').on('click', function() {
+        var all_says = [];
+        $('.form-control').each(function(key, value) {
+          var text = $(this).find('<input type="value[]">').val();
+          // $('select[name="assign_form"]').append('<option value="'+ nameObject.id +'">'+ nameObject.form_name +'</option>');
+          // var active = $(this).find('input[type=checkbox]').is(':checked');
+          var obj = {
+            text: text,
+            // active: active
+          };
+          all_says.push(obj);
+        })
+        $('#gen').val(JSON.stringify(all_says));
+      });
+    })();

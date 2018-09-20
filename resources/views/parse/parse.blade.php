@@ -10,8 +10,9 @@ Dashboard
 @section('content')
     <div class="container-fluid">
         <div class="card">
-            <form action="{{route('parse.store')}}" method="post" id="parseform"> 
-                {{ csrf_field() }} 
+            <form action="{{route('parse.store')}}" method="post" id="parseform">
+                @csrf
+                <!-- @method('PUT') -->
                 <div class="header">
                     <h2>
                         Parse<small>Inserting data</small>
@@ -22,6 +23,7 @@ Dashboard
                         </div>
                     </div>
                 </div>
+
                 <div class="body wrap-image-content">
                     <div class="info">
                         <button type="submit" class="btn btn-primary">Save</button>                       
@@ -36,8 +38,8 @@ Dashboard
                          <input type="hidden" name="Document" value="{{$invoice->doc_name}}">
                          <input type="hidden" name="File" value="{{$invoice->file_name}}">
                     </div>
-                    {{--  <input type="hidden" name="invoice_id" value="{{$invoice->id}}">
-                    <input type="hidden" name="formname_id" value="{{$invoice->form_name_id}}">  --}}
+                    <input type="hidden" name="invoice_id" value="{{$invoice->id}}">
+                    <input type="hidden" name="formname_id" value="{{$invoice->form_name_id}}">
                     @if(count($data) == 0)
                          @if($extension == 'pdf')
                             <div id="images-contents">

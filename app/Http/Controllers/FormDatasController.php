@@ -5,6 +5,7 @@ use App\Company;
 use App\Formname;
 use App\InvoiceInput;
 use App\Filename;
+use App\Document;
 use DB;
 use App\FormData;
 use Illuminate\Http\Request;
@@ -32,28 +33,27 @@ class FormDatasController extends Controller
                         ->get();
         return view('parse/list', compact('form','formname','invoices','company'));
     }
-    public function store(Request $request)
+
+    public function result()
     {
-        // dd($request->all()); 
-        // $var = request->id;
-        // $query = filename::where('id',$var)->first();
-        // $query->parse = $request->parsing;
-        // $query->save();
-        // DB::beginTransaction();
-        // try{
-        //     foreach($request->value as $key => $value){
-        //         $data = array('file_id' => $request->invoice_id,
-        //                 'formname_id' => $request->formname_id,
-        //                 'value' => $request->value [$key]);
-        //         FormData::create($data);
-        //     }
-        // }
-        // catch(Exception $e){
-        //     DB::rollback();
-        //     throw $e;
-        // }
-        // DB::commit();
-        // return redirect(route('parse.list'))->with('success', 'Created successfully');
+        // dd($document);
+        $document = Document::all();
+        $company = Company::orderBy('company_name', 'asc')->get();
+       return view('parse/result', compact('document','company'));
+    }
+
+    public function details($id)
+    {
+        // dd($id);
+        $url = request()->getHttpHost();
+        // $parses = Filename::where('id', $id)->first();
+        $document = Document::all();
+        $parsing = DB::table('files')
+                ->select('files.parse','files.doc_id','documents.doc_name')
+                ->join('documents', 'files.doc_id', '=', 'documents.id')
+                ->get();
+                // dd($parsing);
+       return view('parse/details', compact('parsing','document','url'));
     }
 
     /**
@@ -83,17 +83,30 @@ class FormDatasController extends Controller
         $extension = \File::extension($invoice->file_location);
         return view('parse/parse', compact('invoice','form','extension','url','data','formline'));
     }
+
+    public function store(Request $request)
+    {
+        // dd($request->parsing);
+        $query = Filename::where('id', $request->invoice_id)->update(['parse' => $request->parsing]);
+        return redirect(route('parse.list'))->with('success','Assigned successfully');
+    }
+
     public function show_data($id){
         // dd($id);
         $url = request()->getHttpHost();
-        $invoice = Filename::where('id', $id)->first();
-        $invoice_input = InvoiceInput::where('form_name_id', $invoice->form_name_id)
-                                        // ->where('invoice_id', $id)
-                                        ->where('company_id', $invoice->company_id)->get();
-        $form_data = FormData::where('file_id', $id)
-                                ->where('formname_id', $invoice->form_name_id)->get();
-        return view('parse/show_data', compact('form_data','invoice','invoice_input','url'));
+        $parses = Filename::where('id', $id)->first();
+
+        // dd($parse);
+        // $invoice = Filename::where('id', $id)->first();
+        // $invoice_input = InvoiceInput::where('form_name_id', $invoice->form_name_id)
+        //                                 // ->where('invoice_id', $id)
+        //                                 ->where('company_id', $invoice->company_id)->get();
+        // $form_data = FormData::where('file_id', $id)
+        //                         ->where('formname_id', $invoice->form_name_id)->get();
+        return view('parse/show_data', compact('parses','url'));
+        // return \Response::json(array('error' => $form_data)); return data from data with only one table
     }
+
     public function search_form(){
         $search = request('search_form');
         $search_company = request('search_company');
@@ -110,9 +123,9 @@ class FormDatasController extends Controller
         return view('parse/list', compact('form','formname','invoices','company'));
     }
     public function select_ajax($id){
-
-
         $forms = Formname::where('company_id', $id)->get();
         return response()->json($forms);
     }
+
+    
 }

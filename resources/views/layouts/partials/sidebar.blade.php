@@ -114,20 +114,25 @@
                                 </a>
                             </li>
                         </ul>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0);" class="menu-toggle">
-                            <i class="material-icons">assignment_ind</i>
-                            <span>Data Entry</span>
-                        </a>
-                        <ul class="ml-menu">
-                            <li>
-                                <a href="{{ route('parse.list') }}">
-                                    <span>List of Data Entries</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" class="menu-toggle">
+                                <i class="material-icons">assignment_ind</i>
+                                <span>Data Entry</span>
+                            </a>
+                            <ul class="ml-menu">
+                                <li>
+                                    <a href="{{ route('parse.list') }}">
+                                        <span>List of Data Entries</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('parse.result') }}">
+                                        <span>Invoice Details</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
 
                 </ul>
             </div>
@@ -139,7 +144,7 @@
                     &copy; 2018 <a href="javascript:void(0);">Revelo Solutions, Inc.</a>
                 </div>
                 <div class="version">
-                    <b>Pre-Alpha Version: </b> 0.0.6
+                    <b>Pre-Alpha Version: </b> 0.0.7
                     <a href="{{ route('about.index')}}">
                         <p>References</p>
                     </a>

@@ -2822,6 +2822,7 @@ section.content {
     padding: 5px 0 0 8px !important; }
 
 /* Card ======================================== */
+
 div#images-contents {
   position: relative;}
 .info {
@@ -2889,7 +2890,8 @@ a.remove_button {
   float: left;}
 .category {
   min-width: 80px;
-  float: left;}
+  float: left;
+  white-space: pre-wrap;}
 .parse-content {
   padding: 70px;}
 ul.dropdown-menu.pull-right.show {
