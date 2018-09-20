@@ -43,6 +43,35 @@
                                                 </div>
                                             </div>
                                             <div class="row">
+                                                <div class="row-body">
+                                                    <div class="col-md-3 col-lg-3 align-left">
+                                                        <label>Characters</label>
+                                                    </div>
+                                                    <div class="col-md-9 col-lg-9">
+                                                       <select class="form-control" id="character" required>
+                                                                <option value="">--- Choose Characters ---</option>
+                                                                <option value="number">Number</option>
+                                                                <option value="text">Text</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="row-body">
+                                                    <div class="col-md-3 col-lg-3 align-left">
+                                                        <label>Text Alignment</label>
+                                                    </div>
+                                                    <div class="col-md-9 col-lg-9">
+                                                        <select class="form-control" id="alignment" required>
+                                                                <option value="">--- Choose Alignment ---</option>
+                                                                <option value="Left">Left</option>
+                                                                <option value="Center">Center</option>
+                                                                <option value="Right">Right</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
                                                 <div class="submit-button">
                                                     <button type="button" class="btn btn-default waves-effect remove-data-from-delete-form" data-dismiss="modal">Cancel</button>
                                                     <button type="button" id="btnSave" class="btn btn-primary waves-effect waves-light">Go</button>
@@ -78,6 +107,35 @@
                                                     </div>
                                                     <div class="col-md-9 col-lg-9">
                                                         <input type="number" name="test" class="form-control line-height" min="1" step="1" value="26"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="row-body">
+                                                    <div class="col-md-3 col-lg-3 align-left">
+                                                        <label>Characters</label>
+                                                    </div>
+                                                    <div class="col-md-9 col-lg-9">
+                                                       <select class="form-control" id="line_character" required>
+                                                                <option value="">--- Choose Characters ---</option>
+                                                                <option value="number">Number</option>
+                                                                <option value="text">Text</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="row-body">
+                                                    <div class="col-md-3 col-lg-3 align-left">
+                                                        <label>Text Alignment</label>
+                                                    </div>
+                                                    <div class="col-md-9 col-lg-9">
+                                                        <select class="form-control" id="line_alignment" required>
+                                                                <option value="">--- Choose Alignment ---</option>
+                                                                <option value="Left">Left</option>
+                                                                <option value="Center">Center</option>
+                                                                <option value="Right">Right</option>
+                                                        </select>
                                                     </div>
                                                 </div>
                                             </div>

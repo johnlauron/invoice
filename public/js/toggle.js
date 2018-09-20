@@ -29,6 +29,13 @@ $(document).ready(function(){
         var id = x;
         if(!$('.field_name').val()){
           alert("Input the Field Name");
+          $("#btnLaunch").removeAttr('disabled');
+        }else if(!$('#character').val()){
+          alert('Character is required');
+          $("#btnLaunch").removeAttr('disabled');
+        }else if(!$('#alignment').val()){
+          alert('Alignment is required');
+          $("#btnLaunch").removeAttr('disabled');
         }else{
           var name = $('.field_name').val();
           if (jQuery.inArray(name, arrayvar)!='-1') {
@@ -36,11 +43,13 @@ $(document).ready(function(){
               $("#btnLaunch").removeAttr('disabled');
           } else {
               arrayvar.push(name);
+              var character = $('#character').val();
+              var align = $('#alignment').val();
               var field = $('.field_name').val();
               var height = $('.height').val();
               var width = $('.width').val();
               var section = 'header-section';
-              var $el = $('<div id="draggable '+x+'" class="draggable" style="cursor: move;position:absolute;top:0;left=0;z-index:2;"><span class="form-control" style="width:'+ width +'px;height:'+ height +'px" name="start">'+field+'</span><a href="#" class="clickedon"><i class="fa fa-check-circle" id="change" style="position: absolute;left: 155px;top:0;color: #1ff3ce;font-size: 15px;"></i></a>');
+              var $el = $('<div id="draggable '+x+'" class="draggable" style="cursor: move;position:absolute;top:0;left=0;z-index:2;"><span class="form-control" style="width:'+ width +'px;height:'+ height +'px;text-align:'+align+';" name="start">'+field+'</span><a href="#" class="clickedon"><i class="fa fa-check-circle" id="change" style="position: absolute;left: 155px;top:0;color: #1ff3ce;font-size: 15px;"></i></a>');
               window.$el = $el;
               var varwidth;
               var varheight;
@@ -59,18 +68,13 @@ $(document).ready(function(){
                 // });
               $el.draggable({
                 stop: function(){
-                    // var finalOffset = $(this).offset();
-                    // var finalxPos = finalOffset.left;
                     var finalxPos = $(this).position().left;
                     var finalyPos = $(this).position().top;
-                    var htmls = '<div class="hidden-inputs '+id+'"><input type="hidden" name="left[]" class="form-control" value="'+finalxPos+'"><input type="hidden" name="top[]" class="form-control" value="'+finalyPos+'"><input type="hidden" name="section[]" class="form-control" value="'+section+'"><input type="hidden" name="width[]" class="form-control" value="'+width +'"><input type="hidden" name="height[]" class="form-control" value="'+height +'"><input type="hidden" name="field[]" class="form-control" value="'+field +'"></div>';
+                    var htmls = '<div class="hidden-inputs '+id+'"><input type="hidden" name="left[]" class="form-control" value="'+finalxPos+'"><input type="hidden" name="top[]" class="form-control" value="'+finalyPos+'"><input type="hidden" name="section[]" class="form-control" value="'+section+'"><input type="hidden" name="width[]" class="form-control" value="'+width +'"><input type="hidden" name="height[]" class="form-control" value="'+height +'"><input type="hidden" name="field[]" class="form-control" value="'+field +'"><input type="hidden" name="alignment[]" class="form-control" value="'+align+'"><input type="hidden" name="character[]" class="form-control" value="'+character+'"></div>';
                     // $(".header-section").html(htmls);
                     window.myvar = htmls;
                 } 
               });
-              
-              // var retval = variable();
-              // console.log(retval.varhtml);
           }
             //end version1
         $('#custom-width-modal').modal('toggle');
@@ -102,6 +106,13 @@ $(document).ready(function(){
         var i = a;
         if(!$('.line-field').val()){
           alert("Input the Field Name");
+          $("#btnLaunch").removeAttr('disabled');
+        }else if(!$('#line_character').val()){
+          alert('Character is required');
+          $("#btnLaunch").removeAttr('disabled');
+        }else if(!$('#line_alignment').val()){
+          alert('Alignment is required');
+          $("#btnLaunch").removeAttr('disabled');
         }else{
           var name = $('.line-field').val();
           if (jQuery.inArray(name, arrayvar)!='-1') {
@@ -109,20 +120,20 @@ $(document).ready(function(){
               $("#btnLaunch").removeAttr('disabled');
           } else {
             arrayvar.push(name);
+            var line_char = $('#line_character').val();
+            var line_align = $('#line_alignment').val();
             var field = $('.line-field').val();
-            // var box = $('.line-box').val();
             var height = $('.line-height').val();
             var width = $('.line-width').val();
-            // var margin = $('.line-margin').val();
             var section = 'linedetails-section';
-            var $element = $('<div id="draggable'+i+'" class="draggable" style="cursor: move;position:absolute;top:0;left=0;z-index:2;"><span id="'+i+'" style="width:'+ width +'px;height:'+ height +'px" name="start" class="form-control">'+field+'</span><a href="#" class="clickedons"><i class="fa fa-check-circle" id="changes" style="position: absolute;left: 155px;top:0;color: #1ff3ce;font-size: 15px;"></i></a>');
+            var $element = $('<div id="draggable'+i+'" class="draggable" style="cursor: move;position:absolute;top:0;left=0;z-index:2;"><span id="'+i+'" style="width:'+ width +'px;height:'+ height +'px;text-align:'+line_align+';" name="start" class="form-control">'+field+'</span><a href="#" class="clickedons"><i class="fa fa-check-circle" id="changes" style="position: absolute;left: 155px;top:0;color: #1ff3ce;font-size: 15px;"></i></a>');
             window.$element = $element;
             $('.image-contents').append($element);
             $element.draggable({
               stop: function(){
                   var left = $(this).position().left;
                   var top = $(this).position().top;
-                  var htmlss = '<div class="hidden-input '+i+'"><input type="hidden" name="left[]" class="form-control" value="'+left+'"><input type="hidden" name="top[]" class="form-control" value="'+top+'"><input type="hidden" name="section[]" value="'+section+'"><input type="hidden" name="width[]" value="'+ width +'"><input type="hidden" name="height[]" value="'+height +'"><input type="hidden" name="field[]" value="'+field +'"></div>';
+                  var htmlss = '<div class="hidden-input '+i+'"><input type="hidden" name="left[]" class="form-control" value="'+left+'"><input type="hidden" name="top[]" class="form-control" value="'+top+'"><input type="hidden" name="section[]" value="'+section+'"><input type="hidden" name="width[]" value="'+ width +'"><input type="hidden" name="height[]" value="'+height +'"><input type="hidden" name="field[]" value="'+field +'"><input type="hidden" name="alignment[]" value="'+line_align+'"><input type="hidden" name="character[]" value="'+line_char+'"></div>';
                   // $(".linedetails-section").html(htmlss);
                   window.myvars = htmlss;
               } 

@@ -25,7 +25,7 @@ class FilesController extends Controller
     {
         $company = Company::orderBy('company_name', 'asc')->get();
         $invoices = DB::table('files')
-                        ->select('files.id','companies.company_name','formnames.form_name','files.file_location','files.file_name','documents.doc_name')
+                        ->select('files.doc_id','files.id','companies.company_name','formnames.form_name','files.file_location','files.file_name','documents.doc_name')
                         ->join('formnames', 'files.form_name_id', '=', 'formnames.id')
                         ->join('companies', 'files.company_id', '=', 'companies.id')
                         ->join('documents', 'files.doc_id', '=', 'documents.id')
@@ -47,6 +47,7 @@ class FilesController extends Controller
             'file.*'=> 'mimes:jpeg,jpg,png,pdf',
             'company_id' => 'required',
             'invoice_name' => 'required | unique:documents,doc_name',
+            'file_location' => 'unique:files,file_location'
         ]);
         DB::beginTransaction();
         try{
@@ -58,9 +59,13 @@ class FilesController extends Controller
                     $company_name = $company->company_name;
                     $file_path = 'images/'.$company_name;//file path
                     $path = $file_path;
+                    
                 foreach ($request->file as $key => $value){
                     $img = $request->file('file');
                     $img_name = $img [$key]->getClientOriginalName();
+                    if (Filename::where('file_location', '=', $path.'/'.$img_name)->count() > 0) {
+                        return back()->with('error', ''.$img_name.' File Already Exist !');
+                     }
                     $img [$key]->move($file_path,$img_name);
                     $data = array('company_id' => $request->company_id,
                                     'doc_id' => $document_id,
@@ -155,7 +160,7 @@ class FilesController extends Controller
             'company_id' => 'required',
             'invoice_name' => 'required | unique:files,file_name,'.$id.',id'
         ]);
-        if(!empty(request('file'))){
+        if(!empty(request('file'))){//check if the uploaded file is not empty
             $img = request('file');
             $img_name = $img->getClientOriginalName();
         }
@@ -163,8 +168,10 @@ class FilesController extends Controller
         $company_path = 'images/'. $company->company_name;//end
         DB::beginTransaction();
         try{
-            $doc = Document::where('id', $request->doc_id);
+            
+            $doc = Document::where('id', $request->doc_id)->first();
             $doc->doc_name = $request->invoice_name;
+            $doc->save();
             $inv = Filename::find($id);
             $form = $inv->form_name_id;
             $oldFileName = $inv->file_name;//get old file name if company updated
@@ -173,24 +180,24 @@ class FilesController extends Controller
             $oldpath = 'images/'. $oldcomp->company_name;//end
             $newcomp = request('company_id');
             $inv->company_id = request('company_id');
-            $inv->file_name = request('invoice_name');
             $inv->form_name_id = request('form_name_id');
-            // dd($company_path. '/' .$img_name);
+            // dd($company_path. '/' .$oldFileName);
             if(!empty($img_name)){
                 $inv->file_location = $company_path.'/'.$img_name;
                 $inv->file_name = $img_name;
-                if(file_exists($company_path. '/' .$img_name)){
+                if(file_exists($company_path. '/' .$img_name)){//check if file is exist
                     return back()->with('error', 'File Already Exist');
                 }
                 else{
                     if($img->move($company_path,$img_name)){//move file
                         if($inv->save()){
+                            File::delete($company_path. '/' .$oldFileName);//delete the file
                             if($oldcompid != $newcomp){
                                 File::delete($oldpath. '/' .$oldFileName);//delete the old file path
                             }
                         }
                         else{
-                            if(File::delete($company_path. '/' .$img_name)){
+                            if(!File::delete($company_path. '/' .$img_name)){
                                 return back()->with('error', 'Theres a problem on rollback the file');
                             }
                             return back()->with('error', 'Theres a problem on saving data');
@@ -224,15 +231,16 @@ class FilesController extends Controller
 
     public function destroy($id)
     {
-        $invoices = Filename::findorFail($id);
-        $doc = Document::where('id', $invoices->doc_id);
-        $company = Company::find($invoices->company_id);
-        if(File::delete($invoices->file_location)){
-            $invoices->delete();
-            $doc->delete();
-        }
-        else{
-            return back()->with('error','Cant delete the image or image not found');
+        $doc = Document::find($id);
+        $invoices = Filename::where('doc_id', $id)->get();
+        foreach($invoices as $key => $value){
+            $array = array($invoices [$key]->file_location);
+            if(File::delete($array)){
+                Filename::destroy('doc_id', $id);
+                $doc->delete();
+            }else{
+                return back()->with('error','Cant delete the image or image not found');
+            }
         }
         if(empty($invoices->form_name_id)){
             return redirect()->route('invoices.no_form_inv')
@@ -246,10 +254,8 @@ class FilesController extends Controller
     public function form_without()
     {
         $company = Company::orderBy('company_name', 'asc')->get();
-        $invoices = DB::table('files')
-                            ->select('files.id','companies.company_name','files.file_location','documents.doc_name','files.file_name')
-                            ->join('companies', 'files.company_id', '=', 'companies.id')
-                            ->join('documents', 'files.doc_id', '=', 'documents.id')
+        $invoices = Filename::select('files.doc_id','files.id','files.file_location','documents.doc_name','files.file_name')
+                            ->join('documents', 'documents.id', '=', 'files.doc_id')
                             ->whereNull('files.form_name_id')
                             ->orderBy('files.created_at', 'Desc')
                             ->paginate(5);
@@ -278,7 +284,7 @@ class FilesController extends Controller
         $select = request('select');
         $company = Company::orderBy('company_name', 'asc')->get();
         $invoices = DB::table('files')
-                        ->select('files.id','companies.company_name','formnames.form_name','files.file_location','documents.doc_name')
+                        ->select('files.id','files.doc_id','companies.company_name','formnames.form_name','files.file_location','documents.doc_name')
                         ->join('formnames', 'files.form_name_id', '=', 'formnames.id')
                         ->join('companies', 'files.company_id', '=', 'companies.id')
                         ->where('files.company_id', $select)

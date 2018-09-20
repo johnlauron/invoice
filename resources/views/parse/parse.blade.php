@@ -30,7 +30,7 @@ Dashboard
                         
                     </div>
                     <div class="parsing">
-                        <textarea name="parsing" id="parsing"  style="width: 754px; height: 80px; margin: 0px;" readonly /></textarea>
+                        <textarea name="parsing" id="parsing"  style="width: 884px; height: 80px; margin: 0px;" readonly /></textarea>
                     </div>
                     <div class="header-location">
                          <input type="hidden" name="Document" value="{{$invoice->doc_name}}">
@@ -42,14 +42,14 @@ Dashboard
                          @if($extension == 'pdf')
                             <div id="images-contents">
                                 @foreach($form as $forms){{--  header section  --}}
-                                    <div class="header-location"> 
-                                        <input type="text" name="{{$forms->category_name}}" class="form-control box" placeholder="{{$forms->category_name}}" style="position:absolute;top:{{ $forms->yloc }}px;left:{{$forms->xloc}}px;width:{{$forms->width}}px;height:{{$forms->height}}px">
-                                    <div>
+                                   <div class="header-location"> 
+                                        <input type="{{$forms->character}}" name="{{$forms->category_name}}" class="form-control box" placeholder="{{$forms->category_name}}" style="position:absolute;top:{{ $forms->yloc }}px;left:{{$forms->xloc}}px;width:{{$forms->width}}px;height:{{$forms->height}}px;text-align:{{$forms->alignment}};">
+                                    </div>
                                 @endforeach
                                 <div class="input-section">
                                     @foreach($formline as $formlines){{--  linedetails section  --}}
                                         <div class="inputs" style="position:absolute;top:{{ $formlines->yloc }}px;left:{{$formlines->xloc}}px;">
-                                            <input type="text" name="{{$formlines->category_name}}" class="form-control box" placeholder="{{$formlines->category_name}}" style="width:{{$formlines->width}}px;height:{{$formlines->height}}px">
+                                            <input type="{{$forms->character}}" name="{{$formlines->category_name}}" class="form-control box" placeholder="{{$formlines->category_name}}" style="width:{{$formlines->width}}px;height:{{$formlines->height}}px;text-align:{{$forms->alignment}};">
                                             <div class="add_but">
                                                 <a href="javascript:void(0);" class="add_button" title="Add field"><i class="fas fa-plus-circle"></i></a>
                                             </div>
@@ -65,13 +65,13 @@ Dashboard
                             <div id="images-contents">
                                 @foreach($form as $forms){{--  header section  --}}
                                     <div class="header-location"> 
-                                        <input type="text" name="{{$forms->category_name}}" class="form-control box" placeholder="{{$forms->category_name}}" style="position:absolute;top:{{ $forms->yloc }}px;left:{{$forms->xloc}}px;width:{{$forms->width}}px;height:{{$forms->height}}px">
+                                        <input type="{{$forms->character}}" name="{{$forms->category_name}}" class="form-control box" placeholder="{{$forms->category_name}}" style="position:absolute;top:{{ $forms->yloc }}px;left:{{$forms->xloc}}px;width:{{$forms->width}}px;height:{{$forms->height}}px;text-align:{{$forms->alignment}};">
                                     </div>
                                 @endforeach
                                 <div class="input-section">
                                     @foreach($formline as $formlines){{--  linedetails section  --}}
                                         <div class="inputs" style="position:absolute;top:{{ $formlines->yloc }}px;left:{{$formlines->xloc}}px;">
-                                            <textarea name="{{$formlines->category_name}}" class="form-control box" placeholder="{{$formlines->category_name}}" style="width:{{$formlines->width}}px;height:{{$formlines->height}}px"></textarea>
+                                            <input type="{{$formlines->character}}" name="{{$formlines->category_name}}" class="form-control box" placeholder="{{$formlines->category_name}}" style="width:{{$formlines->width}}px;height:{{$formlines->height}}px;text-align:{{$formlines->alignment}};">
                                             <div class="add_but">
                                                 <a href="javascript:void(0);" class="add_button" title="Add field"><i class="fas fa-plus-circle"></i></a>
                                             </div>

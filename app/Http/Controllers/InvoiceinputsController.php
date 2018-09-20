@@ -31,21 +31,11 @@ class InvoiceinputsController extends Controller
      */
     public function create()
     {
-        $companies = Company::all()->first();
-        if(empty($companies)){
-            $company_n = null;
-            $company_id = null;}
-        else{
-            $company_n = $companies->company_name;
-            $company_id = $companies->id;}
-        $company_name = $company_n;
         $invoice = Filename::select('files.id','files.file_location','documents.doc_name','files.company_id')
                             ->join('documents', 'files.doc_id', '=', 'documents.id')
-                            ->where('company_id', $company_id)
                             ->get();
         $company = Company::orderBy('company_name', 'asc')->get();
-        return view('dragdrop.invoiceslist',compact('invoice','company','company_name'));
-        // return view('dragdrop.createDragAndDrop',compact('invoice'));
+        return view('dragdrop.invoiceslist',compact('invoice','company'));
     }
     public function createdrag($id){
         $url = request()->getHttpHost();
@@ -86,7 +76,9 @@ class InvoiceinputsController extends Controller
                                         'section' => $request->section [$key],
                                         'file_id' => $invoice_id,
                                         'form_name_id' => $formname_id,
-                                        'company_id' => $company->id);
+                                        'company_id' => $company->id,
+                                        'alignment' => $request->alignment [$key],
+                                        'character' => $request->character [$key]);
                         InvoiceInput::create($data);//saving the data
                     }
                 }

@@ -33,9 +33,6 @@
     <div class="card drag-content">
         <div class="invoices-image">
             <div class="container d-content">
-                <div class="image-content-title">
-                    <h3>{{$company_name}}</h3>
-                </div>
                 @if(count($invoice) == 0)
                     <div class="alert bg-red alert-dismissible" role="alert">
                         <strong>No Record Found</strong>

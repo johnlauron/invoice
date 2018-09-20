@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class InvoiceInput extends Model
 {
 	protected $fillable = [
-        'height','width','xloc','yloc','file_id','form_name_id','category_name','company_id','section'
+        'height','width','xloc','yloc','file_id','form_name_id','category_name','company_id','section','alignment','character'
     ];
     protected $table = 'invoice_input';
 }

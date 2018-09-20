@@ -2825,9 +2825,8 @@ section.content {
 div#images-contents {
   position: relative;}
 .info {
-  min-height: 55px;
-  width: 13%;
-  float: left;}
+  min-height: 40px;
+  min-width: 18%;}
 .info-dropdown {
   float: left;}
 .info-submit {

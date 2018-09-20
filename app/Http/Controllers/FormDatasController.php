@@ -34,7 +34,11 @@ class FormDatasController extends Controller
     }
     public function store(Request $request)
     {
-        dd($request->all()); 
+        // dd($request->all()); 
+        // $var = request->id;
+        // $query = filename::where('id',$var)->first();
+        // $query->parse = $request->parsing;
+        // $query->save();
         // DB::beginTransaction();
         // try{
         //     foreach($request->value as $key => $value){
@@ -66,10 +70,10 @@ class FormDatasController extends Controller
                         ->join('documents', 'files.doc_id', '=', 'documents.id')
                         ->where('files.id', $id)
                         ->first();
-        $form = InvoiceInput::all()
+        $form = InvoiceInput::all()//header-section
                             ->where('form_name_id', $invoice->form_name_id)
                             ->where('section', 'header-section');
-        $formline = InvoiceInput::all()
+        $formline = InvoiceInput::all()//linedetails-section
                             ->where('form_name_id', $invoice->form_name_id)
                             ->where('section', 'linedetails-section');
         $data = FormData::all()

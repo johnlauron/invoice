@@ -79,7 +79,7 @@ table {
                                                     <button type="button" onclick="window.location='{{ route("invoices.show_without_form", $invoice->id) }}';" class="btn bg-teal btn-block">SHOW</button>
                                                     <button type="button" onclick="window.location='{{ route("invoices.assign_form", $invoice->id) }}';" class="btn bg-cyan btn-block">Assign Form</button>
                                                     <button type="button" onclick="window.location='{{ route("invoices.edit", $invoice->id) }}';" class="btn bg-cyan btn-block">EDIT</button>
-                                                    <a class="btn bg-red btn-block waves-effect remove-record" data-toggle="modal" data-target="#custom-width-modal" data-url="{{ route('invoices.destroy', $invoice->id) }}" data-id="{{$invoice->id}}">Delete</a>   
+                                                    <a class="btn bg-red btn-block waves-effect remove-record" data-toggle="modal" data-target="#custom-width-modal" data-url="{{ route('invoices.destroy', $invoice->doc_id) }}" data-id="{{$invoice->doc_id}}">Delete</a>   
                                                 </td>
                                             </tr>
                                         @endforeach                                    
@@ -93,7 +93,7 @@ table {
             </div>
         </div>
     </div>
-    @include('layouts.partials.modal')
+    @include('layouts.partials.filemodal')
 @endsection
 
 @section('extra-script')
