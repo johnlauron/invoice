@@ -2822,7 +2822,8 @@ section.content {
     padding: 5px 0 0 8px !important; }
 
 /* Card ======================================== */
-
+.container.parse {
+  width: 100%;}
 div#images-contents {
   position: relative;}
 .info {

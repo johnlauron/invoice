@@ -17,7 +17,7 @@
 					</div>
 					<br>
 					<div class="card-body">
-						<div class="container">
+						<div class="container parse">
 							<div class="invoice-form">
 								<form action="{{ route('invoices.store') }}" method="post" enctype="multipart/form-data" autocomplete="off" multiple />
 									{{ csrf_field() }}									

@@ -87,7 +87,7 @@ table {
                                                 <td>{{ $invoice->file_name }}</td>
                                                 <td>
                                                         <button type="button" onclick="window.location='{{ route("parse.show_data", $invoice->id) }}';" class="btn bg-teal btn-block">view</button>
-                                                        <button type="button" onclick="window.location='{{ route("parse.show", $invoice->id) }}';" class="btn bg-cyan btn-block">Action</button>
+                                                        <button type="button" onclick="window.location='{{ route("parse.show", $invoice->id) }}';" class="btn bg-cyan btn-block">Parse</button>
                                                 </td>
                                             </tr>
                                         @endforeach                                    

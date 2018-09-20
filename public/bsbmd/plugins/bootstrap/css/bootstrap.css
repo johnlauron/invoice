@@ -6521,8 +6521,6 @@ button.close {
 }
 .pull-right {
   float: right !important;
-  position: absolute;
-  right: -770px;
 }
 .pull-left {
   float: left !important;

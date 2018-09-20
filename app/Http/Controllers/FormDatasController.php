@@ -88,7 +88,7 @@ class FormDatasController extends Controller
     {
         // dd($request->parsing);
         $query = Filename::where('id', $request->invoice_id)->update(['parse' => $request->parsing]);
-        return redirect(route('parse.list'))->with('success','Assigned successfully');
+        return redirect(route('parse.list'))->with('success','Parsed successfully');
     }
 
     public function show_data($id){
