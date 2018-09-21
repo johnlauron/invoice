@@ -27,7 +27,8 @@ class CreateDocumentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('files');
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
         Schema::dropIfExists('documents');
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 }

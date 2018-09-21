@@ -51,6 +51,8 @@ class CreateForeignVersion2 extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('foreign_keys');
+        Schema::table('formnames', function (Blueprint $table) {
+            $table->dropForeign(['company_id']);
+        });
     }
 }

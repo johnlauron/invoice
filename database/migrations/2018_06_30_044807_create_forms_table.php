@@ -13,6 +13,7 @@ class CreateFormsTable extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('forms');
         Schema::create('forms', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('file_id');
@@ -28,6 +29,6 @@ class CreateFormsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('form');
+        Schema::dropIfExists('forms');
     }
 }

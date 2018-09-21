@@ -67,6 +67,10 @@ class CreateForeignKeysTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('foreign_keys');
+        Schema::table('files', function (Blueprint $table) {
+            $table->dropForeign(['company_id']);
+            $table->dropForeign(['doc_id']);
+            $table->dropForeign(['form_name_id']);
+        });
     }
 }

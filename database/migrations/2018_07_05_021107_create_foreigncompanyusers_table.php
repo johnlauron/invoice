@@ -36,8 +36,8 @@ class CreateForeigncompanyusersTable extends Migration
     public function down()
     {
         Schema::table('companyusers', function (Blueprint $table) {
-            $table->dropForeign('user_id');
-            $table->dropForeign('company_id');
+            $table->dropForeign(['user_id']);
+            $table->dropForeign(['company_id']);
         });
     }
 }
