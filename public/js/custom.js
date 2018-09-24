@@ -74,6 +74,7 @@ $(document).ready(function() {
         console.log('nice');
     });
 });
+
 function readURL(input) {
     var url = input.value;
     var ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();

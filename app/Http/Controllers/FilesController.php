@@ -268,7 +268,7 @@ class FilesController extends Controller
         $comp_req = request('select_n');
         $company = Company::orderBy('company_name', 'asc')->get();
         $invoices = DB::table('files')
-                            ->select('files.id','companies.company_name','files.file_location','files.file_name','documents.doc_name')
+                            ->select('files.doc_id','files.id','companies.company_name','files.file_location','files.file_name','documents.doc_name')
                             ->join('companies', 'files.company_id', '=', 'companies.id')
                             ->join('documents', 'files.doc_id', '=', 'documents.id')
                             ->whereNull('files.form_name_id')
@@ -284,9 +284,10 @@ class FilesController extends Controller
         $select = request('select');
         $company = Company::orderBy('company_name', 'asc')->get();
         $invoices = DB::table('files')
-                        ->select('files.id','files.doc_id','companies.company_name','formnames.form_name','files.file_location','documents.doc_name')
+                        ->select('files.id','files.doc_id','companies.company_name','formnames.form_name','files.file_name','documents.doc_name')
                         ->join('formnames', 'files.form_name_id', '=', 'formnames.id')
                         ->join('companies', 'files.company_id', '=', 'companies.id')
+                        ->join('documents', 'files.doc_id', '=', 'documents.id')
                         ->where('files.company_id', $select)
                         ->orderBy('files.created_at', 'Desc')
                         ->paginate(5);

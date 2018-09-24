@@ -3126,8 +3126,7 @@ input.form-control.box.addinput:focus {
   .wrap-image-content img {
     min-width: 1073px;
     width: 100%;
-    min-height: 1073px;
-    display: none;}
+    min-height: 1073px;}
   .card .body {
     font-size: 14px;
     color: #555;

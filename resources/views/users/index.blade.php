@@ -18,7 +18,7 @@ table {
 @endsection
 
 @section('content')
-    <script src="{{asset('js/animation.js')}}"></script>
+    {{--  <script src="{{asset('js/animation.js')}}"></ script>  --}}
 	<div class="container-fluid">
         <div class="block-header">
             <div class="row clearfix">
