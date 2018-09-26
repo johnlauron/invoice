@@ -45,13 +45,14 @@
                                             <div class="row">
                                                 <div class="row-body">
                                                     <div class="col-md-3 col-lg-3 align-left">
-                                                        <label>Characters</label>
+                                                        <label>Data Restrictions</label>
                                                     </div>
                                                     <div class="col-md-9 col-lg-9">
                                                        <select class="form-control" id="character" required>
-                                                                <option value="">--- Choose Characters ---</option>
-                                                                <option value="number">Number</option>
                                                                 <option value="text">Text</option>
+                                                                <option value="email">Email</option>
+                                                                <option value="date">Date</option>
+                                                                <option value="number">Number</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -113,13 +114,14 @@
                                             <div class="row">
                                                 <div class="row-body">
                                                     <div class="col-md-3 col-lg-3 align-left">
-                                                        <label>Characters</label>
+                                                        <label>Data Restrictions</label>
                                                     </div>
                                                     <div class="col-md-9 col-lg-9">
                                                        <select class="form-control" id="line_character" required>
-                                                                <option value="">--- Choose Characters ---</option>
-                                                                <option value="number">Number</option>
                                                                 <option value="text">Text</option>
+                                                                <option value="email">Email</option>
+                                                                <option value="date">Date</option>
+                                                                <option value="number">Number</option>
                                                         </select>
                                                     </div>
                                                 </div>

@@ -26,7 +26,7 @@ table {
                     <div class="card">
                         <div class="header">
                             <h2>
-                                List of Invoice's
+                                List of Invoices
                             </h2>
                             <div class="choose-company">
                                 <form action="/invoices/dropdown" method="post" style="display: inline-block;margin-top: -6px;">

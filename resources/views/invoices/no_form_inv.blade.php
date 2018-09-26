@@ -26,7 +26,7 @@ table {
                     <div class="card">
                         <div class="header">
                             <h2>
-                                List of Invoice's without Form
+                                List of Invoices without Form
                             </h2>
                             <div class="choose-company">
                                 <form action="{{route('invoices.form_without_select')}}" method="post" style="display: inline-block;margin-top: -6px;">

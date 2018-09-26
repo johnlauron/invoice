@@ -114,9 +114,10 @@ class FormDatasController extends Controller
         $form = Formname::orderBy('form_name', 'asc')->get();
         $formname = Company::where('id', $search_company)->first();
         $invoices = DB::table('files')
-                        ->select('files.id','files.invoice_name','companies.company_name','files.file_location','formnames.form_name')
+                        ->select('files.id','files.file_name','documents.doc_name','companies.company_name','files.file_location','formnames.form_name')
                         ->join('companies', 'files.company_id', '=', 'companies.id')
                         ->join('formnames', 'files.form_name_id', '=', 'formnames.id')
+                        ->join('documents', 'files.doc_id', '=', 'documents.id')
                         ->where('files.form_name_id', $search)
                         ->where('files.company_id', $search_company)
                         ->get();
