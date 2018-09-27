@@ -25,7 +25,7 @@ Route::resource('companies','CompaniesController');//->middleware('userVerificat
 
 //invoice
 Route::get('/no_form_inv', 'FilesController@form_without')->name('invoices.no_form_inv');
-Route::post('invoices', 'FilesController@index')->name('invoices.index');
+Route::post('invoices/index', 'FilesController@index')->name('invoices.index');
 Route::get('invoices/no_form_inv', 'FilesController@form_without')->name('invoices.form_without');
 Route::get('invoices/no_form_inv/{id}', 'FilesController@show_without_form')->name('invoices.show_without_form');
 Route::post('invoices/no_form_inv/', 'FilesController@form_without_select')->name('invoices.form_without_select');
@@ -33,7 +33,7 @@ Route::get('invoices/assign_form/{id}', 'FilesController@assign_form')->name('in
 Route::post('invoices/assign_update/{id}', 'FilesController@update_assign')->name('invoices.update_assign');
 Route::get('invoices/ajax/{id}', 'FilesController@ajax')->name('invoices.ajax');
 Route::get('invoices/company_ajax/{id}', 'FilesController@company_ajax')->name('invoices.company_ajax');
-Route::post('/invoices/dropdown', 'FilesController@dropdown');
+Route::post('invoices/index', 'FilesController@dropdown')->name('invoices.dropdown');
 Route::resource('invoices','FilesController');
 Route::resource('users','UsersController');
 

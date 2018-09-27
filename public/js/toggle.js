@@ -52,6 +52,7 @@ $(document).ready(function(){
 				'datas': name
 				});
 				var character = $('#character').val();
+				var pre_define = $('.pre-define').val();
 				var align = $('#alignment').val();
 				var field = $('.field_name').val();
 				var height = $('.height').val();
@@ -78,7 +79,7 @@ $(document).ready(function(){
 				stop: function(){
 					var finalxPos = $(this).position().left;
 					var finalyPos = $(this).position().top;
-					var htmls = '<div class="hidden-input'+id+'" id="hidden_inputs"><input type="hidden" name="left[]" class="form-control" value="'+finalxPos+'"><input type="hidden" name="top[]" class="form-control" value="'+finalyPos+'"><input type="hidden" name="section[]" class="form-control" value="'+section+'"><input type="hidden" name="width[]" class="form-control" value="'+width +'"><input type="hidden" name="height[]" class="form-control" value="'+height +'"><input type="hidden" name="field[]" class="form-control" value="'+field +'"><input type="hidden" name="alignment[]" class="form-control" value="'+align+'"><input type="hidden" name="character[]" class="form-control" value="'+character+'"></div>';
+					var htmls = '<div class="hidden-input'+id+'" id="hidden_inputs"><input type="hidden" name="pre_define[]" class="form-control" value="'+pre_define+'"><input type="hidden" name="left[]" class="form-control" value="'+finalxPos+'"><input type="hidden" name="top[]" class="form-control" value="'+finalyPos+'"><input type="hidden" name="section[]" class="form-control" value="'+section+'"><input type="hidden" name="width[]" class="form-control" value="'+width +'"><input type="hidden" name="height[]" class="form-control" value="'+height +'"><input type="hidden" name="field[]" class="form-control" value="'+field +'"><input type="hidden" name="alignment[]" class="form-control" value="'+align+'"><input type="hidden" name="character[]" class="form-control" value="'+character+'"></div>';
 					// $(".header-section").html(htmls);
 					window.myvar = htmls;
 				} 
@@ -99,9 +100,9 @@ $(document).ready(function(){
 		'data': myvar
 		});
 		$("#btnLaunch").removeAttr('disabled');
-		$("#hidden_inputs").remove();
+		$(".datas").remove();
 		for(var i =0; i < array.length; i++){
-		$(".header-section").append(array[i].data);
+			$(".header-section").append('<div class="datas">'+array[i].data+'</div>');
 		}
 		$("#header_change"+ar+"").addClass("delete").removeClass("clickedon")
 		$("#change"+ar+"").addClass("far fa-times-circle").removeClass("fa fa-check-circle")
@@ -165,6 +166,7 @@ $(document).ready(function(){
 				var height = $('.line-height').val();
 				var width = $('.line-width').val();
 				var section = 'linedetails-section';
+				var pre_define = "";
 				var $element = $('<div id="draggables'+i+'" class="draggable" style="cursor: move;position:absolute;top:0;left=0;z-index:2;"><span id="'+i+'" style="width:'+ width +'px;height:'+ height +'px;text-align:'+line_align+';" name="start" class="form-control">'+field+'</span><a href="#" class="clickedons" id="line_change'+i+'" attrs="'+i+'"><i class="fa fa-check-circle" id="changes'+i+'" style="position: absolute;left: 155px;top:0;color: #1ff3ce;font-size: 15px;"></i></a>');
 				window.$element = $element;
 				$('.image-contents').append($element);
@@ -172,7 +174,7 @@ $(document).ready(function(){
 					stop: function(){
 						var left = $(this).position().left;
 						var top = $(this).position().top;
-						var htmlss = '<div class="hidden-inputs'+i+'" id="line_hidden"><input type="hidden" name="left[]" class="form-control" value="'+left+'"><input type="hidden" name="top[]" class="form-control" value="'+top+'"><input type="hidden" name="section[]" value="'+section+'"><input type="hidden" name="width[]" value="'+ width +'"><input type="hidden" name="height[]" value="'+height +'"><input type="hidden" name="field[]" value="'+field +'"><input type="hidden" name="alignment[]" value="'+line_align+'"><input type="hidden" name="character[]" value="'+line_char+'"></div>';
+						var htmlss = '<div class="hidden-inputs'+i+'" id="line_hidden"><input type="hidden" name="pre_define[]" class="form-control" value="'+pre_define+'"><input type="hidden" name="left[]" class="form-control" value="'+left+'"><input type="hidden" name="top[]" class="form-control" value="'+top+'"><input type="hidden" name="section[]" value="'+section+'"><input type="hidden" name="width[]" value="'+ width +'"><input type="hidden" name="height[]" value="'+height +'"><input type="hidden" name="field[]" value="'+field +'"><input type="hidden" name="alignment[]" value="'+line_align+'"><input type="hidden" name="character[]" value="'+line_char+'"></div>';
 						// $(".linedetails-section").html(htmlss);
 						window.myvars = htmlss;
 					} 
@@ -191,9 +193,9 @@ $(document).ready(function(){
 			'id':ars,
 			'line_datas':myvars});
 		$("#btnLaunch").removeAttr('disabled');
-		$("#line_hidden").remove();
+		$(".line_datas").remove();
 		for(var f =0; f < arrays.length; f++){
-			$(".linedetails-section").append(arrays[f].line_datas);
+			$(".linedetails-section").append('<div class="line_datas">'+arrays[f].line_datas+'</div>');
 		}
 			$("#line_change"+ars+"").addClass("deletes").removeClass("clickedons")
 			$("#changes"+ars+"").addClass("far fa-times-circle").removeClass("fa fa-check-circle")

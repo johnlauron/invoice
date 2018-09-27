@@ -51,7 +51,7 @@ Dashboard
                                 <div class="input-section">
                                     @foreach($formline as $formlines){{--  linedetails section  --}}
                                         <div class="inputs" style="position:absolute;top:{{ $formlines->yloc }}px;left:{{$formlines->xloc}}px;">
-                                            <input type="{{$forms->character}}" name="{{$formlines->category_name}}" class="form-control box" placeholder="{{$formlines->category_name}}" style="width:{{$formlines->width}}px;height:{{$formlines->height}}px;text-align:{{$forms->alignment}};">
+                                            <input type="{{$forms->character}}" name="{{$formlines->category_name}}" id="line_drag" class="form-control box" placeholder="{{$formlines->category_name}}" style="width:{{$formlines->width}}px;height:{{$formlines->height}}px;text-align:{{$forms->alignment}};">
                                             <div class="add_but">
                                                 <a href="javascript:void(0);" class="add_button" title="Add field"><i class="fas fa-plus-circle"></i></a>
                                             </div>
@@ -67,13 +67,13 @@ Dashboard
                             <div id="images-contents">
                                 @foreach($form as $forms){{--  header section  --}}
                                     <div class="header-location"> 
-                                        <input type="{{$forms->character}}" name="{{$forms->category_name}}" class="form-control box" placeholder="{{$forms->category_name}}" style="position:absolute;top:{{ $forms->yloc }}px;left:{{$forms->xloc}}px;width:{{$forms->width}}px;height:{{$forms->height}}px;text-align:{{$forms->alignment}};">
+                                        <input type="{{$forms->character}}" name="{{$forms->category_name}}" class="form-control box" placeholder="{{$forms->category_name}}" style="position:absolute;top:{{ $forms->yloc }}px;left:{{$forms->xloc}}px;width:{{$forms->width}}px;height:{{$forms->height}}px;text-align:{{$forms->alignment}};" value="{{$forms->pre_define}}">
                                     </div>
                                 @endforeach
                                 <div class="input-section">
                                     @foreach($formline as $formlines){{--  linedetails section  --}}
                                         <div class="inputs" style="position:absolute;top:{{ $formlines->yloc }}px;left:{{$formlines->xloc}}px;">
-                                            <input type="{{$formlines->character}}" name="{{$formlines->category_name}}" class="form-control box" placeholder="{{$formlines->category_name}}" style="width:{{$formlines->width}}px;height:{{$formlines->height}}px;text-align:{{$formlines->alignment}};">
+                                            <input type="{{$formlines->character}}" name="{{$formlines->category_name}}" id="line_drag" class="form-control box" placeholder="{{$formlines->category_name}}" style="width:{{$formlines->width}}px;height:{{$formlines->height}}px;text-align:{{$formlines->alignment}};">
                                             <div class="add_but">
                                                 <a href="javascript:void(0);" class="add_button" title="Add field"><i class="fas fa-plus-circle"></i></a>
                                             </div>

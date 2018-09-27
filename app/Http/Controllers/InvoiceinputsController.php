@@ -75,6 +75,7 @@ class InvoiceinputsController extends Controller
                                         'category_name' => $request->field [$key],
                                         'section' => $request->section [$key],
                                         'file_id' => $invoice_id,
+                                        'pre_define' => $request->pre_define [$key],
                                         'form_name_id' => $formname_id,
                                         'company_id' => $company->id,
                                         'alignment' => $request->alignment [$key],

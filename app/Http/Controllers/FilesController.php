@@ -99,14 +99,20 @@ class FilesController extends Controller
     {
         $url = request()->getHttpHost();//get the url
         $invoice = DB::table('files')
-                            ->select('files.id','companies.company_name','formnames.form_name','files.file_name','files.file_location','documents.doc_name')
+                            ->select('files.id','companies.company_name','formnames.form_name','files.file_name','files.file_location','documents.doc_name','files.form_name_id')
                             ->join('formnames', 'files.form_name_id', '=', 'formnames.id')
                             ->join('companies', 'files.company_id', '=', 'companies.id')
                             ->join('documents', 'files.doc_id', '=', 'documents.id')
                             ->where('files.id', $id)
                             ->orderBy('files.created_at', 'Desc')
                             ->first();
-        $extension = \File::extension($invoice->file_name);
+        if(empty($invoice->form_name_id)){
+            return redirect(route('invoices.index'));
+        }
+        else{
+            $extension = \File::extension($invoice->file_name);
+        }
+        // $extension = \File::extension($invoice->file_name);
         return view('invoices.show',compact('invoice','extension','url'));
     }
     public function show_without_form($id)// for show button in 'invoice w/o form'
@@ -282,18 +288,22 @@ class FilesController extends Controller
     public function dropdown()//select button from invoice
     {
         $select = request('select');
-        $company = Company::orderBy('company_name', 'asc')->get();
-        $invoices = DB::table('files')
-                        ->select('files.id','files.doc_id','companies.company_name','formnames.form_name','files.file_name','documents.doc_name')
-                        ->join('formnames', 'files.form_name_id', '=', 'formnames.id')
-                        ->join('companies', 'files.company_id', '=', 'companies.id')
-                        ->join('documents', 'files.doc_id', '=', 'documents.id')
-                        ->where('files.company_id', $select)
-                        ->orderBy('files.created_at', 'Desc')
-                        ->paginate(5);
-        $comp_name = Company::find($select);
-        return view('invoices.index',compact('invoices','company','comp_name'))
-                        ->with('i', (request()->input('page', 1) - 1) * 5);
+        // if($select == ""){
+        //     return view('invoices.index');
+        // }else{
+            $company = Company::orderBy('company_name', 'asc')->get();
+            $invoices = DB::table('files')
+                            ->select('files.id','files.doc_id','companies.company_name','formnames.form_name','files.file_name','documents.doc_name')
+                            ->join('formnames', 'files.form_name_id', '=', 'formnames.id')
+                            ->join('companies', 'files.company_id', '=', 'companies.id')
+                            ->join('documents', 'files.doc_id', '=', 'documents.id')
+                            ->where('files.company_id', $select)
+                            ->orderBy('files.created_at', 'Desc')
+                            ->paginate(5);
+            $comp_name = Company::find($select);
+            return view('invoices.index',compact('invoices','company','comp_name'))
+                            ->with('i', (request()->input('page', 1) - 1) * 5);   
+        // }
     }
     public function ajax($id){
         $forms = InvoiceInput::where('form_name_id', $id)->get();

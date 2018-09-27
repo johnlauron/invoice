@@ -29,8 +29,9 @@ table {
                                 List of Invoices
                             </h2>
                             <div class="choose-company">
-                                <form action="/invoices/dropdown" method="post" style="display: inline-block;margin-top: -6px;">
+                                <form action="{{route('invoices.dropdown')}}" method="post" style="display: inline-block;margin-top: -6px;">
                                     {{ csrf_field() }}
+                                    {{--  @method('POST')  --}}
                                     <div class="search-section">
                                         <div class="select-section" style="width: 227px;float: left;margin-right: 7px;">
                                             <select class="form-control" name="select" style="width: 268px;">

@@ -60,6 +60,16 @@
                                             <div class="row">
                                                 <div class="row-body">
                                                     <div class="col-md-3 col-lg-3 align-left">
+                                                        <label>Pre-defined</label>
+                                                    </div>
+                                                    <div class="col-md-9 col-lg-9">
+                                                        <input type="text" name="test" class="form-control pre-define" placeholder=""/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="row-body">
+                                                    <div class="col-md-3 col-lg-3 align-left">
                                                         <label>Text Alignment</label>
                                                     </div>
                                                     <div class="col-md-9 col-lg-9">
