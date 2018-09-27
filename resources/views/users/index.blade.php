@@ -16,64 +16,68 @@ table {
     <!-- JQuery DataTable Css -->
     {{ Html::style('bsbmd/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css') }}
 @endsection
-
-@section('content')
-    {{--  <script src="{{asset('js/animation.js')}}"></ script>  --}}
-	<div class="container-fluid">
-        <div class="block-header">
-            <div class="row clearfix">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="card">
-                        <div class="header">
-                            <h2>
-                                USER ACCOUNTS
-                            </h2>
-                        </div>
-                        <div class="body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-striped table-hover dataTable js-exportable">
-                                    <thead>
-                                        <tr>
-                                            <th style="position: sticky; top: 0px; background: white; width: 327px;">Name</th>
-                                            <th style="position: sticky; top: 0px; background: white; width: 327px;">Email</th>
-                                            <th style="position: sticky; top: 0px; background: white; width: 327px;">Company</th>
-                                            <th style="position: sticky; top: 0px; background: white; width: 327px;">Role</th>
-                                            <th style="position: sticky; top: 0px; background: white; width: 327px;">Actions</th>
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                           <th>Name</th>
-                                            <th>Email</th>
-                                            <th>Company</th>
-                                            <th>Role</th>
-                                            <th>Actions</th>
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
-                                        @foreach ($users as $user)
+@section('contents')
+    <div class="unique-div">
+@endsection
+        @section('content')
+        {{--  <script src="{{asset('js/animation.js')}}"></ script>  --}}
+        <div class="container-fluid">
+            <div class="block-header">
+                <div class="row clearfix">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="card">
+                            <div class="header">
+                                <h2>
+                                    USER ACCOUNTS
+                                </h2>
+                            </div>
+                            <div class="body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+                                        <thead>
                                             <tr>
-                                                <td>{{ $user->name }}</td>
-                                                <td>{{ $user->email }}</td>
-                                                <td>{{ $user->company_id }}</td>
-                                                <td>{{ $user->role }}</td>
-                                                <td>
-                                                    <button type="button" onclick="window.location='{{ route("users.edit",$user->id) }}';" class="btn bg-cyan btn-block  waves-effect">EDIT</button>
-                                                    <a class="btn bg-red btn-block waves-effect remove-record" data-toggle="modal" data-target="#custom-width-modal" data-url="{{ route('users.destroy',$user->id) }}" data-id="{{$user->id}}">Delete</a>
-                                                </td>
+                                                <th style="position: sticky; top: 0px; background: white; width: 327px;">Name</th>
+                                                <th style="position: sticky; top: 0px; background: white; width: 327px;">Email</th>
+                                                <th style="position: sticky; top: 0px; background: white; width: 327px;">Company</th>
+                                                <th style="position: sticky; top: 0px; background: white; width: 327px;">Role</th>
+                                                <th style="position: sticky; top: 0px; background: white; width: 327px;">Actions</th>
                                             </tr>
-                                        @endforeach                                    
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tfoot>
+                                            <tr>
+                                            <th>Name</th>
+                                                <th>Email</th>
+                                                <th>Company</th>
+                                                <th>Role</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </tfoot>
+                                        <tbody>
+                                            @foreach ($users as $user)
+                                                <tr>
+                                                    <td>{{ $user->name }}</td>
+                                                    <td>{{ $user->email }}</td>
+                                                    <td>{{ $user->company_id }}</td>
+                                                    <td>{{ $user->role }}</td>
+                                                    <td>
+                                                        <button type="button" onclick="window.location='{{ route("users.edit",$user->id) }}';" class="btn bg-cyan btn-block  waves-effect">EDIT</button>
+                                                        <a class="btn bg-red btn-block waves-effect remove-record" data-toggle="modal" data-target="#custom-width-modal" data-url="{{ route('users.destroy',$user->id) }}" data-id="{{$user->id}}">Delete</a>
+                                                    </td>
+                                                </tr>
+                                            @endforeach                                    
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    @include('layouts.partials.modal')
-@endsection
+        @include('layouts.partials.modal')
+    @endsection
+
+
 @section('extra-script')
         {{Html::script('bsbmd/plugins/jquery-countto/jquery.countTo.js')}}
         {{Html::script('bsbmd/plugins/raphael/raphael.min.js')}}

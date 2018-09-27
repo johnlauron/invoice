@@ -36,6 +36,7 @@
 </head>
 
 <body class={{ 'theme-'.Auth::user()->skin }}>
+    @yield('contents')
     @include('layouts.partials.loader')
     <div class="overlay"></div>
     @include('layouts.partials.header')
@@ -60,6 +61,7 @@
         <script src=" {{ asset('bsbmd/js/admin.js') }} "></script>
         <script src=" {{ asset('bsbmd/js/demo.js') }} "></script>
     @show
+    </div>
 </body>
 
 </html>
