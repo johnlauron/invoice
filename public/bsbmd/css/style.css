@@ -2822,6 +2822,8 @@ section.content {
     padding: 5px 0 0 8px !important; }
 
 /* Card ======================================== */
+.slimScrollDiv {
+  height: 700px !important;}
 #addinputs .inputs.ui-draggable.ui-draggable-handle {
   padding-bottom: 10px;
   cursor: move;}
