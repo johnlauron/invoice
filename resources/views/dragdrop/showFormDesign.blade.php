@@ -48,7 +48,10 @@ Dashboard
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.0.550/pdf.js"></script>
     <script type="text/javascript">
     // URL of PDF document
-        var url = "http://<?php echo $url."/".$files->file_location?>";
+        @if(!empty($files)){
+            var url = "http://<?php echo $url."/".$files->file_location?>";
+        }@else{}
+        @endif
     // Asynchronous download PDF
     </script>
     <script src="{{asset('js/pdf-view.js')}}"></script>

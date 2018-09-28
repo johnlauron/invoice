@@ -123,7 +123,9 @@ class InvoiceinputsController extends Controller
         $boxes = InvoiceInput::select('category_name','yloc','xloc','height','width', 'section', 'alignment')
                         ->where('form_name_id', $id)
                         ->get();
-        $extension = \File::extension($files->file_location);
+        if(!empty($files)){
+            $extension = \File::extension($files->file_location);
+        }else{}
         return view('dragdrop.showFormDesign', compact('url','files','extension','boxes','data'));
     }
 }

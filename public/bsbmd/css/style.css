@@ -2825,7 +2825,7 @@ section.content {
 .unique-div .slimScrollDiv {
   height: 704px !important;}
 #addinputs .inputs.ui-draggable.ui-draggable-handle {
-  padding-bottom: 10px;
+  padding: 10px 0px;
   cursor: move;}
 .container.parse {
   width: 100%;}
