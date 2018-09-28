@@ -32,8 +32,13 @@ Dashboard
                     {{--  <generate-box id="app"></generate-box>
                     <script src="{{asset('js/app.js')}}"></script>  --}}
                     <input type="hidden" name="invoice_id" value="{{$invoice->id}}">
-                        @if($extension == 'pdf')
-                        <canvas id="the-canvas" style="border:1px solid black"></canvas>
+                    @if($extension == 'pdf')
+                        <div class="image-contents">
+                           
+                        </div>
+                        <div class="images">
+                            <canvas id="the-canvas" style="border:1px solid black"></canvas>
+                        </div>
                     @else
                         <div class="image-contents">
                            
