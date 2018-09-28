@@ -30,7 +30,24 @@ table {
                             </h2>
                             <br>
                             <div class="choose-company">
-                                
+                                <form action="{{route('parse.searchByCompany')}}" method="post" style="display: inline-block;margin-top: -6px;">
+                                    {{ csrf_field() }}
+                                    <div class="container selection-sec">
+                                        <div class="selection">
+                                            <div class="select-section-company" style="width: 227px;float: left;margin-right: 7px;">
+                                                <select class="form-control" name="search_company" style="width: 268px;" required>
+                                                        <option value="">--- Choose Company ---</option>
+                                                        @foreach($company as $companies)
+                                                        <option value="{{$companies->id}}">{{$companies->company_name}}</option>
+                                                        @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="button-selection">
+                                            <button type="submit" class="btn btn-primary">Go</button>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                         <script src="{{ asset('js/custom.js') }}"></script>
@@ -51,7 +68,7 @@ table {
                                 <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                                     <thead>
                                         <tr>
-                                           <th style="position: sticky; top: 0px; background: white; width: 742px;">Form name</th>
+                                           <th style="position: sticky; top: 0px; background: white; width: 742px;">Invoice name</th>
                                            <th style="position: sticky; top: 0px; background: white; width: 242px;">Action</th>
                                         </tr>
                                     </thead>

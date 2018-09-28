@@ -49,6 +49,7 @@ table {
                                             <tr>
                                                 <td>{{ $forms->form_name }}</td>
                                                 <td>
+                                                    <button type="button" onclick="window.location='{{ route("dragdrop.showFormDesign", $forms->id) }}';" class="btn bg-cyan btn-block">View Form Design</button>
                                                     <a class="btn bg-red btn-block waves-effect remove-record" data-toggle="modal" data-target="#custom-width-modal" data-url="{{route('dragdrop.delete', $forms->id)}}" data-id="{{$forms->id}}">Delete</a>   
                                                 </td>
                                             </tr>

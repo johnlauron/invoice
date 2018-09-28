@@ -36,24 +36,38 @@ class FormDatasController extends Controller
 
     public function result()
     {
-        // dd($document);
+        $filename = DB::table('files')
+                    ->whereNotNull('parse')
+                    ->get();
         $document = Document::all();
         $company = Company::orderBy('company_name', 'asc')->get();
-       return view('parse/result', compact('document','company'));
+       return view('parse/result', compact('document','company','filename'));
     }
 
     public function details($id)
     {
-        // dd($id);
         $url = request()->getHttpHost();
-        // $parses = Filename::where('id', $id)->first();
         $document = Document::all();
+
         $parsing = DB::table('files')
                 ->select('files.parse','files.doc_id','documents.doc_name')
                 ->join('documents', 'files.doc_id', '=', 'documents.id')
+                ->where('files.doc_id', $id)
                 ->get();
-                // dd($parsing);
        return view('parse/details', compact('parsing','document','url'));
+    }
+
+    public function searchByCompany(){
+        $search_company = request('search_company');
+        $company = Company::orderBy('company_name', 'asc')->get();
+        $formname = Company::where('id', $search_company)->first();
+        $document = DB::table('files')
+                        ->select('files.id','files.file_name','documents.doc_name','companies.company_name','files.file_location')
+                        ->join('companies', 'files.company_id', '=', 'companies.id')
+                        ->join('documents', 'files.doc_id', '=', 'documents.id')
+                        ->where('files.company_id', $search_company)
+                        ->get();
+        return view('parse/result', compact('formname','document','company'));
     }
 
     /**

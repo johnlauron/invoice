@@ -40,6 +40,7 @@ Route::resource('users','UsersController');
 //invoiceinput or drag and drop
 // Route::resource('invoices/createdraganddrop','InvoiceinputsController');
 Route::get('dragdrop/index', 'InvoiceinputsController@index')->name('dragdrop.index');
+Route::get('dragdrop/showFormDesign/{id}', 'InvoiceinputsController@showFormDesign')->name('dragdrop.showFormDesign');
 Route::get('dragdrop/invoiceslist', 'InvoiceinputsController@create')->name('dragdrop.invoiceslist');
 Route::post('dragdrop/createdraganddrop','InvoiceinputsController@store')->name('invoices.store_inputs');
 Route::get('dragdrop/createdraganddrop/{id}','InvoiceinputsController@createdrag')->name('dragdrop.createdrag');
@@ -54,6 +55,7 @@ Route::get('parse/ajax_dropdown/{id}','FormdatasController@select_ajax')->name('
 Route::post('parse/parse/', 'FormdatasController@store')->name('parse.store');
 Route::post('parse/search', 'FormdatasController@search_form')->name('parse.search_form');
 Route::get('parse/result','FormdatasController@result')->name('parse.result');
+Route::post('parse/search-company','FormdatasController@searchByCompany')->name('parse.searchByCompany');
 Route::get('parse/details/{id}','FormdatasController@details')->name('parse.details');
 Route::resource('about','AboutController');
 Auth::routes();
