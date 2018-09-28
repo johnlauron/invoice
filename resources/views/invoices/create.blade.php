@@ -43,7 +43,7 @@
 									<div class="col-xs-8 col-sm-8 col-md-8">
 										<div class="form-group">
 											<strong>Name:</strong>
-											<input type="text" name="invoice_name" class="form-control" placeholder="Invoice Name">
+											<input type="text" name="doc_name" class="form-control" placeholder="Invoice Name">
 										</div>
 									</div>
 									<div class="col-xs-8 col-sm-8 col-md-8">

@@ -5,6 +5,7 @@ use App\InvoiceInput;
 use App\Formname;
 use App\Filename;
 use App\Company;
+use App\FormData;
 use DB;
 use Illuminate\Http\Request;
 
@@ -74,8 +75,7 @@ class InvoiceinputsController extends Controller
                                         'yloc' => $request->top [$key],
                                         'category_name' => $request->field [$key],
                                         'section' => $request->section [$key],
-                                        // 'file_id' => $invoice_id,
-                                        'pre_define' => $request->pre_define [$key],
+                                        'file_id' => $invoice_id,
                                         'form_name_id' => $formname_id,
                                         'company_id' => $company->id,
                                         'alignment' => $request->alignment [$key],
@@ -96,7 +96,7 @@ class InvoiceinputsController extends Controller
     {
         $formname = Formname::find($id);
         if($formname->delete()){
-            return redirect(route('dragdrop.index'))->with('success', 'deleted successfully');
+            return view(route('dragdrop.index'))->with('success', 'deleted successfully');
         }
     }
     public function list_createform()
@@ -112,5 +112,18 @@ class InvoiceinputsController extends Controller
                             ->get();
         $company = Company::all();
         return view('dragdrop.invoiceslist',compact('invoice','company','company_name'));
+    }
+    public function showFormDesign($id)
+    {
+        $url = request()->getHttpHost();
+        $files = Filename::select('files.file_location','documents.doc_name','files.file_name','files.form_name_id')
+                            ->join('documents', 'files.doc_id', '=', 'documents.id')
+                            ->where('files.form_name_id', $id)
+                            ->first();
+        $boxes = InvoiceInput::select('category_name','yloc','xloc','height','width', 'section', 'alignment')
+                        ->where('form_name_id', $id)
+                        ->get();
+        $extension = \File::extension($files->file_location);
+        return view('dragdrop.showFormDesign', compact('url','files','extension','boxes','data'));
     }
 }

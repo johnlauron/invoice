@@ -46,14 +46,14 @@ class FilesController extends Controller
             'file' => 'required',
             'file.*'=> 'mimes:jpeg,jpg,png,pdf',
             'company_id' => 'required',
-            'invoice_name' => 'required | unique:documents,doc_name',
-            'file_location' => 'unique:files,file_location'
+            'doc_name' => 'required | unique:documents,doc_name',
+            'file_location' => 'unique:files,file_location,company_id'
         ]);
         DB::beginTransaction();
         try{
             if($request->file){
-                    Document::create(['doc_name' => $request->invoice_name]);
-                    $document = Document::where('doc_name', $request->invoice_name)->first();
+                    Document::create(['doc_name' => $request->doc_name]);
+                    $document = Document::where('doc_name', $request->doc_name)->first();
                     $document_id = $document->id;
                     $company = Company::find($request->company_id);
                     $company_name = $company->company_name;
@@ -64,7 +64,10 @@ class FilesController extends Controller
                     $img = $request->file('file');
                     $img_name = $img [$key]->getClientOriginalName();
                     if (Filename::where('file_location', '=', $path.'/'.$img_name)->count() > 0) {
-                        return back()->with('error', ''.$img_name.' File Already Exist !');
+                        return back()->with('error', ''.$img_name.' File Already Exist in this Company records !');
+                     }
+                     if (Filename::where('file_name', '=', $img_name)->count() > 0) {
+                        return back()->with('error', ''.$img_name.' This Invoice is Already Exist in another Company records ! Make sure you are uploading the exact Invoice in the specific Company.');
                      }
                     $img [$key]->move($file_path,$img_name);
                     $data = array('company_id' => $request->company_id,

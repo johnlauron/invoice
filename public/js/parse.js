@@ -23,6 +23,7 @@ $(document).ready(function() {
           var pars = '"'+inputs.attr('name') + '": "' + inputs.val()+'"';
           parsing.push('\t'+pars+'\n');          
       }
+      
     );
     $.fn.appendVal = function( TextToAppend ) {
       return $(this).val(
