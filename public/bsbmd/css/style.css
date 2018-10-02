@@ -2824,6 +2824,14 @@ section.content {
 /* Card ======================================== */
 .unique-div .slimScrollDiv {
   height: 704px !important;}
+.white-container {
+    min-width: 100%;
+    float: left;
+    white-space: pre-wrap;
+}
+button.btn.btn-primary {
+  position: absolute;
+}
 #addinputs .inputs.ui-draggable.ui-draggable-handle {
   padding: 10px 0px;
   cursor: move;}

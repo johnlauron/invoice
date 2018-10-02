@@ -19,7 +19,7 @@
             <div class="container parse">
                 @if(!empty($parsing->parse))
                 <button type="button" class="btn btn-primary" onclick="print_this('to_print')">Print!</button>
-                    <div class="category">
+                    <div class="white-container">
                         <div id="to_print" class="jumbotron">
                             <p>{{ $parsing->parse }}</p>
                         </div>
