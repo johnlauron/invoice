@@ -9,7 +9,7 @@ $(document).ready(function(){
         console.log(variable);
         $('#images-contents').append('<div class="input-section'+x+'" id="addinputs">'+content+'</div>');
         $('.input-section'+x+' .inputs').draggable();
-        $('#line_drag').resizable();
+        // $('#line_drag').resizable();
         $('.input-section'+x+' .inputs').css('margin-top', ''+variable+'px');
         $('.input-section'+x+' .add_button').replaceWith('<a href="javascript:void(0);" class="remove_button" id="'+x+'"><i class="fa fa-minus-circle"></i></a>');
     });

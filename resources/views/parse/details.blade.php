@@ -15,17 +15,21 @@
             </div>
         </div>
         <div class="parse-content">
-            <button type="button" class="btn btn-primary" onclick="print_this('to_print')">Print!</button>
+            
             <div class="container parse">
-                <div id="to_print" class="jumbotron">
-                    <div class="category">
-                    
-                        @foreach ($parsing as $pars)
-                           <p>{{ $pars->parse }}</p>
-                        @endforeach
+                @if(!empty($parsing->parse))
+                <button type="button" class="btn btn-primary" onclick="print_this('to_print')">Print!</button>
+                    <div class="white-container">
+                        <div id="to_print" class="jumbotron">
+                            <p>{{ $parsing->parse }}</p>
+                        </div>
                     </div>
-
-                </div>
+                @else
+                    <br>
+                    <div class="alert bg-red alert-dismissible" role="alert">
+                        <strong>No Record Found</strong>
+                    </div>
+                @endif
             </div>    
             </table>
         </div>

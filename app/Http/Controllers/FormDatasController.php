@@ -53,7 +53,7 @@ class FormDatasController extends Controller
                 ->select('files.parse','files.doc_id','documents.doc_name')
                 ->join('documents', 'files.doc_id', '=', 'documents.id')
                 ->where('files.doc_id', $id)
-                ->get();
+                ->first();
        return view('parse/details', compact('parsing','document','url'));
     }
 

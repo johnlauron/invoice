@@ -75,7 +75,6 @@ class InvoiceinputsController extends Controller
                                         'yloc' => $request->top [$key],
                                         'category_name' => $request->field [$key],
                                         'section' => $request->section [$key],
-                                        'file_id' => $invoice_id,
                                         'form_name_id' => $formname_id,
                                         'company_id' => $company->id,
                                         'alignment' => $request->alignment [$key],
@@ -123,7 +122,9 @@ class InvoiceinputsController extends Controller
         $boxes = InvoiceInput::select('category_name','yloc','xloc','height','width', 'section', 'alignment')
                         ->where('form_name_id', $id)
                         ->get();
-        $extension = \File::extension($files->file_location);
+        if(!empty($files)){
+            $extension = \File::extension($files->file_location);
+        }else{}
         return view('dragdrop.showFormDesign', compact('url','files','extension','boxes','data'));
     }
 }
