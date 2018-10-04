@@ -58,7 +58,7 @@ table {
                             @endif
                         </div>
                         <div class="body">
-                             @if(count($document) == 0)
+                             @if(count($filename) == 0)
                             <br>
                                 <div class="alert bg-red alert-dismissible" role="alert">
                                     <strong>No Record Found</strong>

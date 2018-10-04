@@ -2829,9 +2829,6 @@ section.content {
     float: left;
     white-space: pre-wrap;
 }
-button.btn.btn-primary {
-  position: absolute;
-}
 #addinputs .inputs.ui-draggable.ui-draggable-handle {
   padding: 10px 0px;
   cursor: move;}
@@ -2843,7 +2840,7 @@ div#images-contents {
   min-height: 40px;
   min-width: 18%;}
 .info-dropdown {
-  float: left;}
+    float: left;}
 .info-submit {
   width: 6%;
   float: left;}

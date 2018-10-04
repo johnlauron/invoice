@@ -37,11 +37,14 @@ class FormDatasController extends Controller
     public function result()
     {
         $filename = DB::table('files')
-                    ->whereNotNull('parse')
+                    ->select('files.parse', 'documents.doc_name', 'documents.id','companies.company_name','companies.id')
+                    ->join('companies','files.company_id','=','companies.id')
+                    ->join('documents', 'files.doc_id', '=', 'documents.id')
+                    ->whereNotNull('files.parse')
                     ->get();
-        $document = Document::all();
+                    // dd($filename);
         $company = Company::orderBy('company_name', 'asc')->get();
-       return view('parse/result', compact('document','company','filename'));
+       return view('parse/result', compact('company','filename'));
     }
 
     public function details($id)
@@ -61,13 +64,15 @@ class FormDatasController extends Controller
         $search_company = request('search_company');
         $company = Company::orderBy('company_name', 'asc')->get();
         $formname = Company::where('id', $search_company)->first();
-        $document = DB::table('files')
-                        ->select('files.id','files.file_name','documents.doc_name','companies.company_name','files.file_location')
-                        ->join('companies', 'files.company_id', '=', 'companies.id')
+        $filename = DB::table('files')
+                        ->select('files.parse', 'documents.doc_name', 'documents.id','companies.company_name','companies.id')
+                        ->join('companies','files.company_id','=','companies.id')
                         ->join('documents', 'files.doc_id', '=', 'documents.id')
+                        ->whereNotNull('files.parse')
                         ->where('files.company_id', $search_company)
                         ->get();
-        return view('parse/result', compact('formname','document','company'));
+                        // dd($filename);
+        return view('parse/result', compact('formname','filename','company'));
     }
 
     /**
