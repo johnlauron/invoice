@@ -95,7 +95,7 @@ class InvoiceinputsController extends Controller
     {
         $formname = Formname::find($id);
         if($formname->delete()){
-            return view(route('dragdrop.index'))->with('success', 'deleted successfully');
+            return redirect(route('dragdrop.index'))->with('success', 'deleted successfully');
         }
     }
     public function list_createform()

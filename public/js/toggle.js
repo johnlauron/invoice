@@ -63,18 +63,6 @@ $(document).ready(function(){
 				var varwidth;
 				var varheight;
 				$('.image-contents').append($el);
-				//version1
-				// $('span').resizable({
-				//   resize: function(e, ui) {
-				//     // console.log( ui.size.width + 'x' + ui.size.height);
-				//     var varwidth = ui.size.width;
-				//     var varheight = ui.size.height;
-				//     var varhtml   = '<input type="hidden" name="width[]" class="form-control" value="'+varwidth +'"><input type="hidden" name="height[]" class="form-control" value="'+varheight +'">';
-				//     window.varhtmls = varhtml;
-				//     // return new variable(varhtml);
-				//     // window.varheight = varheight;
-				//   }
-				// });
 				$el.draggable({
 				stop: function(){
 					var finalxPos = $(this).position().left;
@@ -160,12 +148,18 @@ $(document).ready(function(){
 					'data': name
 				});
 				console.log(line_array)
+				var validation = ['subtotal', 'total', 'vat', 'tax', 'discount'];
+				var char_var = $('.line-field').val();
+				if( validation.indexOf(char_var.toLowerCase()) > 0){
+					var section = 'header-section';
+				}else{
+					var section = 'linedetails-section';
+				}
 				var line_char = $('#line_character').val();
 				var line_align = $('#line_alignment').val();
 				var field = $('.line-field').val();
 				var height = $('.line-height').val();
 				var width = $('.line-width').val();
-				var section = 'linedetails-section';
 				var pre_define = "";
 				var $element = $('<div id="draggables'+i+'" class="draggable" style="cursor: move;position:absolute;top:0;left=0;z-index:2;"><span id="'+i+'" style="width:'+ width +'px;height:'+ height +'px;text-align:'+line_align+';" name="start" class="form-control">'+field+'</span><a href="#" class="clickedons" id="line_change'+i+'" attrs="'+i+'"><i class="fa fa-check-circle" id="changes'+i+'" style="position: absolute;left: 155px;top:0;color: #1ff3ce;font-size: 15px;"></i></a>');
 				window.$element = $element;

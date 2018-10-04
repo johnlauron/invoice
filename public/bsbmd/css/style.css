@@ -2836,15 +2836,6 @@ section.content {
     padding: 5px 0 0 8px !important; }
 
 /* Card ======================================== */
-@page
-{
-    @top-center
-    {
-        content: "Document Title Goes Here"; /* This is the content that will appear in the header */
-        font-family: ConfluenceInstalledFont, Helvetica, Arial, sans-serif;
-        font-size: 8pt;
-    }
-}
 div#to_print {
   padding: 0px 40px;
   font-size: 13px;
@@ -2855,9 +2846,6 @@ div#to_print {
     min-width: 100%;
     float: left;
     white-space: pre-wrap;
-}
-button.btn.btn-primary {
-  position: absolute;
 }
 #addinputs .inputs.ui-draggable.ui-draggable-handle {
   padding: 10px 0px;
