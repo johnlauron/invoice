@@ -37,7 +37,7 @@ class FormDatasController extends Controller
     public function result()
     {
         $filename = DB::table('files')
-                    ->select('files.parse', 'documents.doc_name', 'documents.id','companies.company_name','companies.id')
+                    ->select('files.parse', 'documents.doc_name', 'files.id','companies.company_name','companies.id as company_id')
                     ->join('companies','files.company_id','=','companies.id')
                     ->join('documents', 'files.doc_id', '=', 'documents.id')
                     ->whereNotNull('files.parse')
@@ -50,14 +50,12 @@ class FormDatasController extends Controller
     public function details($id)
     {
         $url = request()->getHttpHost();
-        $document = Document::all();
-
         $parsing = DB::table('files')
                 ->select('files.parse','files.doc_id','documents.doc_name')
                 ->join('documents', 'files.doc_id', '=', 'documents.id')
                 ->where('files.doc_id', $id)
                 ->first();
-       return view('parse/details', compact('parsing','document','url'));
+       return view('parse/details', compact('parsing','url'));
     }
 
     public function searchByCompany(){
@@ -106,7 +104,7 @@ class FormDatasController extends Controller
     public function store(Request $request)
     {
         $this->validate(request(),[ 
-            'parse' => 'required'
+            'parsing' => 'required'
         ]);
         // dd($request->parsing);
         $query = Filename::where('id', $request->invoice_id)->update(['parse' => $request->parsing]);

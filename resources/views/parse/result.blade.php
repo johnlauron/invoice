@@ -73,11 +73,11 @@ table {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($document as $documents)
+                                        @foreach ($filename as $filenames)
                                             <tr>
-                                                <td>{{ $documents->doc_name }}</td>
+                                                <td>{{ $filenames->doc_name }}</td>
                                                 <td>
-                                                        <button type="button" onclick="window.location='{{ route("parse.details", $documents->id) }}';" class="btn bg-teal btn-block">Show Details</button>
+                                                    <button type="button" onclick="window.location='{{ route("parse.details", $filenames->id) }}';" class="btn bg-teal btn-block">Show Details</button>
                                                 </td>
                                             </tr>
                                         @endforeach                                    
