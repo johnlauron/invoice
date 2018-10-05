@@ -105,6 +105,9 @@ class FormDatasController extends Controller
 
     public function store(Request $request)
     {
+        $this->validate(request(),[ 
+            'parse' => 'required'
+        ]);
         // dd($request->parsing);
         $query = Filename::where('id', $request->invoice_id)->update(['parse' => $request->parsing]);
         return redirect(route('parse.list'))->with('success','Parsed successfully');
