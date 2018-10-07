@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Company;
+use App\Filename;
+use File;
 use Illuminate\Http\Request;
 
 class CompaniesController extends Controller
@@ -113,7 +115,16 @@ class CompaniesController extends Controller
     public function destroy($id)
     {
         $company = Company::find($id);
-        $company->delete();
+        $invoices = Filename::where('company_id', $id)->get();
+        foreach($invoices as $key => $value){
+            $array = array($invoices [$key]->file_location);
+            if(File::delete($array)){
+                Filename::destroy('company_id', $id);
+                $company->delete();
+            }else{
+                return back()->with('error','Cant delete the image or image not found');
+            }
+        }
         
         return redirect()->route('companies.index')
                         ->with('success','Company Info deleted successfully');

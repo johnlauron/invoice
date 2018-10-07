@@ -43,10 +43,10 @@
                     <div class="col-md-3 col-sm-3 col-lg-3">
                         <a href="{{route('dragdrop.createdrag', $invoices->id)}}">
                             @if (pathinfo($invoices->file_location, PATHINFO_EXTENSION) == 'pdf')
-                                <p style="color:#000;"><strong>{{$invoices->doc_name}}</strong></p>
+                                <p style="color:#000;margin-top: 30px;"><strong>{{$invoices->doc_name}}</strong></p>
                                 <img class="draglist" src="{{asset('images/pdf_icon.jpg')}}">
                             @else
-                                <p style="color:#000;"><strong>{{$invoices->doc_name}}</strong></p>
+                                <p style="color:#000;margin-top:30px;"><strong>{{$invoices->doc_name}}</strong></p>
                                  <img class="draglist" src="{{asset($invoices->file_location)}}">
                             @endif 
                         </a>

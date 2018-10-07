@@ -147,10 +147,10 @@ $(document).ready(function(){
 					'array_id': a,
 					'data': name
 				});
-				console.log(line_array)
-				var validation = ['subtotal', 'total', 'vat', 'tax', 'discount'];
+				var validation = [,'TOTAL', 'VAT', 'TAX', 'DISCOUNT', 'SUBTOTAL'];
 				var char_var = $('.line-field').val();
-				if( validation.indexOf(char_var.toLowerCase()) > 0){
+				console.log(char_var.toUpperCase());
+				if( validation.indexOf(char_var.toUpperCase()) > 0){
 					var section = 'header-section';
 				}else{
 					var section = 'linedetails-section';
@@ -161,8 +161,15 @@ $(document).ready(function(){
 				var height = $('.line-height').val();
 				var width = $('.line-width').val();
 				var pre_define = "";
-				var $element = $('<div id="draggables'+i+'" class="draggable" style="cursor: move;position:absolute;top:0;left=0;z-index:2;"><span id="'+i+'" style="width:'+ width +'px;height:'+ height +'px;text-align:'+line_align+';" name="start" class="form-control">'+field+'</span><a href="#" class="clickedons" id="line_change'+i+'" attrs="'+i+'"><i class="fa fa-check-circle" id="changes'+i+'" style="position: absolute;left: 155px;top:0;color: #1ff3ce;font-size: 15px;"></i></a>');
-				window.$element = $element;
+				if(section == 'header-section'){
+					var $element = $('<div id="draggables'+i+'" class="draggable" style="cursor: move;position:absolute;top:0;left=0;z-index:2;"><span id="'+i+'" style="width:'+ width +'px;height:'+ height +'px;text-align:'+line_align+';" name="start" class="form-control">'+field+'</span><a href="#" class="clickedons" id="line_change'+i+'" attrs="'+i+'"><i class="fa fa-check-circle" id="changes'+i+'" style="position: absolute;left: 155px;top:0;color: #1ff3ce;font-size: 15px;"></i></a>');
+					window.$element = $element;
+				}
+				else{
+					var $element = $('<div id="draggables'+i+'" class="draggable" style="cursor: move;position:absolute;top:0;left=0;z-index:2;"><span id="'+i+'" style="width:'+ width +'px;height:'+ height +'px;text-align:'+line_align+';" name="start" class="form-control span">'+field+'</span><a href="#" class="clickedons" id="line_change'+i+'" attrs="'+i+'"><i class="fa fa-check-circle" id="changes'+i+'" style="position: absolute;left: 155px;top:0;color: #1ff3ce;font-size: 15px;"></i></a>');
+					window.$element = $element;
+				}
+				
 				$('.image-contents').append($element);
 				$element.draggable({
 					stop: function(){
