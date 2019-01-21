@@ -2830,7 +2830,7 @@ section.content {
     white-space: pre-wrap;
 }
 button.btn.btn-primary {
-  position: absolute;
+  position: relative;
 }
 #addinputs .inputs.ui-draggable.ui-draggable-handle {
   padding: 10px 0px;

@@ -40,3 +40,6 @@ after('deploy:failed', 'deploy:unlock');
 
 before('deploy:symlink', 'artisan:migrate');
 
+task('deploy:update_code', function () {
+    upload('.', '{{release_path}}');
+});
