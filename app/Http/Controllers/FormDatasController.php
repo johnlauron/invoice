@@ -10,7 +10,7 @@ use DB;
 use App\FormData;
 use Illuminate\Http\Request;
 
-class FormDatasController extends Controller
+class FormdatasController extends Controller
 {
     /**
      * Display a listing of the resource.
