@@ -10,7 +10,7 @@ use DB;
 use App\FormData;
 use Illuminate\Http\Request;
 
-class FormDatasController extends Controller
+class FormdatasController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -37,37 +37,40 @@ class FormDatasController extends Controller
     public function result()
     {
         $filename = DB::table('files')
-                    ->whereNotNull('parse')
+                    ->select('files.parse', 'documents.doc_name', 'files.id','companies.company_name','companies.id as company_id')
+                    ->join('companies','files.company_id','=','companies.id')
+                    ->join('documents', 'files.doc_id', '=', 'documents.id')
+                    ->whereNotNull('files.parse')
                     ->get();
-        $document = Document::all();
+                    // dd($filename);
         $company = Company::orderBy('company_name', 'asc')->get();
-       return view('parse/result', compact('document','company','filename'));
+       return view('parse/result', compact('company','filename'));
     }
 
     public function details($id)
     {
         $url = request()->getHttpHost();
-        $document = Document::all();
-
         $parsing = DB::table('files')
                 ->select('files.parse','files.doc_id','documents.doc_name')
                 ->join('documents', 'files.doc_id', '=', 'documents.id')
                 ->where('files.doc_id', $id)
                 ->first();
-       return view('parse/details', compact('parsing','document','url'));
+       return view('parse/details', compact('parsing','url'));
     }
 
     public function searchByCompany(){
         $search_company = request('search_company');
         $company = Company::orderBy('company_name', 'asc')->get();
         $formname = Company::where('id', $search_company)->first();
-        $document = DB::table('files')
-                        ->select('files.id','files.file_name','documents.doc_name','companies.company_name','files.file_location')
-                        ->join('companies', 'files.company_id', '=', 'companies.id')
+        $filename = DB::table('files')
+                        ->select('files.parse', 'documents.doc_name', 'documents.id','companies.company_name','companies.id')
+                        ->join('companies','files.company_id','=','companies.id')
                         ->join('documents', 'files.doc_id', '=', 'documents.id')
+                        ->whereNotNull('files.parse')
                         ->where('files.company_id', $search_company)
                         ->get();
-        return view('parse/result', compact('formname','document','company'));
+                        // dd($filename);
+        return view('parse/result', compact('formname','filename','company'));
     }
 
     /**
@@ -100,6 +103,9 @@ class FormDatasController extends Controller
 
     public function store(Request $request)
     {
+        $this->validate(request(),[ 
+            'parsing' => 'required'
+        ]);
         // dd($request->parsing);
         $query = Filename::where('id', $request->invoice_id)->update(['parse' => $request->parsing]);
         return redirect(route('parse.list'))->with('success','Parsed successfully');

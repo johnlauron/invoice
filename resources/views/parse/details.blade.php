@@ -18,12 +18,16 @@
             
             <div class="container parse">
                 @if(!empty($parsing->parse))
-                <button type="button" class="btn btn-primary" onclick="print_this('to_print')">Print!</button>
-                    <div class="white-container">
-                        <div id="to_print" class="jumbotron">
-                            <p>{{ $parsing->parse }}</p>
-                        </div>
+                <!-- <button type="button" class="btn btn-primary" onclick="print_this('to_print')">Print</button> -->
+                <div class="result_buttons">
+                    <button type="button" class="btn btn-primary" id="print">Print</button>
+                    <button type="button" class="btn btn-success" onclick="return xepOnline.Formatter.Format('pdf',{render:'download', cssStyle:[{fontSize:'30px'},{fontWeight:'bold'}]});">Save as PDF</button>
+                </div>
+                <div class="white-container" id="pdf_print">
+                    <div id="to_print">
+                        <pre id="pdf">{{ $parsing->parse }}</pre>
                     </div>
+                </div>
                 @else
                     <br>
                     <div class="alert bg-red alert-dismissible" role="alert">
@@ -34,7 +38,8 @@
             </table>
         </div>
     </div>
-</script>
-<script src="{{asset('js/print.js')}}"></script>
+<script src="{{asset('js/savepdf.js')}}"></script>
+<script src="{{asset('js/xepOnline.jqPlugin.js')}}"></script>
+<script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script>
 
 @endsection

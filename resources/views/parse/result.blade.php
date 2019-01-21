@@ -58,7 +58,7 @@ table {
                             @endif
                         </div>
                         <div class="body">
-                             @if(count($document) == 0)
+                             @if(count($filename) == 0)
                             <br>
                                 <div class="alert bg-red alert-dismissible" role="alert">
                                     <strong>No Record Found</strong>
@@ -73,11 +73,11 @@ table {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($document as $documents)
+                                        @foreach ($filename as $filenames)
                                             <tr>
-                                                <td>{{ $documents->doc_name }}</td>
+                                                <td>{{ $filenames->doc_name }}</td>
                                                 <td>
-                                                        <button type="button" onclick="window.location='{{ route("parse.details", $documents->id) }}';" class="btn bg-teal btn-block">Show Details</button>
+                                                    <button type="button" onclick="window.location='{{ route("parse.details", $filenames->id) }}';" class="btn bg-teal btn-block">Show Details</button>
                                                 </td>
                                             </tr>
                                         @endforeach                                    

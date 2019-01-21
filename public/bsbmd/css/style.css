@@ -1,3 +1,4 @@
+
 ﻿/* Navbar ====================================== */
 @import url(materialize.css);
 .navbar {
@@ -145,7 +146,6 @@
   margin-right: 10px;
   margin-left: -10px;
   margin-top: 4px; }
-
 .col-red .navbar .bars:hover {
   background-color: rgba(0, 0, 0, 0.08); }
 
@@ -220,7 +220,11 @@
 
 .col-deep-purple .navbar .nav > li > a {
   color: #fff; }
-
+.white-container {
+    min-width: 100%;
+    float: left;
+    white-space: pre-wrap;
+}
 .col-deep-purple .navbar .bars {
   float: left;
   padding: 10px 20px;
@@ -2360,6 +2364,16 @@
   .navbar > .container .navbar-brand,
   .navbar > .container-fluid .navbar-brand {
     margin-left: 20px; } }
+@media print{
+  section.content {
+    margin: -125px 0px !important;}
+  body.theme-purple {
+      visibility: hidden;}
+  div#to_print {
+    padding: 0;
+    margin: 0;
+    visibility: visible;}
+}
 
 /* General ===================================== */
 body {
@@ -2822,6 +2836,13 @@ section.content {
     padding: 5px 0 0 8px !important; }
 
 /* Card ======================================== */
+span.span {
+  border: 1px solid #2196f3;
+  box-shadow: inset 0 1px 1px #2196f3;}
+div#to_print {
+  padding: 0px 40px;
+  font-size: 13px;
+  background-color: #eeeeee96;}
 .unique-div .slimScrollDiv {
   height: 704px !important;}
 .white-container {
@@ -2843,10 +2864,12 @@ div#images-contents {
   min-height: 40px;
   min-width: 18%;}
 .info-dropdown {
-  float: left;}
+    float: left;}
 .info-submit {
+  height: 33px;
   width: 6%;
-  float: left;}
+  float: left;
+  display: inline-block;}
 .fa-times-circle {
   color: #ff1212 !important;}
 .draggable input {
