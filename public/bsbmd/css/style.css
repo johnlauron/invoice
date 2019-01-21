@@ -2850,6 +2850,9 @@ div#to_print {
     float: left;
     white-space: pre-wrap;
 }
+button.btn.btn-primary {
+  position: relative;
+}
 #addinputs .inputs.ui-draggable.ui-draggable-handle {
   padding: 10px 0px;
   cursor: move;}
@@ -2863,8 +2866,10 @@ div#images-contents {
 .info-dropdown {
     float: left;}
 .info-submit {
+  height: 33px;
   width: 6%;
-  float: left;}
+  float: left;
+  display: inline-block;}
 .fa-times-circle {
   color: #ff1212 !important;}
 .draggable input {
