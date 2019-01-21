@@ -57,8 +57,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <!--pre define---------------------------------------------------->
-                                            <div class="row">
+                                            {{--  <div class="row">
                                                 <div class="row-body">
                                                     <div class="col-md-3 col-lg-3 align-left">
                                                         <label>Pre-defined</label>
@@ -67,8 +66,7 @@
                                                         <input type="text" name="test" class="form-control pre-define" placeholder=""/>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <!--end-->
+                                            </div>  --}}
                                             <div class="row">
                                                 <div class="row-body">
                                                     <div class="col-md-3 col-lg-3 align-left">
