@@ -907,17 +907,18 @@
         getSize();
         this.$searchbox.off('input.getSize propertychange.getSize').on('input.getSize propertychange.getSize', getSize);
         $window.off('resize.getSize scroll.getSize').on('resize.getSize scroll.getSize', getSize);
-      } else if (this.options.size && this.options.size != 'auto' && this.$lis.not(notDisabled).length > this.options.size) {
-        var optIndex = this.$lis.not('.divider').not(notDisabled).children().slice(0, this.options.size).last().parent().index(),
-            divLength = this.$lis.slice(0, optIndex + 1).filter('.divider').length;
-        menuHeight = liHeight * this.options.size + divLength * divHeight + menuPadding;
+      }
+      // } else if (this.options.size && this.options.size != 'auto' && this.$lis.not(notDisabled).length > this.options.size) {
+      //   var optIndex = this.$lis.not('.divider').not(notDisabled).children().slice(0, this.options.size).last().parent().index(),
+      //       divLength = this.$lis.slice(0, optIndex + 1).filter('.divider').length;
+      //   menuHeight = liHeight * this.options.size + divLength * divHeight + menuPadding;
 
-        if (that.options.container) {
-          if (!$menu.data('height')) $menu.data('height', $menu.height());
-          getHeight = $menu.data('height');
-        } else {
-          getHeight = $menu.height();
-        }
+      //   if (that.options.container) {
+      //     if (!$menu.data('height')) $menu.data('height', $menu.height());
+      //     getHeight = $menu.data('height');
+      //   } else {
+      //     getHeight = $menu.height();
+      //   }
 
         if (that.options.dropupAuto) {
           //noinspection JSUnusedAssignment

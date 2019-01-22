@@ -61,7 +61,7 @@ table {
                                                     <td>{{ $user->role }}</td>
                                                     <td>
                                                         <button type="button" onclick="window.location='{{ route("users.edit",$user->id) }}';" class="btn bg-cyan btn-block  waves-effect">EDIT</button>
-                                                        <a class="btn bg-red btn-block waves-effect remove-record" data-toggle="modal" data-target="#custom-width-modal" data-url="{{ route('users.destroy',$user->id) }}" data-id="{{$user->id}}">Delete</a>
+                                                        <a class="btn bg-red btn-block remove-record" data-toggle="modal" data-target="#custom-width-modal" data-url="{{ route('users.destroy',$user->id) }}" data-id="{{$user->id}}">Delete</a>
                                                     </td>
                                                 </tr>
                                             @endforeach                                    
