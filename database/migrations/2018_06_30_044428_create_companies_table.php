@@ -19,7 +19,6 @@ class CreateCompaniesTable extends Migration
             $table->string('contact_number', 100);
             $table->string('email', 100);
             $table->boolean('approved')->default(true);
-            $table->unique(['company_name', 'email']);
             $table->string('address', 200);
             $table->timestamps();
         });

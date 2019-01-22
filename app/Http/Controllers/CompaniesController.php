@@ -49,7 +49,7 @@ class CompaniesController extends Controller
         request()->validate([
             'company_name' => 'required | unique:companies,company_name',
             'contact_number' => 'required',
-            'email' => 'required| email',
+            'email' => 'required',
             'address' => 'required'
         ]);
 
