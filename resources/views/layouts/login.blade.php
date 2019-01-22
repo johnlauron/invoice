@@ -58,8 +58,9 @@
     @show    
     @yield('extra-script')
     @section('script-bottom')
-        <script src=" {{ asset('bsbmd/js/admin.js') }} "></script>
         <script src=" {{ asset('bsbmd/js/demo.js') }} "></script>
+        <script src=" {{ asset('bsbmd/js/admin.js') }} "></script>
+        
     @show
     </div>
 </body>

@@ -32,8 +32,8 @@
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
                             <strong>Company:</strong>
-                            <!-- <select class="form-control show-tick" data-live-search="true" name="company_id"> -->
-        					<select class="form-control" name="company_id">
+                            <select class="form-control show-tick" data-live-search="true" name="company_id">
+        					<!-- <select class="form-control" name="company_id"> -->
                                     <option value="">--- Choose Company ---</option>
         					    @foreach ($companies as $company)
                                     <option value="{{$company->id}}">{{$company->company_name}}</option>
@@ -75,4 +75,5 @@
         </div>
     </div>
 </div>
+<script src=" {{ asset('js/selectElement.js') }} "></script>
 @endsection

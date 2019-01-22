@@ -47,7 +47,7 @@ class UsersController extends Controller
 
     public function create()
     {
-        $companies = Company::all();
+        $companies = Company::orderBy('company_name', 'asc')->get();
         return view('users.create', compact('companies'));
     }
 
@@ -97,16 +97,7 @@ class UsersController extends Controller
 
     public function show($id)
     {
-/*        $user = User::find($id);
-        //dd($user);
-        $newApprove = true;
-        
-        if($user->approved == true){
-            $newApprove = false;
-        }
-        $user->approved = $newApprove;
-        $user->save();
-        return redirect()->route('users.index');*/
+
     }
 
     public function edit($id)

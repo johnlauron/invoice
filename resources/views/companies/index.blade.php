@@ -53,7 +53,7 @@ table {
                                                 <td>
                                                     <button type="button" onclick="window.location='{{ route("companies.show",$company->id) }}';" class="btn bg-teal btn-block">SHOW</button>
                                                     <button type="button" onclick="window.location='{{ route("companies.edit",$company->id) }}';" class="btn bg-cyan btn-block">EDIT</button>
-                                                    <a class="btn bg-red btn-block waves-effect remove-record" data-toggle="modal" data-target="#custom-width-modal" data-url="{{ route('companies.destroy',$company->id) }}" data-id="{{$company->id}}">Delete</a>    
+                                                    <a class="btn bg-red btn-block remove-record" data-toggle="modal" data-target="#custom-width-modal" data-url="{{ route('companies.destroy',$company->id) }}" data-id="{{$company->id}}">Delete</a>    
                                                 </td>
                                             </tr>
                                         @endforeach                                    
